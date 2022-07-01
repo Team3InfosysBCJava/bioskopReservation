@@ -1,6 +1,7 @@
 package com.teamc.bioskop.Controller;
 
-import com.teamc.bioskop.DTO.ScheduleResponseFilmSeatDTO;
+import com.teamc.bioskop.DTO.ScheduleResponseDTO;
+import com.teamc.bioskop.DTO.ScheduleResponsePost;
 import com.teamc.bioskop.DTO.ScheduleResponseNameLikeDTO;
 import com.teamc.bioskop.Exception.ResourceNotFoundException;
 import com.teamc.bioskop.Model.*;
@@ -35,7 +36,7 @@ public class ScheduleController {
     public ResponseEntity<Object> ScheduleList(){
        try {
            List<Schedule> result = scheduleService.getAll();
-           List<ScheduleResponseFilmSeatDTO> scheduleMaps = new ArrayList<>();
+           List<ScheduleResponseDTO> scheduleMaps = new ArrayList<>();
            logger.info(Line + "Logger Start Find All Schedule" + Line);
            for (Schedule dataResult:result){
                logger.info("================================");
@@ -43,7 +44,7 @@ public class ScheduleController {
                logger.info("Film :"+dataResult.getFilms());
 ;              logger.info("Seats :"+dataResult.getSeats());
                logger.info("================================");
-               ScheduleResponseFilmSeatDTO scheduleDTO = dataResult.convertToResponseFilmsSeat();
+               ScheduleResponseDTO scheduleDTO = dataResult.convertToResponse();
                scheduleMaps.add(scheduleDTO);
            }
            logger.info(Line + "Logger End Find All Schedule" + Line);
@@ -69,7 +70,7 @@ public class ScheduleController {
                 schedule.setFilms(films);
                 schedule.setSeats(seats);
                 Schedule scheduleCreate = scheduleService.createSchedule(schedule);
-                ScheduleResponseFilmSeatDTO result = scheduleCreate.convertToResponseFilmsSeat();
+                ScheduleResponsePost result = scheduleCreate.convertToResponsePost();
                 logger.info(Line + "Logger Start Create New Schedule" + Line);
                 logger.info(schedule);
                 logger.info(Line + " Logger Stop Create New Schedule" + Line);
@@ -92,7 +93,7 @@ public class ScheduleController {
        try {
            Optional<Schedule> schedule = scheduleService.getScheduleById(id);
            Schedule scheduleget = schedule.get();
-           ScheduleResponseFilmSeatDTO result = scheduleget.convertToResponseFilmsSeat();
+           ScheduleResponseDTO result = scheduleget.convertToResponse();
            logger.info(Line + " Logger Start Find Schedule ById " + Line);
            logger.info("GetById");
            logger.info(result);
@@ -125,7 +126,7 @@ public class ScheduleController {
        schedule.setShowStart(scheduleDetails.getShowStart());
        schedule.setShowEnd(scheduleDetails.getShowEnd());
        Schedule scheduleUpdate = scheduleService.updateSchedule(schedule);
-       ScheduleResponseFilmSeatDTO result = scheduleUpdate.convertToResponseFilmsSeat();
+           ScheduleResponseDTO result = scheduleUpdate.convertToResponse();
         logger.info(Line + " Logger Start Updated Data" + Line);
         logger.info("Update");
         logger.info(result);

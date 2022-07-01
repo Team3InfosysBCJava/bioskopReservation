@@ -23,17 +23,18 @@ public class ScheduleResponseDTO {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateShow;
 
-//    @JsonFormat(pattern = "HH-mm-ss")
     private LocalTime showStart;
 
-//    @JsonFormat(pattern = "HH-mm-ss")
     private LocalTime showEnd;
 
     private Integer price;
 
+    private LocalDateTime updated_at;
+    private LocalDateTime created_at;
+
     @Override
     public String toString() {
-        return "\n ScheduleResponseDTO{" +
+        return "ScheduleResponseDTO{" +
                 "scheduleId=" + scheduleId +
                 ", films=" + films +
                 ", seats=" + seats +
@@ -41,10 +42,8 @@ public class ScheduleResponseDTO {
                 ", showStart=" + showStart +
                 ", showEnd=" + showEnd +
                 ", price=" + price +
+                ", updated_at=" + updated_at +
+                ", created_at=" + created_at +
                 '}';
     }
-
-    //    private LocalDateTime updatedAt;
-//    private LocalDateTime createdAt;
-
 }
