@@ -5,6 +5,7 @@ import com.teamc.bioskop.Model.User;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Getter
@@ -13,10 +14,10 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Builder
 public class BookingResponseDTO {
-    private Long reserv_id;
-    private Long usr_id;
-    private String usr_name;
-    private String email_usr;
+    private Long reservation_id;
+    private Long user_id;
+    private String user_name;
+    private String email_user;
     private String film_name;
     private Integer price;
     private String studio;
@@ -26,14 +27,16 @@ public class BookingResponseDTO {
     private LocalDate date_film;
     private LocalTime start_film;
     private LocalTime end_film;
+    private LocalDateTime created_at;
+    private LocalDateTime updated_at;
 
     @Override
     public String toString() {
         return "BookingResponseDTO{" +
-                "reserv_id=" + reserv_id +
-                ", usr_id=" + usr_id +
-                ", usr_name='" + usr_name + '\'' +
-                ", email_usr='" + email_usr + '\'' +
+                "reservation_id=" + reservation_id +
+                ", user_id=" + user_id +
+                ", user_name='" + user_name + '\'' +
+                ", email_user='" + email_user + '\'' +
                 ", film_name='" + film_name + '\'' +
                 ", price=" + price +
                 ", studio='" + studio + '\'' +
@@ -43,6 +46,8 @@ public class BookingResponseDTO {
                 ", date_film=" + date_film +
                 ", start_film=" + start_film +
                 ", end_film=" + end_film +
+                ", created_at=" + created_at +
+                ", updated_at=" + updated_at +
                 '}';
     }
 }

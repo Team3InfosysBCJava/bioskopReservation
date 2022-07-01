@@ -2,12 +2,16 @@ package com.teamc.bioskop.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.teamc.bioskop.DTO.ScheduleResponseDTO;
-import com.teamc.bioskop.DTO.ScheduleResponseFilmSeatDTO;
+import com.teamc.bioskop.DTO.ScheduleResponsePost;
 import com.teamc.bioskop.DTO.ScheduleResponseNameLikeDTO;
+import com.teamc.bioskop.DTO.ScheduleResponsePost;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Getter
@@ -45,32 +49,32 @@ public class Schedule {
     @Column(name = "price")
     private Integer price;
 
-//    @CreationTimestamp
-//    @Column(nullable = false,updatable = false)
-//    private LocalDateTime createdAt;
-//
-//    @UpdateTimestamp
-//    private LocalDateTime updatedAt;
+    @CreationTimestamp
+    @Column(nullable = false,updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public ScheduleResponseDTO convertToResponse(){
         return ScheduleResponseDTO.builder()
                 .scheduleId(this.scheduleId).films(this.films)
                 .seats(this.seats).dateShow(this.dateShow)
-                .showStart(this.showStart).showEnd(this.showEnd).price(this.price).build();
-//                .createdAt(this.createdAt).updatedAt(this.updatedAt).build();
+                .showStart(this.showStart).showEnd(this.showEnd).price(this.price)
+                .created_at(this.createdAt).updated_at(this.updatedAt).build();
     }
 
-    public ScheduleResponseFilmSeatDTO convertToResponseFilmsSeat(){
-        return ScheduleResponseFilmSeatDTO.builder()
+    public ScheduleResponsePost convertToResponsePost(){
+        return ScheduleResponsePost.builder()
                 .scheduleId(this.scheduleId)
                 .filmId(this.films.getFilmId())
                 .seatId(this.seats.getSeatId())
                 .dateShow(this.dateShow)
                 .showStart(this.showStart)
                 .showEnd(this.showEnd)
-                .price(this.price).build();
-//                .updatedAt(this.updatedAt)
-//                .createdAt(this.createdAt)
+                .price(this.price)
+                .updatedAt(this.updatedAt)
+                .build();
 
     }
     public ScheduleResponseNameLikeDTO convertToResponseNameLike(){
@@ -78,12 +82,15 @@ public class Schedule {
                 .filmName(this.getFilms().getName())
                 .studioName(this.getSeats().getStudioName())
                 .price(this.price)
+                .created_at(this.createdAt)
+                .updatedAt(this.updatedAt)
+                .updatedAt(this.updatedAt)
                 .build();
     }
 
     @Override
     public String toString() {
-        return "\n Schedule{" +
+        return "Schedule{" +
                 "scheduleId=" + scheduleId +
                 ", films=" + films +
                 ", dateShow=" + dateShow +
@@ -91,6 +98,8 @@ public class Schedule {
                 ", showStart=" + showStart +
                 ", showEnd=" + showEnd +
                 ", price=" + price +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }

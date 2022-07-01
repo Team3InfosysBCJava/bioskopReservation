@@ -12,14 +12,14 @@ import lombok.*;
 @Builder
 public class BookingRequestDTO {
     private Long id;
-    private User usr;
-    private Schedule sch;
+    private User user;
+    private Schedule schedule;
 
     public Reservation covertToEntitiy(){
         return Reservation.builder()
                 .reservationId(this.id)
-                .user(this.usr)
-                .schedule(this.sch)
+                .user(this.user)
+                .schedule(this.schedule)
                 .build();
     }
 }
