@@ -3,7 +3,11 @@ package com.teamc.bioskop.Model;
 import com.teamc.bioskop.DTO.BookingResponseDTO;
 import com.teamc.bioskop.DTO.BookingResponsePost;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -25,12 +29,19 @@ public class Reservation {
     @JoinColumn(name = "schedule_id")
     private Schedule schedule;
 
+    @CreationTimestamp
+    @Column(nullable = false,updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
     public BookingResponseDTO convertToResponse(){
         return BookingResponseDTO.builder()
-                .reserv_id(this.reservationId)
-                .usr_id(this.getUser().getUserId())
-                .usr_name(this.getUser().getUsername())
-                .email_usr(this.getUser().getEmailId())
+                .reservation_id(this.reservationId)
+                .user_id(this.getUser().getUserId())
+                .user_name(this.getUser().getUsername())
+                .email_user(this.getUser().getEmailId())
                 .film_name(this.getSchedule().getFilms().getName())
                 .price(this.getSchedule().getPrice())
                 .studio(this.getSchedule().getSeats().getStudioName())
@@ -40,14 +51,18 @@ public class Reservation {
                 .date_film(this.getSchedule().getDateShow())
                 .start_film(this.getSchedule().getShowStart())
                 .end_film(this.getSchedule().getShowEnd())
+                .created_at(this.createdAt)
+                .updated_at(this.updatedAt)
                 .build();
     }
 
     public BookingResponsePost convertToResponsePost(){
         return BookingResponsePost.builder()
-                .reserv_id(this.reservationId)
-                .usr_id(this.getUser().getUserId())
-                .sch_id(this.getSchedule().getScheduleId())
+                .reservation_id(this.reservationId)
+                .user_id(this.getUser().getUserId())
+                .schedule_id(this.getSchedule().getScheduleId())
+                .created_at(this.createdAt)
+                .updated_at(this.updatedAt)
                 .build();
     }
 

@@ -92,7 +92,7 @@ public class ReservationController {
     @PutMapping("/Reservation/{id}")
     public ResponseEntity<Object> bookingupdate(@PathVariable Long id, @RequestBody BookingRequestDTO bookingRequestDTO){
         try {
-            if(bookingRequestDTO.getSch() == null || bookingRequestDTO.getUsr() == null){
+            if(bookingRequestDTO.getSchedule() == null || bookingRequestDTO.getUser() == null){
                 throw new ResourceNotFoundException("Reservation must have schedule id and user id");
             }
             Reservation booking = bookingRequestDTO.covertToEntitiy();
@@ -117,7 +117,7 @@ public class ReservationController {
     @PostMapping("/Reservation")
     public ResponseEntity<Object> bookingCreate(@RequestBody BookingRequestDTO bookingRequestDTO){
         try{
-            if(bookingRequestDTO.getSch() == null || bookingRequestDTO.getUsr() == null){
+            if(bookingRequestDTO.getSchedule() == null || bookingRequestDTO.getUser() == null){
                 throw new ResourceNotFoundException("Reservation must have schedule id and user id");
             }
             Reservation booking = bookingRequestDTO.covertToEntitiy();
