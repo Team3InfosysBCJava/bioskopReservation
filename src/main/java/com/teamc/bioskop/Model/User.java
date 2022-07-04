@@ -32,6 +32,7 @@ public class User {
     public UserResponseDTO convertToResponse(){
         return UserResponseDTO.builder()
                 .user_id(this.userId)
+                .user_name(this.username)
                 .email_id(this.emailId)
                 .pass_word(this.password)
                 .build();
