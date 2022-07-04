@@ -1,5 +1,6 @@
 package com.teamc.bioskop.Model;
 
+import com.teamc.bioskop.DTO.UserResponseDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,6 +28,22 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
+    public UserResponseDTO convertToResponse(){
+        return UserResponseDTO.builder()
+                .user_id(this.userId)
+                .email_id(this.emailId)
+                .pass_word(this.password)
+                .build();
+    }
+
+
+
+
+
+
+
+
 
     @Override
     public String toString() {
