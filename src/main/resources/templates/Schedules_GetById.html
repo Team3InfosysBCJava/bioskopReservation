@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title th:text="${schedule_entry.films.name}"></title>
+</head>
+<body>
+    <div th:switch="${schedule_entry}">
+        <h2 th:case="null">No schedule found</h2>
+        <div th:case="*">
+            <h2 th:text="${schedule_entry.films.name}"></h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Film</th>
+                    <th>Date</th>
+                    <th>Show Start</th>
+                    <th>Show End</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td th:text="${schedule_entry.films.name}"></td>
+                    <td th:text="${schedule_entry.dateShow}"></td>
+                    <td th:text="${schedule_entry.showStart}"></td>
+                    <td th:text="${schedule_entry.showEnd}"></td>
+                    <td th:text="${schedule_entry.price}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+</html>
