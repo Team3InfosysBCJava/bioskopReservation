@@ -12,7 +12,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ScheduleResponseFilmSeatDTO {
+public class ScheduleResponsePost {
 
     private Integer scheduleId;
     private Long filmId;
@@ -29,6 +29,19 @@ public class ScheduleResponseFilmSeatDTO {
 
     private Integer price;
 
-//    private LocalDateTime updatedAt;
-//    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    @Override
+    public String toString() {
+        return "ScheduleResponseFilmSeatDTO{" +
+                "scheduleId=" + scheduleId +
+                ", filmId=" + filmId +
+                ", seatId=" + seatId +
+                ", dateShow=" + dateShow +
+                ", showStart=" + showStart +
+                ", showEnd=" + showEnd +
+                ", price=" + price +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 }

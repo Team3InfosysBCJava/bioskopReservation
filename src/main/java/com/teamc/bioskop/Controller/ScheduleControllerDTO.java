@@ -32,7 +32,7 @@ public class ScheduleControllerDTO {
     public ResponseEntity<Object> ScheduleList(){
         try {
             List<Schedule> result = scheduleService.getAll();
-            List<ScheduleResponseFilmSeatDTO> scheduleMaps = new ArrayList<>();
+            List<ScheduleResponseDTO> scheduleMaps = new ArrayList<>();
             logger.info(Line + "Logger Start Find All Schedule" + Line);
             for (Schedule dataResult:result){
                 Map<String,Object> schedule = new HashMap<>();
@@ -44,7 +44,7 @@ public class ScheduleControllerDTO {
                 logger.info("Film :"+dataResult.getFilms());
                 logger.info("Seats :"+dataResult.getSeats());
                 logger.info("================================");
-                ScheduleResponseFilmSeatDTO scheduleDTO = dataResult.convertToResponseFilmsSeat();
+                ScheduleResponseDTO scheduleDTO = dataResult.convertToResponse();
                 scheduleMaps.add(scheduleDTO);
             }
             logger.info(Line + "Logger End Find All Schedule" + Line);
@@ -67,7 +67,7 @@ public class ScheduleControllerDTO {
         try {
             Schedule scheduleCreate = scheduleRequestDTO.convertToEntity();
             scheduleService.createSchedule(scheduleCreate);
-            ScheduleResponseFilmSeatDTO result = scheduleCreate.convertToResponseFilmsSeat();
+            ScheduleResponsePost result = scheduleCreate.convertToResponsePost();
             logger.info(Line + " Logger Start Created New Schedule" + Line);
             logger.info(result);
             logger.info(Line + " Logger Stop Create New Schedule" + Line);
@@ -87,7 +87,7 @@ public class ScheduleControllerDTO {
             Schedule schedule = scheduleRequestDTO.convertToEntity();
             schedule.setScheduleId(id);
             Schedule scheduleUpdate = scheduleService.updateSchedule(schedule);
-            ScheduleResponseFilmSeatDTO result = scheduleUpdate.convertToResponseFilmsSeat();
+            ScheduleResponseDTO result = scheduleUpdate.convertToResponse();
             logger.info(Line + " Logger Start Updated Data" + Line);
             logger.info("Update : " + scheduleUpdate);
             logger.info(Line + " Logger Finish Updated Data" + Line);
@@ -128,7 +128,7 @@ public class ScheduleControllerDTO {
         try {
             Optional<Schedule> schedule = scheduleService.getScheduleById(id);
             Schedule scheduleget = schedule.get();
-            ScheduleResponseFilmSeatDTO result = scheduleget.convertToResponseFilmsSeat();
+            ScheduleResponseDTO result = scheduleget.convertToResponse();
             logger.info(Line + " Logger Start Find Schedule ById " + Line);
             logger.info("GetById");
             logger.info(result);
