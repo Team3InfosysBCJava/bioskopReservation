@@ -1,5 +1,6 @@
 package com.teamc.bioskop.Controller;
 
+import com.teamc.bioskop.DTO.UserResponseDTO;
 import com.teamc.bioskop.Exception.ResourceNotFoundException;
 import com.teamc.bioskop.Model.User;
 import com.teamc.bioskop.Repository.UserRepository;
@@ -78,7 +79,8 @@ public class UserController {
 //            User userResult = userRepository.getReferenceById(users_Id);
             User userResult = userServiceImplements.getUserById(users_Id)
                     .orElseThrow(() -> new ResourceNotFoundException("User not exist with user_Id :" + users_Id));
-            Map<String, Object> user = new HashMap<>();
+            UserResponseDTO userget = userResult.convertToResponse();
+ //           Map<UserResponseDTO> user = new HashMap<>();
             List<Map<String, Object>> maps = new ArrayList<>();
 
             logger.info("==================== Logger Start Find By ID Users ====================");
@@ -87,15 +89,15 @@ public class UserController {
             logger.info("Email    : " + userResult.getEmailId());
             logger.info("Password : " + userResult.getPassword());
 
-            user.put("ID             ", userResult.getUserId());
-            user.put("Username       ", userResult.getUsername());
-            user.put("Email          ", userResult.getEmailId());
-            user.put("Password       ", userResult.getPassword());
-            maps.add(user);
+//            user.put("ID             ", userResult.getUserId());
+//            user.put("Username       ", userResult.getUsername());
+//            user.put("Email          ", userResult.getEmailId());
+////            user.put("Password       ", userResult.getPassword());
+//            maps.add(user);
 
             logger.info("==================== Logger End Find By ID Users   ====================");
             logger.info(" ");
-            return ResponseHandler.generateResponse("Successfully Get User By ID!", HttpStatus.OK, maps);
+            return ResponseHandler.generateResponse("Successfully Get User By ID!", HttpStatus.OK, userget);
         } catch (Exception e) {
             logger.info("==================== Logger Start Get By ID Users     ====================");
             logger.error(ResponseHandler.generateResponse(e.getMessage(),HttpStatus.NOT_FOUND,"Data Not Found!"));
@@ -117,6 +119,7 @@ public class UserController {
         try {
             userServiceImplements.createUser(user);
             User userResult = userServiceImplements.createUser(user);
+            UserResponseDTO userget = userResult.convertToResponse();
             Map<String, Object> userMap = new HashMap<>();
             List<Map<String, Object>> maps = new ArrayList<>();
 
@@ -134,7 +137,7 @@ public class UserController {
             maps.add(userMap);
             logger.info("==================== Logger End Create Users   ====================");
             logger.info(" ");
-            return ResponseHandler.generateResponse("Successfully Created User!", HttpStatus.CREATED, maps);
+            return ResponseHandler.generateResponse("Successfully Created User!", HttpStatus.CREATED, userget);
         } catch (Exception e) {
             logger.info("==================== Logger Start Create Users     ====================");
             logger.error(ResponseHandler.generateResponse(e.getMessage(),HttpStatus.BAD_REQUEST,"User Already Exist!"));
@@ -156,7 +159,7 @@ public class UserController {
         try {
             User user = userServiceImplements.getUserById(users_Id)
                     .orElseThrow(() -> new ResourceNotFoundException("User not exist with user_Id :" + users_Id));
-
+            UserResponseDTO userget = user.convertToResponse();
             user.setUsername(userDetails.getUsername());
             user.setEmailId(userDetails.getEmailId());
             user.setPassword(userDetails.getPassword());
@@ -170,7 +173,7 @@ public class UserController {
             logger.info("Password : " + user.getPassword());
             logger.info("==================== Logger End Update Users   ====================");
             logger.info(" ");
-            return ResponseHandler.generateResponse("Successfully Updated User!",HttpStatus.OK, user);
+            return ResponseHandler.generateResponse("Successfully Updated User!",HttpStatus.OK, userget);
         }catch(Exception e){
             logger.info("==================== Logger Start Update Users     ====================");
             logger.error(ResponseHandler.generateResponse(e.getMessage(),HttpStatus.NOT_FOUND,"Data Not Found!"));
