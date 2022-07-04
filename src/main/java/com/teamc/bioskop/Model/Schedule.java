@@ -8,6 +8,7 @@ import com.teamc.bioskop.DTO.ScheduleResponsePost;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -33,6 +34,7 @@ public class Schedule {
     @JoinColumn(name = "film_id")
     private Films films;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_show")
     private LocalDate dateShow;
 
@@ -40,9 +42,11 @@ public class Schedule {
     @JoinColumn(name = "seat_id")
     private Seats seats;
 
+    @DateTimeFormat(pattern = "HH:mm:ss")
     @Column(name = "show_start")
     private LocalTime showStart;
 
+    @DateTimeFormat(pattern = "HH:mm:ss")
     @Column(name = "show_end")
     private LocalTime showEnd;
 

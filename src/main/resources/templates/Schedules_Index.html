@@ -28,11 +28,14 @@
                     <td th:text="${schedule.showStart}"></td>
                     <td th:text="${schedule.showEnd}"></td>
                     <td th:text="${schedule.price}"></td>
+                    <td><a th:href="@{/MVC/schedules/update/{id}(id=${schedule.scheduleId})}">Edit</a></td>
+                    <td><a th:href="@{/MVC/schedules/delete/{id}(id=${schedule.scheduleId})}">Delete</a></td>
                 </tr>
                 </tbody>
             </table>
         </div>
 
     </div>
+    <p><a href="/MVC/new-schedule">Add a new schedule</a></p>
 </body>
 </html>
