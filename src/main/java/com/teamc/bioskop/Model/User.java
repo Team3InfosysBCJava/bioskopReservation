@@ -1,9 +1,8 @@
 package com.teamc.bioskop.Model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.teamc.bioskop.DTO.UserResponseDTO;
+import lombok.*;
+
 import javax.persistence.*;
 
 @Setter
@@ -11,6 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "Users")
 public class User {
 
@@ -28,6 +28,22 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
+    public UserResponseDTO convertToResponse(){
+        return UserResponseDTO.builder()
+                .user_id(this.userId)
+                .email_id(this.emailId)
+                .pass_word(this.password)
+                .build();
+    }
+
+
+
+
+
+
+
+
 
     @Override
     public String toString() {
