@@ -26,6 +26,13 @@ import java.util.Optional;
 public class ScheduleMVCController {
     private final ScheduleService scheduleService;
 
+    //HOMEPAGE
+    @GetMapping("/MVC")
+    public String showHomepage(){
+        return "Homepage";
+    }
+
+
     //CREATE
     @GetMapping("/MVC/new-schedule")
     public String showScheduleForm(Schedule schedule) {
@@ -80,8 +87,9 @@ public class ScheduleMVCController {
             return "Schedules_Update";
         }
 
+        schedule.setScheduleId(id);
         scheduleService.updateSchedule(schedule);
-        return "Schedules_Index";
+        return "redirect:/MVC/schedules";
     }
 
 
