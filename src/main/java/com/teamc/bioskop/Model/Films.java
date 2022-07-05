@@ -23,7 +23,7 @@ public class Films {
     private Integer isPlaying;
 
         public FilmsResponseDTO convertToResponse() {
-        return FilmsResponseDTO.builder().code(this.filmId)
+        return FilmsResponseDTO.builder().filmId(this.filmId)
                 .title(this.name)
                 .status(this.isPlaying)
                 .build();
