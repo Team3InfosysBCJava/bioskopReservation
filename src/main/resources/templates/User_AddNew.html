@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Add New User</title>
+    <style type="text/css">
+    label {
+        display: inline-block;
+        width: 200px;
+        margin: 5px;
+        text-align: left;
+    }
+    input[type=text] {
+        display: inline-block;
+        width: 200px;
+    }
+    input[type=submit] {
+        padding: 5px;
+        margin: 10px;
+    }
+</style>
+</head>
+<body>
+<div align="center">
+    <h2>Add New User</h2>
+    <form action="#"
+          th:action="@{/MVC/User/add-user}"
+          th:object="${user}"
+          method="post">
+
+        <!--    //films-->
+        <label for="userId">User ID</label>
+        <input type="text" th:field="*{userId}" id="userId" placeholder="User ID"><br/>
+        <span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span>
+
+        <!--    //dateShow-->
+        <label for="username">Username</label>
+        <input type="text" th:field="*{username}" id="username" placeholder="Username"><br/>
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+
+        <!--    //seats-->
+        <label for="emailId">Email ID</label>
+        <input type="text" th:field="*{emailId}" id="emailId" placeholder="email ID"><br/>
+        <span th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}"></span>
+
+        <!--    //showStart-->
+        <label for="password">Password</label>
+        <input type="text" th:field="*{password}" id="password" placeholder="Password"><br/>
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+
+
+
+        <input type="submit" value="Add User">
+    </form>
+</div>
+</body>
+</html>
