@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Add New Film</title>
+    <style type="text/css">
+    label {
+        display: inline-block;
+        width: 200px;
+        margin: 5px;
+        text-align: left;
+    }
+    input[type=text] {
+        display: inline-block;
+        width: 200px;
+    }
+    input[type=submit] {
+        padding: 5px;
+        margin: 10px;
+    }
+</style>
+</head>
+<body>
+<div align="center">
+    <h2>Add New Film</h2>
+    <form action="#"
+          th:action="@{/MVC/Film/add-film}"
+          th:object="${films}"
+          method="post">
+
+        <!--    //films-->
+<!--        <label for="filmId">Film ID</label>-->
+<!--        <input type="text" th:field="*{filmId}" id="filmId" placeholder="filmId"><br/>-->
+<!--        <span th:if="${#fields.hasErrors('filmId')}" th:errors="*{filmId}"></span>-->
+
+        <!--    //dateShow-->
+        <label for="name">Film Name</label>
+        <input type="text" th:field="*{name}" id="name" placeholder="name"><br/>
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
+        <!--    //seats-->
+        <label for="isPlaying">Status</label>
+        <input type="text" th:field="*{isPlaying}" id="isPlaying" placeholder="0 or 1"><br/>
+        <span th:if="${#fields.hasErrors('isPlaying')}" th:errors="*{isPlaying}"></span>
+
+
+
+        <input type="submit" value="Add Schedule">
+    </form>
+</div>
+</body>
+</html>

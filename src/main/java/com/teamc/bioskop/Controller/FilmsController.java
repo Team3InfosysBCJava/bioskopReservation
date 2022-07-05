@@ -98,11 +98,11 @@ public class FilmsController {
      * UPDATE FILM by ID
      */
     @PutMapping("/film/{filmId}")
-    public ResponseEntity<Object> updateFilms(@PathVariable(value = "filmId") Long filmId,@RequestBody Films filmsdetails) {
+    public ResponseEntity<Object> updateFilms(@PathVariable(value = "filmId") Long filmId,@RequestBody Films films) {
         try {
-            Films films = filmsdetails;
+//            Films films = filmsdetails;
             films.setFilmId(filmId);
-            Films filmsUpdate = filmsService.updateFilm(films,filmId);
+            Films filmsUpdate = filmsService.updateFilm(films);
             logger.info(Line + " Logger Start Update " + Line);
             logger.info(filmsUpdate);
             logger.info(Line + " Logger End Update " + Line);
