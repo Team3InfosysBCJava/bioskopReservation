@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title th:text="${film_getId}">Get By Id Films</title>
+</head>
+<body>
+<div th:switch="${film_getId}">
+<h2 th:case="null">No film Id found</h2>
+<div th:case="*">
+<!--    <h2 th:text="${film_getId}"></h2>-->
+        <h4>Get Film By id</h4>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th  scope="col">Film id</th>
+                <th  scope="col">Film Name</th>
+                <th  scope="col">Is Playing</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="Films : ${film_getId}">
+                <td th:text="${film_getId.filmId}"></td>
+                <td th:text="${film_getId.title}"></td>
+                <td th:text="${film_getId.status}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--    <p><a href="/signup">Add a new user</a></p>-->
+</div>
+</body>
+</html>
