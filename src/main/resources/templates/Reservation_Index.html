@@ -44,8 +44,8 @@
                 <td th:text="${Reservation.date_film}"></td>
                 <td th:text="${Reservation.start_film}"></td>
                 <td th:text="${Reservation.end_film}"></td>
-                <td><a th:href="@{/MVC/Reservation/update/{id}{id=${Reservation.reservation_id}}}">Edit</a></td>
-                <td><a th:href="@{/MVC/Reservation/delete/{id}{id=${Reservation.reservation_id}}}">Delete</a></td>
+                <td><a th:href="@{/MVC/Reservation/update/{id}(id=${Reservation.reservation_id})}">Edit</a></td>
+                <td><a th:href="@{/MVC/Reservation/delete/{id}(id=${Reservation.reservation_id})}">Delete</a></td>
              </tr>
             </tbody>
         </table>

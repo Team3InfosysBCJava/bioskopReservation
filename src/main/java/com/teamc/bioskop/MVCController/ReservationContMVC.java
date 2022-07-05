@@ -3,16 +3,13 @@ package com.teamc.bioskop.MVCController;
 import com.teamc.bioskop.DTO.BookingResponseDTO;
 import com.teamc.bioskop.Model.Reservation;
 import com.teamc.bioskop.Service.BookingService;
-import com.teamc.bioskop.Service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -54,10 +51,11 @@ public class ReservationContMVC {
 
 
     /**
-     * Create , status : belum berhasil
+     * Create
      */
     @GetMapping("/MVC/Reservation/new")
     public String showRerservationForm(Reservation reservation){
+
         return "Reservations_New";
     }
 
@@ -71,6 +69,28 @@ public class ReservationContMVC {
     }
 
     /**
+     * Update
+      */
+    @GetMapping("/MVC/Reservation/update/{id}")
+    public String showEditReservationForm(@PathVariable("id") Long id, Model model){
+        Optional<Reservation> reservation = bookingService.getBookingById(id);
+        Reservation reservationget = reservation.get();
+        model.addAttribute("reservation", reservationget);
+        return "Reservation_Update";
+    }
+
+    @PostMapping("/MVC/Reservation/update-reservation/{id}")
+    public String showUpdateReservation(@PathVariable("id") Long id, @Valid Reservation reservation, BindingResult result, Model model){
+        if (result.hasErrors()){
+            reservation.setReservationId(id);
+            return "Reservation_Update";
+        }
+        reservation.setReservationId(id);
+        bookingService.updateBooking(reservation);
+        return "redirect:/MVC/Reservations";
+    }
+
+    /**
      * Delete by ID
      */
     @GetMapping("/MVC/Reservation/delete/{id}")
@@ -78,7 +98,7 @@ public class ReservationContMVC {
         Reservation reservation = bookingService.getBookingById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid reservation Id:" + id));
         bookingService.deleteSBookingById(id);
-        return "Reservation_GetById";
+        return "redirect:/MVC/Reservations";
     }
 
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Add New Reservation</title>
+    <title>Edit Reservation</title>
     <style type="text/css">
     label {
         display: inline-block;
@@ -23,9 +23,9 @@
 </head>
 <body>
 <div align="center">
-    <h2>Add New Reservation</h2>
+    <h2>Edit Reservation</h2>
     <form action="#"
-          th:action="@{/MVC/Reservation/add}"
+          th:action="@{/MVC/Reservation/update-reservation/{id}(id=${reservation.reservationId})}"
           th:object="${reservation}"
           method="post">
 
@@ -39,7 +39,7 @@
         <input type="text" th:field="*{schedule.scheduleId}" id="schedule" placeholder="schedule"><br/>
         <span th:if="${#fields.hasErrors('schedule')}" th:errors="*{schedule}"></span>
 
-        <input type="submit" value="Add Reservation">
+        <input type="submit" value="Edit Reservation">
     </form>
 </div>
 </body>
