@@ -22,6 +22,7 @@ public class Films {
     private String name;
     private Integer isPlaying;
 
+
         public FilmsResponseDTO convertToResponse() {
         return FilmsResponseDTO.builder().filmId(this.filmId)
                 .title(this.name)
