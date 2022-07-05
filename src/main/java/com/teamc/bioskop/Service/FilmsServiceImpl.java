@@ -47,11 +47,8 @@ public class FilmsServiceImpl implements FilmsService {
 
 
     @Override
-    public Films updateFilm(Films films, Long filmId) {
-        Optional<Films> optionalFilms = filmsRepository.findById(filmId);
-        if(optionalFilms.isEmpty()){
-            throw new ResourceNotFoundException("Films not exist with id : " + filmId);
-        }
+    public Films updateFilm(Films films) {
+
         return filmsRepository.save(films);
     }
 

@@ -79,7 +79,7 @@ public class FilmsControllerDTO {
         try {
             Films films = filmsRequestDTO.convertToEntity();
             films.setFilmId(filmId);
-            Films filmsUpdate = filmsService.updateFilm(films, filmId);
+            Films filmsUpdate = filmsService.updateFilm(films);
             logger.info(Line + "Logger Start Update Films by Id" + Line);
             logger.info("Film updated " + filmsUpdate);
             logger.info(Line + "Logger End Update Films by Id" + Line);
