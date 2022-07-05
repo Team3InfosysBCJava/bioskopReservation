@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Get by ID Reservation</title>
+
+</head>
+<body>
+<div th:switch="${Reservation_entry}">
+    <h2 th:case="null">No reservation found</h2>
+    <div th:case="*">
+        <h2>Reservation</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Reservation Id</th>
+                <th>User Id</th>
+                <th>Username</th>
+                <th>Email User</th>
+                <th>Film Name</th>
+                <th>Price</th>
+                <th>Studio</th>
+                <th>Status Show</th>
+                <th>Seat Number</th>
+                <th>Status Seat</th>
+                <th>Date Film</th>
+                <th>Start Film</th>
+                <th>End Film</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${Reservation_entry.reservation_id}"></td>
+                <td th:text="${Reservation_entry.user_id}"></td>
+                <td th:text="${Reservation_entry.user_name}"></td>
+                <td th:text="${Reservation_entry.film_name}"></td>
+                <td th:text="${Reservation_entry.price}"></td>
+                <td th:text="${Reservation_entry.studio}"></td>
+                <td th:text="${Reservation_entry.status_show}"></td>
+                <td th:text="${Reservation_entry.seat_num}"></td>
+                <td th:text="${Reservation_entry.status_show}"></td>
+                <td th:text="${Reservation_entry.seat_num}"></td>
+                <td th:text="${Reservation_entry.status_seat}"></td>
+                <td th:text="${Reservation_entry.date_film}"></td>
+                <td th:text="${Reservation_entry.start_film}"></td>
+                <td th:text="${Reservation_entry.end_film}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

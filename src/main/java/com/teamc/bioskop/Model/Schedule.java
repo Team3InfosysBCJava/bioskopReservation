@@ -113,4 +113,3 @@ public class Schedule {
 //bikin constructor method untuk semua property (bisa diganti dengan penggunaan anotasi @AllArgsConstructor)
 //bikin setter getter (bisa diganti dengan penggunaan anotasi @SetterGetter)
 
-
