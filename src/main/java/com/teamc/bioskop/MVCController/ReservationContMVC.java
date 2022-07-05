@@ -1,6 +1,7 @@
 package com.teamc.bioskop.MVCController;
 
 import com.teamc.bioskop.DTO.BookingResponseDTO;
+import com.teamc.bioskop.Model.Films;
 import com.teamc.bioskop.Model.Reservation;
 import com.teamc.bioskop.Service.BookingService;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Controller
@@ -99,6 +101,30 @@ public class ReservationContMVC {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid reservation Id:" + id));
         bookingService.deleteSBookingById(id);
         return "redirect:/MVC/Reservations";
+    }
+
+    @PostMapping("/MVC/Reservation/search")
+    public String search(Films film, Model model, String name) {
+    if(name!=null) {
+        List<Reservation> reservations = bookingService.getBookingByFilmName(film.getName());
+        //pake stream
+        List<BookingResponseDTO> results = reservations.stream()
+                .map(Reservation::convertToResponse)
+                .collect(Collectors.toList());
+        model.addAttribute("Reservation_entry", results);
+    }else {
+        List<Reservation> reservations = bookingService.getAll();
+        List<BookingResponseDTO> reservationsMaps = new ArrayList<>();
+        //manual for each
+        for (Reservation data:reservations){
+            BookingResponseDTO reservationDTO = data.convertToResponse();
+            reservationsMaps.add(reservationDTO);
+        }
+        model.addAttribute("Reservation_entry", reservationsMaps);
+    }
+
+    return "Reservation_search";
+
     }
 
 }
