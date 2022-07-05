@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Edit Schedule</title>
+    <style type="text/css">
+    label {
+        display: inline-block;
+        width: 200px;
+        margin: 5px;
+        text-align: left;
+    }
+    input[type=text] {
+        display: inline-block;
+        width: 200px;
+    }
+    input[type=submit] {
+        padding: 5px;
+        margin: 10px;
+    }
+</style>
+</head>
+<body>
+    <div align="center">
+        <h2>Edit Schedule</h2>
+        <form action="#"
+        th:action="@{/MVC/schedules/update-schedule/{id}(id=${schedule.scheduleId})}"
+        th:object="${schedule}"
+        method="post">
+
+            <label for="films">Film ID</label>
+            <input type="text" th:field="*{films.filmId}" id="films" placeholder="films"><br/>
+            <span th:if="${#fields.hasErrors('films')}" th:errors="*{films}"></span>
+
+            <!--    //dateShow-->
+            <label for="dateShow">Date Show</label>
+            <input type="text" th:field="*{dateShow}" id="dateShow" placeholder="date show"><br/>
+            <span th:if="${#fields.hasErrors('dateShow')}" th:errors="*{dateShow}"></span>
+
+            <!--    //seats-->
+            <label for="seats">Seat ID</label>
+            <input type="text" th:field="*{seats.seatId}" id="seats" placeholder="seats"><br/>
+            <span th:if="${#fields.hasErrors('seats')}" th:errors="*{seats}"></span>
+
+            <!--    //showStart-->
+            <label for="showStart">Show Start</label>
+            <input type="text" th:field="*{showStart}" id="showStart" placeholder="show start"><br/>
+            <span th:if="${#fields.hasErrors('showStart')}" th:errors="*{showStart}"></span>
+
+            <!--    //showEnd-->
+            <label for="showEnd">Show End</label>
+            <input type="text" th:field="*{showEnd}" id="showEnd" placeholder="show end"><br/>
+            <span th:if="${#fields.hasErrors('showEnd')}" th:errors="*{showEnd}"></span>
+
+            <!--    //price-->
+            <label for="price">Price</label>
+            <input type="text" th:field="*{price}" id="price" placeholder="price"><br/>
+            <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+
+            <!--    <label for="email">Email</label>-->
+            <!--    <input type="text" th:field="*{email}" id="email" placeholder="Email">-->
+            <!--    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
+
+            <input type="submit" value="Update Schedule">
+        </form>
+    </div>
+</body>
+</html>
