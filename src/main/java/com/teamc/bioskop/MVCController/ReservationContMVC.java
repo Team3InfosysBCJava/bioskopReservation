@@ -21,7 +21,6 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Controller
-@RequestMapping("/Team3/MVC")
 public class ReservationContMVC {
 
     private final BookingService bookingService;
@@ -29,7 +28,7 @@ public class ReservationContMVC {
     /**
      * Get All
      */
-    @GetMapping("/Reservations")
+    @GetMapping("/MVC/Reservations")
     public String showReservationList(Model model) {
         List<Reservation> reservations = bookingService.getAll();
         List<BookingResponseDTO> reservationsMaps = new ArrayList<>();
@@ -44,7 +43,7 @@ public class ReservationContMVC {
     /**
      * Get by ID
      */
-    @GetMapping("/Reservation/{id}")
+    @GetMapping("/MVC/Reservation/{id}")
     public String showReservationById(@PathVariable("id") Long id, Model model){
         Optional<Reservation> reservation = bookingService.getBookingById(id);
         Reservation reservationGet = reservation.get();
@@ -57,24 +56,24 @@ public class ReservationContMVC {
     /**
      * Create , status : belum berhasil
      */
-    @GetMapping("/Reservation/new")
+    @GetMapping("/MVC/Reservation/new")
     public String showRerservationForm(Reservation reservation){
         return "Reservations_New";
     }
 
-    @PostMapping("/Reservation/add")
+    @PostMapping("/MVC/Reservation/add")
     public String showAddReservation(@Valid Reservation reservation, BindingResult result, Model model){
         if(result.hasErrors()){
             return "Reservations_New";
         }
         bookingService.createBooking(reservation);
-        return "redirect:/Team3/MVC/Reservations";
+        return "redirect:/MVC/Reservations";
     }
 
     /**
      * Delete by ID
      */
-    @GetMapping("/Reservation/delete/{id}")
+    @GetMapping("/MVC/Reservation/delete/{id}")
     public String showDeleteReservationById(@PathVariable("id") Long id, Model model){
         Reservation reservation = bookingService.getBookingById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid reservation Id:" + id));

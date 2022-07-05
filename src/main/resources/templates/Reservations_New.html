@@ -9,19 +9,20 @@
 <div align="center">
     <h2>Add New Reservation</h2>
     <form action="#"
-          th:action="@{/Team3/MVC/Reservation/add}"
+          th:action="@{/MVC/Reservation/add}"
           th:object="${reservation}"
           method="post">
 
-<!--        user-->
+        <!--        user-->
         <label for="user">User ID</label>
         <input type="text" th:field="*{user.userId}" id="user" placeholder="user"><br/>
         <span th:if="${}#fields.hasErrors('user')}" th:errors="*{user}"></span>
 
-<!--        schedule-->
-        <label for="schedule">User ID</label>
+        <!--        schedule-->
+        <label for="schedule">Schedule ID</label>
         <input type="text" th:field="*{schedule.scheduleId}" id="schedule" placeholder="schedule"><br/>
         <span th:if="${}#fields.hasErrors('schedule')}" th:errors="*{schedule}"></span>
+
         <input type="submit" value="Add Reservation">
     </form>
 </div>
