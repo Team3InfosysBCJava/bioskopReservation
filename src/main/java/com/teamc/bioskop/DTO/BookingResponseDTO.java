@@ -3,6 +3,7 @@ package com.teamc.bioskop.DTO;
 import com.teamc.bioskop.Model.Schedule;
 import com.teamc.bioskop.Model.User;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,8 +26,12 @@ public class BookingResponseDTO {
     private Long seat_num;
     private Integer status_seat;
     private LocalDate date_film;
+
+    @DateTimeFormat(pattern = "HH:mm:ss")
     private LocalTime start_film;
+    @DateTimeFormat(pattern = "HH:mm:ss")
     private LocalTime end_film;
+
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
 

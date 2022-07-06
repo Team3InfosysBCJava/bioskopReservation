@@ -70,9 +70,9 @@ public class ReservationController {
     @GetMapping("/Reservation/{id}")
     public ResponseEntity<Object> getBookingById(@PathVariable Long id){
         try {
-            Optional<Reservation> booking = bookingService.getBookingById(id);
-            Reservation bookingget = booking.get();
-            BookingResponseDTO result = bookingget.convertToResponse();
+            Optional<Reservation> reservation = bookingService.getBookingById(id);
+            Reservation reservationGet = reservation.get();
+            BookingResponseDTO result = reservationGet.convertToResponse();
             logger.info(Line + " Logger Start Get By id Reservation " + Line);
             logger.info("Update RReservation : " + result);
             logger.info(Line + " Logger End Get By id Reservation " + Line);

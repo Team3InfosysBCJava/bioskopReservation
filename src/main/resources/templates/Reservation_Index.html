@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Get All Reservation</title>
+</head>
+<body>
+<div th:switch="${Reservation_entry}">
+    <h2 th:case="null">No reservation yet!</h2>
+    <div th:case="*">
+        <h2>All Reservations</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Reservation Id</th>
+                <th>User Id</th>
+                <th>Username</th>
+                <th>Email User</th>
+                <th>Film Name</th>
+                <th>Price</th>
+                <th>Studio</th>
+                <th>Status Show</th>
+                <th>Seat Number</th>
+                <th>Status Seat</th>
+                <th>Date Film</th>
+                <th>Start Film</th>
+                <th>End Film</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="Reservation : ${Reservation_entry}">
+                <td th:text="${Reservation.reservation_id}"></td>
+                <td th:text="${Reservation.user_id}"></td>
+                <td th:text="${Reservation.user_name}"></td>
+                <td th:text="${Reservation.film_name}"></td>
+                <td th:text="${Reservation.price}"></td>
+                <td th:text="${Reservation.studio}"></td>
+                <td th:text="${Reservation.status_show}"></td>
+                <td th:text="${Reservation.seat_num}"></td>
+                <td th:text="${Reservation.status_show}"></td>
+                <td th:text="${Reservation.seat_num}"></td>
+                <td th:text="${Reservation.status_seat}"></td>
+                <td th:text="${Reservation.date_film}"></td>
+                <td th:text="${Reservation.start_film}"></td>
+                <td th:text="${Reservation.end_film}"></td>
+                <td><a th:href="@{/MVC/Reservation/update/{id}{id=${Reservation.reservation_id}}}">Edit</a></td>
+                <td><a th:href="@{/MVC/Reservation/delete/{id}{id=${Reservation.reservation_id}}}">Delete</a></td>
+             </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/MVC/Reservation/new">Add a new Reservation</a></p>
+</div>
+</body>
+</html>
