@@ -14,18 +14,25 @@
     <div th:case="*">
         <h2>All Reservations</h2>
         <nav class="navbar navbar-light bg-light">
-            <form class="form-inline" th:action="@{/MVC/Reservations}">
-                Search Anything Except Your Happiness <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required/>
-                &nbsp;
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>             &nbsp;
-                <input class="btn btn-outline-success my-2 my-sm-0" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
-            </form>
-            <form class="form-inline" th:action="@{/MVC/Reservation/Id}">
-                Search by ID <input type="text" name="id" id="id" size="50" th:value="${id}" required/>
-                &nbsp;
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>             &nbsp;
-                <input class="btn btn-outline-success my-2 my-sm-0" type="button" value="Clear" id="btnClear2" onclick="clearSearch()" />
-            </form>
+            <div class="row">
+            <div class="col-md-6">
+                <form class="form-inline" th:action="@{/MVC/Reservation/Id}">
+                    <input type="text" name="id" id="id" size="50" th:value="${id}" placeholder="Search By ID" required/>
+                    &nbsp;<button class="btn btn-outline-info" type="submit">Search</button>             &nbsp;
+                </form>
+                <form th:action="@{/MVC/Reservation/searchFilm}" method="post" class="mb-3">
+                    <input type="text" name="name" th:value="${name}"  placeholder="Search By Film Name" size="50" >
+                    <button type="submit" class="btn btn-outline-info" >Search</button>
+                </form>
+                </div>
+            <div class="col-md-6">
+                   <form class="form-inline" th:action="@{/MVC/Reservations}">
+                       <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" placeholder="Search Anything Except Your Happiness" required/>
+                    <button class="btn btn-outline-info" type="submit">Search</button>&nbsp;        &nbsp;
+                    <input class="btn btn-outline-secondary" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+                </form>
+            </div>
+            </div>
         </nav>
         <table class="table">
             <thead class="thead-dark">
@@ -69,6 +76,8 @@
         </table>
     </div>
     <p><a href="/MVC/Reservation/new">Add a new Reservation</a></p>
+    <input class="btn btn-primary btn-lg" type="button" value="Back Home" id="btnClear4" onclick="clearSearch()" />
+
     <script type="text/javascript">
     function clearSearch() {
         window.location = "[[@{/MVC/Reservations}]]";

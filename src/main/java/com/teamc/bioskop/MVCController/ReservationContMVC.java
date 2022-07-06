@@ -134,7 +134,7 @@ public class ReservationContMVC {
         }
         model.addAttribute("Reservation_entry", reservationsMaps);
     }
-    return "Reservation_search";
+    return "Reservation_Index";
     }
 
 }
