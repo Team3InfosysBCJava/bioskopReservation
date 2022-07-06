@@ -13,7 +13,7 @@ public class UserResponseDTO {
 
     private Long user_id;
 
-    private Reservation reservation ;
+
 
     private String user_name;
 

@@ -3,6 +3,7 @@ package com.teamc.bioskop.MVCController;
 
 
 import com.teamc.bioskop.DTO.UserResponseDTO;
+import com.teamc.bioskop.Model.Schedule;
 import com.teamc.bioskop.Model.User;
 import com.teamc.bioskop.Service.UserService;
 import lombok.AllArgsConstructor;
@@ -43,7 +44,6 @@ public class UserMVCController {
     @GetMapping("/MVC/User")
     public String showUserlist(Model model) {
         List<User> User = userService.getAll();
-        //alias masuk ke file html
         model.addAttribute("User_masuk", User);
         return "User_Index"; //ngambil file html
     }
@@ -58,7 +58,13 @@ public class UserMVCController {
         model.addAttribute("user_entry", result);
         return "User_GetById";
     }
-
+    @GetMapping("/MVC/User/update/{id}")
+    public String showEditUserForm(@PathVariable("id") Long id, Model model){
+        Optional<User> user = userService.getUserById(id);
+        User userget = user.get();
+        model.addAttribute("user", userget);
+        return "User_Update";
+    }
 
     @PostMapping("/MVC/User/update-user/{id}")
     public String showUpdateUser(@PathVariable("id") Long id, @Valid User user, BindingResult result, Model model) throws Exception {

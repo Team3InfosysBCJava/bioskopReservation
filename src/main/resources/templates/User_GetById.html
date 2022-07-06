@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title th:text="${user_entry}"></title>
+    <title th:text="${user_entry}">Get By Id User</title>
 </head>
 <body>
 <div th:switch="${user_entry}">
@@ -23,10 +23,10 @@
 
             <tbody>
             <tr>
-                <td th:text="${user_entry.userId}"></td>
-                <td th:text="${user_entry.username}"></td>
-                <td th:text="${user_entry.emailId}"></td>
-                <td th:text="${user_entry.password}"></td>
+                <td th:text="${user_entry.user_id}"></td>
+                <td th:text="${user_entry.user_name}"></td>
+                <td th:text="${user_entry.email_id}"></td>
+                <td th:text="${user_entry.pass_word}"></td>
 
             </tr>
             </tbody>
