@@ -12,10 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,7 +34,7 @@ public class ReservationContMVC {
         List<BookingResponseDTO> results = reservations.stream()
                 .map(Reservation::convertToResponse)
                 .collect(Collectors.toList());
-
+//        Collections.reverse(results);
         model.addAttribute("Reservation_entry",results);
         model.addAttribute("keyword",keyword);
         return "Reservation_Index";
@@ -60,7 +59,6 @@ public class ReservationContMVC {
 //        model.addAttribute("Reservation_entry", result);
 //        return "Reservation_GetById";
 //    }
-
 
     /**
      * Create
@@ -123,6 +121,7 @@ public class ReservationContMVC {
         List<BookingResponseDTO> results = reservations.stream()
                 .map(Reservation::convertToResponse)
                 .collect(Collectors.toList());
+//        Collections.reverse(results);
         model.addAttribute("Reservation_entry", results);
     }else {
         List<Reservation> reservations = bookingService.getAll();
@@ -130,8 +129,9 @@ public class ReservationContMVC {
         //manual for each
         for (Reservation data:reservations){
             BookingResponseDTO reservationDTO = data.convertToResponse();
-            reservationsMaps.add(reservationDTO);
+             reservationsMaps.add(reservationDTO);
         }
+//        Collections.reverse(reservationsMaps);
         model.addAttribute("Reservation_entry", reservationsMaps);
     }
     return "Reservation_Index";
