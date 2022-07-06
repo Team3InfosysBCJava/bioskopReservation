@@ -52,7 +52,7 @@ public class SeatsContMVC {
     public String showSeatsList(Model model){
         List<Seats> result = seatsService.findAllseats();
         model.addAttribute("seats_entry", result);
-        return "Seats_Index";
+        return "Seat_Index";
     }
 
 
@@ -73,7 +73,7 @@ public class SeatsContMVC {
     public String showEditSeatsForm(@PathVariable("id") Long id, Model model){
         Optional<Seats> seats = seatsService.findbyid(id);
         Seats seatsget = seats.get();
-        model.addAttribute("schedule", seatsget);
+        model.addAttribute("seats", seatsget);
         return "Seats_Update";
     }
 

@@ -21,12 +21,13 @@
             </thead>
 
             <tbody>
-            <td th:text="${seats_entry.seatId}"></td>
-            <td th:text="${seats_entry.seatNumber}"></td>
-            <td th:text="${seats_entry.studioName}"></td>
-            <td th:text="${seats_entry.isAvailable}"></td>
-            <td><a th:href="@{@{/MVC/Seats/update-seats/{id})}})}">Edit</a></td>
-            <td><a th:href="@{/MVC/Seats/delete/{id}(id=${seats.seatsId})}">Delete</a></td>
+            <tr th:each="seat: ${seats_entry}">
+            <td th:text="${seat.seatId}"></td>
+            <td th:text="${seat.seatNumber}"></td>
+            <td th:text="${seat.studioName}"></td>
+            <td th:text="${seat.isAvailable}"></td>
+<!--            <td><a th:href="@{/MVC/Seats/update-seats/{id})}})}">Edit</a></td>-->
+<!--            <td><a th:href="@{/MVC/Seats/delete/{id}(id=${seats.seatsId})}">Delete</a></td>-->
             </tr>
             </tbody>
         </table>

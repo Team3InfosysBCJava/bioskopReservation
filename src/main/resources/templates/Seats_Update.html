@@ -25,19 +25,19 @@
 <div align="center">
     <h2>Edit Seats</h2>
     <form action="#"
-          th:action="@{/MVC/Seats/update-seats/{id}}(id=${seats.seatsId})}"
+          th:action="@{/MVC/Seats/update-seats/{id}(id=${seats.seatId})}"
           th:object="${seats}"
           method="post">
 
-        <!--    //seatId-->
-        <label for="seats">seatId</label>
-        <input type="text" th:field="*{seatId}" id="seats" placeholder="seats"><br/>
-        <span th:if="${#fields.hasErrors('seats')}" th:errors="*{Seats}"></span>
+<!--        &lt;!&ndash;    //seatId&ndash;&gt;-->
+<!--        <label for="seats">seatId</label>-->
+<!--        <input type="text" th:field="*{seatId}" id="seats" placeholder="seats"><br/>-->
+<!--        <span th:if="${#fields.hasErrors('seats')}" th:errors="*{Seats}"></span>-->
 
         <!--    //seatsNumber-->
-        <label for="seatsNumber">seatsNumber</label>
-        <input type="text" th:field="*{seatsNumber}" id="seatsNumber" placeholder="seatsNumber"><br/>
-        <span th:if="${#fields.hasErrors('seatsNumber')}" th:errors="*{seatsNumber}"></span>
+        <label for="seatNumber">seatsNumber</label>
+        <input type="text" th:field="*{seatNumber}" id="seatNumber" placeholder="seatNumber"><br/>
+        <span th:if="${#fields.hasErrors('seatNumber')}" th:errors="*{seatNumber}"></span>
 
         <!--    //studioName-->
         <label for="studioName">studioName</label>

@@ -26,23 +26,23 @@
     <h2>Add New Seats</h2>
     <form action="#"
           th:action="@{/MVC/Seats/add-seats}"
-          th:object="${Seats}"
+          th:object="${seats}"
           method="post">
 
-        <!--    //seatId-->
-        <label for="seats">seatId</label>
-        <input type="text" th:field="*{seatId}" id="seats" placeholder="seats"><br/>
-        <span th:if="${#fields.hasErrors('seats')}" th:errors="*{Seats}"></span>
+<!--        &lt;!&ndash;    //seatId&ndash;&gt;-->
+<!--        <label for="Seats">seatId</label>-->
+<!--        <input type="text" th:field="*{seatId}" id="Seats" placeholder="Seats"><br/>-->
+<!--        <span th:if="${#fields.hasErrors('seats')}" th:errors="*{Seats}"></span>-->
 
         <!--    //seatsNumber-->
-        <label for="seatsNumber">seatsNumber</label>
-        <input type="text" th:field="*{seatsNumber}" id="seatsNumber" placeholder="seatsNumber"><br/>
-        <span th:if="${#fields.hasErrors('seatsNumber')}" th:errors="*{seatsNumber}"></span>
+        <label for="seatNumber">seatsNumber</label>
+        <input type="text" th:field="*{seatNumber}" id="seatNumber" placeholder="seatNumber"><br/>
+        <span th:if="${#fields.hasErrors('seatNumber')}" th:errors="*{seatNumber}"></span>
 
         <!--    //studioName-->
         <label for="studioName">studioName</label>
         <input type="text" th:field="*{studioName}" id="studioName" placeholder="studioName"><br/>
-        <span th:if="${#fields.hasErrors('studioName')}" th:errors="*{seats}"></span>
+        <span th:if="${#fields.hasErrors('studioName')}" th:errors="*{studioName}"></span>
 
         <!--    //isAvailable-->
         <label for="isAvailable">isAvailable</label>
