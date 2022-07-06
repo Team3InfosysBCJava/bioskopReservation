@@ -387,7 +387,7 @@
 </nav>
 <section class="home">
   <div class="text">Get All Film</div>
-  <div th:switch="${films}">
+  <div th:switch="${films}" class="container">
     <h2 th:case="null">No Film yet!</h2>
     <div th:case="*">
       <!--    <nav class="navbar navbar-light bg-light">-->
