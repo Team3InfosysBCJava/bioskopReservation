@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Get All Reservation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Reservation</title>
 
 </head>
 <body>
@@ -12,29 +13,38 @@
     <h2 th:case="null">No reservation yet!</h2>
     <div th:case="*">
         <h2>All Reservations</h2>
-    </div>
-    <form th:action="@{/MVC/Reservation/search}" method="post" class="mb-3">
-        <input type="text" name="name" th:value="${name}"  placeholder="Find by Film Name" size="50" >
-        <button type="submit" class="btn btn-info" >Search</button>
-        <button type="submit" class="btn btn-info" >Reset</button>
-    </form>
-    <div>
-        <table>
-            <thead>
+        <nav class="navbar navbar-light bg-light">
+            <form class="form-inline" th:action="@{/MVC/Reservations}">
+                Search Anything Except Your Happiness <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required/>
+                &nbsp;
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>             &nbsp;
+                <input class="btn btn-outline-success my-2 my-sm-0" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+            </form>
+            <form class="form-inline" th:action="@{/MVC/Reservation/Id}">
+                Search by ID <input type="text" name="id" id="id" size="50" th:value="${id}" required/>
+                &nbsp;
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>             &nbsp;
+                <input class="btn btn-outline-success my-2 my-sm-0" type="button" value="Clear" id="btnClear2" onclick="clearSearch()" />
+            </form>
+        </nav>
+        <table class="table">
+            <thead class="thead-dark">
             <tr>
-                <th>Reservation Id</th>
-                <th>User Id</th>
-                <th>Username</th>
-                <th>Email User</th>
-                <th>Film Name</th>
-                <th>Price</th>
-                <th>Studio</th>
-                <th>Status Show</th>
-                <th>Seat Number</th>
-                <th>Status Seat</th>
-                <th>Date Film</th>
-                <th>Start Film</th>
-                <th>End Film</th>
+                <th scope="col">Reservation Id</th>
+                <th scope="col">User Id</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email User</th>
+                <th scope="col">Film Name</th>
+                <th scope="col">Status Show</th>
+                <th scope="col">Price</th>
+                <th scope="col">Studio</th>
+                <th scope="col">Seat Number</th>
+                <th scope="col">Status Seat</th>
+                <th scope="col">Date Film</th>
+                <th scope="col">Start Film</th>
+                <th scope="col">End Film</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -42,12 +52,11 @@
                 <td th:text="${Reservation.reservation_id}"></td>
                 <td th:text="${Reservation.user_id}"></td>
                 <td th:text="${Reservation.user_name}"></td>
+                <td th:text="${Reservation.email_user}"></td>
                 <td th:text="${Reservation.film_name}"></td>
+                <td th:text="${Reservation.status_show}"></td>
                 <td th:text="${Reservation.price}"></td>
                 <td th:text="${Reservation.studio}"></td>
-                <td th:text="${Reservation.status_show}"></td>
-                <td th:text="${Reservation.seat_num}"></td>
-                <td th:text="${Reservation.status_show}"></td>
                 <td th:text="${Reservation.seat_num}"></td>
                 <td th:text="${Reservation.status_seat}"></td>
                 <td th:text="${Reservation.date_film}"></td>
@@ -60,6 +69,11 @@
         </table>
     </div>
     <p><a href="/MVC/Reservation/new">Add a new Reservation</a></p>
+    <script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/MVC/Reservations}]]";
+    }
+</script>
 </div>
 </body>
 </html>

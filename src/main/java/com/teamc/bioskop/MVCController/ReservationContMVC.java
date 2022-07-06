@@ -5,12 +5,14 @@ import com.teamc.bioskop.Model.Films;
 import com.teamc.bioskop.Model.Reservation;
 import com.teamc.bioskop.Service.BookingService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -25,31 +27,39 @@ public class ReservationContMVC {
     private final BookingService bookingService;
 
     /**
-     * Get All
+     * Search filmname , default get all
      */
     @GetMapping("/MVC/Reservations")
-    public String showReservationList(Model model) {
-        List<Reservation> reservations = bookingService.getAll();
-        List<BookingResponseDTO> reservationsMaps = new ArrayList<>();
-        for (Reservation data:reservations){
-            BookingResponseDTO reservationDTO = data.convertToResponse();
-            reservationsMaps.add(reservationDTO);
-        }
-        //alias masuk ke file html
-        model.addAttribute("Reservation_entry", reservationsMaps);
-        return "Reservation_Index"; //ngambil file html
+    public String search(Model model, @Param("keyword") String keyword){
+        List<Reservation> reservations = bookingService.search(keyword);
+        List<BookingResponseDTO> results = reservations.stream()
+                .map(Reservation::convertToResponse)
+                .collect(Collectors.toList());
+
+        model.addAttribute("Reservation_entry",results);
+        model.addAttribute("keyword",keyword);
+        return "Reservation_Index";
     }
+
     /**
      * Get by ID
      */
-    @GetMapping("/MVC/Reservation/{id}")
-    public String showReservationById(@PathVariable("id") Long id, Model model){
-        Optional<Reservation> reservation = bookingService.getBookingById(id);
-        Reservation reservationGet = reservation.get();
-        BookingResponseDTO result = reservationGet.convertToResponse();
+    @GetMapping("/MVC/Reservation/Id")
+    public String searchbyID(Model model, @Param("id") Long id){
+        Reservation reservation = bookingService.getReferenceById(id);
+        BookingResponseDTO result = reservation.convertToResponse();
         model.addAttribute("Reservation_entry", result);
-        return "Reservation_GetById";
+        model.addAttribute("id",id);
+        return "Reservation_Index";
     }
+//    @GetMapping("/MVC/Reservation/{id}")
+//    public String showReservationById(@PathVariable("id") Long id, Model model){
+//        Optional<Reservation> reservation = bookingService.getBookingById(id);
+//        Reservation reservationGet = reservation.get();
+//        BookingResponseDTO result = reservationGet.convertToResponse();
+//        model.addAttribute("Reservation_entry", result);
+//        return "Reservation_GetById";
+//    }
 
 
     /**
@@ -102,9 +112,11 @@ public class ReservationContMVC {
         bookingService.deleteSBookingById(id);
         return "redirect:/MVC/Reservations";
     }
-
-    @PostMapping("/MVC/Reservation/search")
-    public String search(Films film, Model model, String name) {
+    /**
+     * Search filmname
+     */
+    @PostMapping("/MVC/Reservation/searchFilm")
+    public String searchFilm(Films film, Model model, String name) {
     if(name!=null) {
         List<Reservation> reservations = bookingService.getBookingByFilmName(film.getName());
         //pake stream
@@ -122,9 +134,7 @@ public class ReservationContMVC {
         }
         model.addAttribute("Reservation_entry", reservationsMaps);
     }
-
     return "Reservation_search";
-
     }
 
 }

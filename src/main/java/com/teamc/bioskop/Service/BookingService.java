@@ -17,5 +17,5 @@ public interface BookingService {
     Reservation updateBooking(Reservation booking);
     Reservation getReferenceById (Long Id);
     List<Reservation> getBookingByFilmName(String name);
-
+    List<Reservation> search(String keyword);
 }

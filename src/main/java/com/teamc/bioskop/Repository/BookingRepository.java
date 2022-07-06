@@ -12,5 +12,11 @@ public interface BookingRepository extends JpaRepository<Reservation,Long> {
     @Query("Select r from Reservation r where r.schedule.films.name like %:name%")
     public List<Reservation> getBookingByFilmName(@Param("name")String name);
 
+    @Query("SELECT r FROM Reservation r WHERE CONCAT(r.reservationId, ' ', " +
+            "r.schedule.films.name, ' ', r.schedule.films.isPlaying, ' ', " +
+            "r.schedule.scheduleId, ' ', r.schedule.dateShow, ' ', r.schedule.showStart, ' ', r.schedule.showEnd, ' ', r.schedule.price, ' ', " +
+            "r.schedule.seats.seatId, ' ', r.schedule.seats.seatNumber, ' ', r.schedule.seats.studioName, ' ', r.schedule.seats.isAvailable, ' ', " +
+            "r.user.userId, ' ', r.user.username, ' ', r.user.emailId) LIKE %?1%")
+    public List<Reservation> search(String keyword);
 }
 
