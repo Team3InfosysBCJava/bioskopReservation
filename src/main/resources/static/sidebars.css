@@ -297,6 +297,16 @@
             color: #343a40;
             padding: 12px 60px;
         }
+        .home .text,
+        .home .icon{
+            color: #212529;
+            transition: var(--tran-03);
+        }
+        .home .text,
+        .home .button i{
+            color: #ccc;
+            transition: var(--tran-03);
+        }
         .home .icon{
 
             border-radius: 6px;

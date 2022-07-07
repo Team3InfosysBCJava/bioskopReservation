@@ -28,17 +28,23 @@
 
   <div class="menu-bar">
     <div class="menu">
-<!--      <li class="search-box">-->
-<!--        <i class='bx bx-search icon'></i>-->
-<!--        <input type="text" placeholder="Search...">-->
-<!--      </li>-->
       <li class="search-box">
-        <form class="d-flex" role="search" th:action="@{/MVC/Film}">
-          <button type="submit" class="bx bx-search icon"> </button>
-        <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="Search..." required>
-        <input class="btn btn-outline-secondary" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
-        </form>
+        <i class='bx bx-search icon'></i>
+          <form class="d-flex" role="search" th:action="@{/MVC/Film}">
+          <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="Search" required>
+            <button input class="btn" type="button" id="btnClear" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
+<!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
+          </form>
+
       </li>
+
+<!--      <li class="search-box">-->
+<!--        <form class="d-flex" role="search" th:action="@{/MVC/Film}">-->
+<!--          <button type="submit" class="bx bx-search icon"> </button>-->
+<!--        <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="Search..." required>-->
+<!--        <input class="btn btn-outline-secondary" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />-->
+<!--        </form>-->
+<!--      </li>-->
 
       <ul class="menu-links">
         <li class="nav-link">
@@ -86,16 +92,6 @@
   <div th:switch="${films}" class="container">
     <h2 th:case="null">No Film yet!</h2>
     <div th:case="*">
-      <!--    <nav class="navbar navbar-light bg-light">-->
-      <!--      <a class="navbar-brand"><h4>Film</h4></a>-->
-      <!--      <form class="form-inline" method="get" th:action="@{/MVC/Film/{id}(id=null)}">-->
-      <!--        <input class="form-control mr-sm-2" th:value="${stringId}" id="id" type="text" placeholder="Search By Id" aria-label="Search">-->
-      <!--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-      <!--      </form>-->
-      <!--    </nav>-->
-<!--      <button type="button" class="btn">-->
-<!--        <a href="/MVC/Film/new-film">Add New Film</a>-->
-<!--      </button>-->
       <div class="button">
         <i class='bx bx-list-plus icon'></i>
         <a class="btn" href="/MVC/Film/new-film" role="button">Add New Film</a>
