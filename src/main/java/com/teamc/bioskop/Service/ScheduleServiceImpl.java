@@ -1,5 +1,6 @@
 package com.teamc.bioskop.Service;
 
+import com.teamc.bioskop.Model.Reservation;
 import com.teamc.bioskop.Model.User;
 import com.teamc.bioskop.Repository.ScheduleRepository;
 import com.teamc.bioskop.Exception.ResourceNotFoundException;
@@ -82,4 +83,12 @@ public class ScheduleServiceImpl implements ScheduleService {
         return this.scheduleRepository.getScheduleFilmsNameLike(name);
     }
 
+    @Override
+    public List<Schedule> getScheduleBySearchName(String keyword){
+        if (keyword != null){
+            return scheduleRepository.search(keyword);
+        }
+
+        return scheduleRepository.findAll();
+    }
 }
