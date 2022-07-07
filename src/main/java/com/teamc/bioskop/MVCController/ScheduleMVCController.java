@@ -5,6 +5,7 @@ import com.teamc.bioskop.Exception.ResourceNotFoundException;
 import com.teamc.bioskop.Model.Films;
 import com.teamc.bioskop.Model.Schedule;
 import com.teamc.bioskop.Response.ResponseHandler;
+import org.springframework.data.repository.query.Param;
 import com.teamc.bioskop.Service.ScheduleService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -77,9 +78,11 @@ public class ScheduleMVCController {
 
     //GET ALL
     @GetMapping("/MVC/schedules")
-    public String showScheduleList(Model model){
-        List<Schedule> result = scheduleService.getAll();
+    public String search(Model model, @Param("keyword") String keyword){
+        List<Schedule> result = scheduleService.getScheduleBySearchName(keyword);
         model.addAttribute("schedule_entry", result);
+        model.addAttribute("keyword",keyword);
+
         return "Schedules_Index";
     }
 

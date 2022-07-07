@@ -34,10 +34,9 @@ public class ReservationContMVC {
         List<BookingResponseDTO> results = reservations.stream()
                 .map(Reservation::convertToResponse)
                 .collect(Collectors.toList());
-//        Collections.reverse(results);
         model.addAttribute("Reservation_entry",results);
         model.addAttribute("keyword",keyword);
-        return "Reservation_Index";
+        return "Index_Reservation";
     }
 
     /**
@@ -49,7 +48,7 @@ public class ReservationContMVC {
         BookingResponseDTO result = reservation.convertToResponse();
         model.addAttribute("Reservation_entry", result);
         model.addAttribute("id",id);
-        return "Reservation_Index";
+        return "Index_Reservation";
     }
 //    @GetMapping("/MVC/Reservation/{id}")
 //    public String showReservationById(@PathVariable("id") Long id, Model model){
@@ -79,6 +78,7 @@ public class ReservationContMVC {
     }
 
     /**
+     * "@{/MVC/Reservation/update-reservation/{id}(id=${reservation.reservationId})}"
      * Update
       */
     @GetMapping("/MVC/Reservation/update/{id}")
@@ -121,8 +121,7 @@ public class ReservationContMVC {
         List<BookingResponseDTO> results = reservations.stream()
                 .map(Reservation::convertToResponse)
                 .collect(Collectors.toList());
-//        Collections.reverse(results);
-        model.addAttribute("Reservation_entry", results);
+           model.addAttribute("Reservation_entry", results);
     }else {
         List<Reservation> reservations = bookingService.getAll();
         List<BookingResponseDTO> reservationsMaps = new ArrayList<>();
@@ -130,11 +129,11 @@ public class ReservationContMVC {
         for (Reservation data:reservations){
             BookingResponseDTO reservationDTO = data.convertToResponse();
              reservationsMaps.add(reservationDTO);
-        }
+          }
 //        Collections.reverse(reservationsMaps);
         model.addAttribute("Reservation_entry", reservationsMaps);
     }
-    return "Reservation_Index";
+    return "Index_Reservation";
     }
 
 }
