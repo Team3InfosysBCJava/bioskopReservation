@@ -2,6 +2,7 @@ package com.teamc.bioskop.MVCController;
 
 import com.teamc.bioskop.DTO.ScheduleResponseDTO;
 import com.teamc.bioskop.Exception.ResourceNotFoundException;
+import com.teamc.bioskop.Model.Films;
 import com.teamc.bioskop.Model.Schedule;
 import com.teamc.bioskop.Response.ResponseHandler;
 import com.teamc.bioskop.Service.ScheduleService;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -32,6 +35,28 @@ public class ScheduleMVCController {
         return "Homepage";
     }
 
+    //SEARCH BY FILM NAME
+    @PostMapping("/MVC/schedules/search-by-film")
+    public String searchFilm(Films film, Model model, String name) {
+        if(name!=null) {
+            List<Schedule> schedules = scheduleService.getScheduleBySearchName(film.getName());
+            //pake stream
+            List<ScheduleResponseDTO> results = schedules.stream()
+                    .map(Schedule::convertToResponse)
+                    .collect(Collectors.toList());
+            model.addAttribute("schedule_entry", results);
+        }else {
+            List<Schedule> schedules = scheduleService.getAll();
+            List<ScheduleResponseDTO> schedulesMaps = new ArrayList<>();
+            //manual for each
+            for (Schedule data : schedules){
+                ScheduleResponseDTO scheduleDTO = data.convertToResponse();
+                schedulesMaps.add(scheduleDTO);
+            }
+            model.addAttribute("schedule_entry", schedulesMaps);
+        }
+        return "Schedules_Index";
+    }
 
     //CREATE
     @GetMapping("/MVC/new-schedule")

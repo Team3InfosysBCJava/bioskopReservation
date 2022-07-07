@@ -28,10 +28,16 @@
 
   <div class="menu-bar">
     <div class="menu">
-
+<!--      <li class="search-box">-->
+<!--        <i class='bx bx-search icon'></i>-->
+<!--        <input type="text" placeholder="Search...">-->
+<!--      </li>-->
       <li class="search-box">
-        <i class='bx bx-search icon'></i>
-        <input type="text" placeholder="Search...">
+        <form class="d-flex" role="search" th:action="@{/MVC/Film}">
+          <button type="submit" class="bx bx-search icon"> </button>
+        <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="Search..." required>
+        <input class="btn btn-outline-secondary" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+        </form>
       </li>
 
       <ul class="menu-links">
@@ -152,6 +158,10 @@
             }
 });
     </script>
-
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/MVC/Film}]]";
+    }
+</script>
 </body>
 </html>

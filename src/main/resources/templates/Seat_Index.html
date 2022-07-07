@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>All Seats</title>
+
+<!--    CSS Bootstrap-->
+    <link rel="stylesheet" href="scss/boostrap.css">
+</head>
+<body>
+<div th:switch="${seats_entry}">
+    <h2 th:case="null">No seats found</h2>
+    <div th:case="*">
+        <h2>All Seats</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>seatId</th>
+                <th>seatNumber</th>
+                <th>studioName</th>
+                <th>isAvailable</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="seat: ${seats_entry}">
+            <td th:text="${seat.seatId}"></td>
+            <td th:text="${seat.seatNumber}"></td>
+            <td th:text="${seat.studioName}"></td>
+            <td th:text="${seat.isAvailable}"></td>
+<!--            <td><a th:href="@{/MVC/Seats/update-seats/{id})}})}">Edit</a></td>-->
+<!--            <td><a th:href="@{/MVC/Seats/delete/{id}(id=${seats.seatsId})}">Delete</a></td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<p><a href="/MVC/Seats/new-seats">Add a new Seats</a></p>
+</body>
+</html>

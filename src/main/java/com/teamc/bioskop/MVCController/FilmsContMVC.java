@@ -4,6 +4,7 @@ import com.teamc.bioskop.DTO.FilmsResponseDTO;
 import com.teamc.bioskop.Model.Films;
 import com.teamc.bioskop.Service.FilmsService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -24,10 +25,11 @@ public class FilmsContMVC {
 
     //GET ALL
     @GetMapping("/MVC/Film")
-    public String showFilmList(Model model) {
-        List<Films> films = filmsService.findAllFilms();
+    public String showFilmList(Model model, @Param("keyword") String keyword) {
+        List<Films> films = filmsService.search(keyword);
         //alias masuk ke file html
         model.addAttribute("films", films);
+        model.addAttribute("keyword",keyword);
         return "Films_GetAll"; //ngambil file html
     }
 

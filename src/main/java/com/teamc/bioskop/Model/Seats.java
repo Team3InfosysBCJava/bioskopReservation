@@ -1,11 +1,14 @@
 package com.teamc.bioskop.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.teamc.bioskop.DTO.SeatsResponseDTO;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
+@Builder
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Table(name = "Seats")
@@ -70,7 +73,14 @@ public class Seats {
 
         this.isAvailable = isAvailable;
     }
-
+    public SeatsResponseDTO convertToResponses(){
+        return SeatsResponseDTO.builder()
+                .seatId(this.seatId)
+                .seatNumber(this.seatNumber)
+                .studioName(this.studioName)
+                .isAvailable(this.isAvailable)
+                .build();
+    }
     @Override
     public String toString() {
         return "Seats{" +

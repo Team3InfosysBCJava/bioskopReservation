@@ -75,4 +75,12 @@ public class BookingServiceImpl implements BookingService{
         return this.bookingRepository.getBookingByFilmName(name);
     }
 
+    public List<Reservation> search(String keyword){
+        if (keyword != null){
+            return bookingRepository.search(keyword);
+        }
+
+        return bookingRepository.findAll();
+    }
+
 }
