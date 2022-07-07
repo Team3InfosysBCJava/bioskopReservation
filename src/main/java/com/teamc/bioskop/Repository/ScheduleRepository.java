@@ -16,8 +16,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {
 
     @Query("SELECT s FROM Schedule s WHERE CONCAT(s.scheduleId, ' ', " +
             "s.films.name, ' ', s.films.isPlaying, ' ', " +
-            "s.scheduleId, ' ', s.dateShow, ' ', s.showStart, ' ', s.showEnd, ' ', s.price, ' ', " +
-            "s.seats.seatId, ' ', s.seats.seatNumber, ' ', s.schedule.seats.studioName, ' ', r.seats.isAvailable, ' ', " +
-            "s.user.userId, ' ', s.user.username, ' ', s.user.emailId) LIKE %?1%")
+            "s.dateShow, ' ', s.showStart, ' ', s.showEnd, ' ', s.price, ' ', " +
+            "s.seats.seatId, ' ', s.seats.seatNumber, ' ', s.seats.studioName, ' ', s.seats.isAvailable, ' ') LIKE %?1%")
     public List<Schedule> search(String keyword);
 }

@@ -15,7 +15,7 @@ public interface FilmsService {
    List<Films> getByIsPlaying(Integer isPlaying);
    Films getReferenceById (Long id);
 
-
+   public List<Films> search(String keyword);
 
 
 }

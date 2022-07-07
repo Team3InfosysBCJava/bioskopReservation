@@ -70,6 +70,12 @@ public class FilmsServiceImpl implements FilmsService {
         return this.filmsRepository.getFilmByIsPlaying(isPlaying);
     }
 
+    public List<Films> search(String keyword){
+        if (keyword != null){
+            return filmsRepository.search(keyword);
+        }
 
+        return filmsRepository.findAll();
+    }
 
 }
