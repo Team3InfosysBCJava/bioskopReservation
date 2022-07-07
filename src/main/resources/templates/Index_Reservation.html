@@ -31,12 +31,27 @@
     <div class="menu">
       <li class="search-box">
         <i class='bx bx-search icon'></i>
-        <form class="d-flex" role="search" th:action="@{/MVC/Film}">
+        <form class="d-flex" role="search" th:action="@{/MVC/Reservations}">
           <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="Search" required>
           <button input class="btn" type="button" id="btnClear" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
           <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
         </form>
-
+      </li>
+      <li class="search-box">
+        <i class='bx bx-search icon'></i>
+        <form class="d-flex" role="search" th:action="@{/MVC/Reservation/Id}">
+          <input type="text" name="id" id="id" th:value="${id}" placeholder="ID" required>
+          <button input class="btn" type="button" id="btnClear2" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
+          <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
+        </form>
+      </li>
+      <li class="search-box">
+        <i class='bx bx-search icon'></i>
+        <form class="d-flex" role="search" th:action="@{/MVC/Reservation/searchFilm}">
+          <input type="text" name="name" th:value="${name}" placeholder="Title Film" required>
+          <button input class="btn" type="button" id="btnClear2" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
+          <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
+        </form>
       </li>
 
       <!--      <li class="search-box">-->
@@ -56,11 +71,33 @@
         </li>
 
         <li class="nav-link">
-          <a href="#">
-            <i class='bx bx-receipt icon'></i>
-            <span class="text nav-text">Features</span>
+          <a href="/MVC/Film">
+            <i class='bx bx-film icon'></i>
+            <span class="text nav-text">Film</span>
           </a>
         </li>
+
+        <li class="nav-link">
+          <a href="/MVC/schedules">
+            <i class='bx bx-calendar icon'></i>
+            <span class="text nav-text">Schedule</span>
+          </a>
+        </li>
+
+        <li class="nav-link">
+          <a href="/MVC/Seats">
+            <i class='bx bx-chair icon'></i>
+            <span class="text nav-text">Seats</span>
+          </a>
+        </li>
+
+        <li class="nav-link">
+          <a href="/MVC/User">
+            <i class='bx bx-user icon'></i>
+            <span class="text nav-text">User</span>
+          </a>
+        </li>
+
       </ul>
     </div>
 
@@ -89,35 +126,55 @@
 
 </nav>
 <section class="home">
-  <div class="text">Get All Film</div>
-  <div th:switch="${films}" class="container">
-    <h2 th:case="null">No Film yet!</h2>
+
+  <div class="text">Get All Reservation</div>
+  <div th:switch="${Reservation_entry}" class="container">
+    <h2 th:case="null">No Reservation yet!</h2>
     <div th:case="*">
       <div class="button">
         <i class='bx bx-list-plus icon'></i>
-        <a class="btn" href="/MVC/Film/new-film" role="button">Add New Film</a>
+        <a class="btn" href="/MVC/Reservation/new" role="button">Add New Reservation</a>
       </div>
+      
       <table class="table table-striped">
         <thead>
-        <tr>
-          <th  scope="col">Film id</th>
-          <th  scope="col">Film Name</th>
-          <th  scope="col">Is Playing</th>
-          <th  scope="col">Action</th>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email User</th>
+            <th scope="col">Film Name</th>
+            <th scope="col">Status Show</th>
+            <th scope="col">Price</th>
+            <th scope="col">Studio</th>
+            <th scope="col">Seat Number</th>
+            <th scope="col">Status Seat</th>
+            <th scope="col">Date Film</th>
+            <th scope="col">Start Film</th>
+            <th scope="col">End Film</th>
+            <th  scope="col">Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="Films : ${films}">
-          <td th:text="${Films.filmId}"></td>
-          <td th:text="${Films.name}"></td>
-          <td th:text="${Films.isPlaying}"></td>
-          <td>
+          <tr th:each="Reservation : ${Reservation_entry}">
+            <td th:text="${Reservation.reservation_id}"></td>
+            <td th:text="${Reservation.user_name}"></td>
+            <td th:text="${Reservation.email_user}"></td>
+            <td th:text="${Reservation.film_name}"></td>
+            <td th:text="${Reservation.status_show}"></td>
+            <td th:text="${Reservation.price}"></td>
+            <td th:text="${Reservation.studio}"></td>
+            <td th:text="${Reservation.seat_num}"></td>
+            <td th:text="${Reservation.status_seat}"></td>
+            <td th:text="${Reservation.date_film}"></td>
+            <td th:text="${Reservation.start_film}"></td>
+            <td th:text="${Reservation.end_film}"></td>
+            <td>
             <i class='bx bxs-edit icon'></i>
-            <a th:href="@{/MVC/Film/update/{id}(id=${Films.filmId})}">Edit</a>
+            <a th:href="@{/MVC/Reservation/update/{id}(id=${Reservation.reservation_id})}">Edit</a>
           </td>
           <td>
             <i class='bx bx-trash icon'></i>
-            <a th:href="@{/MVC/Film/delete/{id}(id=${Films.filmId})}">Delete</a>
+            <a th:href="@{/MVC/Reservation/delete/{id}(id=${Reservation.reservation_id})}">Delete</a>
           </td>
         </tr>
         </tbody>
@@ -157,7 +214,7 @@
     </script>
 <script type="text/javascript">
     function clearSearch() {
-        window.location = "[[@{/MVC/Film}]]";
+        window.location = "[[@{/MVC/Reservations}]]";
     }
 </script>
 </body>

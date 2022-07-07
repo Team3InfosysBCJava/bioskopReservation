@@ -37,7 +37,7 @@ public class ReservationContMVC {
 //        Collections.reverse(results);
         model.addAttribute("Reservation_entry",results);
         model.addAttribute("keyword",keyword);
-        return "Reservation_Index";
+        return "Index_Reservation";
     }
 
     /**
@@ -49,7 +49,7 @@ public class ReservationContMVC {
         BookingResponseDTO result = reservation.convertToResponse();
         model.addAttribute("Reservation_entry", result);
         model.addAttribute("id",id);
-        return "Reservation_Index";
+        return "Index_Reservation";
     }
 //    @GetMapping("/MVC/Reservation/{id}")
 //    public String showReservationById(@PathVariable("id") Long id, Model model){
@@ -134,7 +134,7 @@ public class ReservationContMVC {
 //        Collections.reverse(reservationsMaps);
         model.addAttribute("Reservation_entry", reservationsMaps);
     }
-    return "Reservation_Index";
+    return "Index_Reservation";
     }
 
 }
