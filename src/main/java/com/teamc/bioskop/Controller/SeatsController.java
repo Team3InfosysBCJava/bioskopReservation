@@ -1,5 +1,6 @@
 package com.teamc.bioskop.Controller;
 
+import com.teamc.bioskop.DTO.SeatsResponseDTO;
 import com.teamc.bioskop.Model.Films;
 import com.teamc.bioskop.Model.Seats;
 import com.teamc.bioskop.Exception.ResourceNotFoundException;
@@ -84,10 +85,12 @@ public class SeatsController {
     public ResponseEntity<Object> getseatsById(@PathVariable Long seatId){
         try{
             Optional<Seats> seats = seatsService.findbyid(seatId);
+            Seats seatget = seats.get();
+            SeatsResponseDTO results = seatget.convertToResponses();
             logger.info(Line + " Logger Start Create " + Line);
             logger.info(seats);
             logger.info(Line +" Logger END Create "+ Line);
-            return ResponseHandler.generateResponse("Successfully retrieved data!", HttpStatus.OK, seats);
+            return ResponseHandler.generateResponse("Successfully retrieved data!", HttpStatus.OK, results);
         }catch (Exception e) {
             logger.info("==================== Logger Start Get By Id    ====================");
             logger.error(ResponseHandler.generateResponse(e.getMessage(),HttpStatus.NOT_FOUND,"Table Has No Value!"));
