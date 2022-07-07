@@ -3,39 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>All Schedules</title>
 </head>
 <body>
     <div th:switch="${schedule_entry}">
         <h2 th:case="null">No schedule found</h2>
         <div th:case="*">
-            <h2>All Schedules</h2>
-            <table>
-                <thead>
-                <tr>
-                    <th>Film</th>
-                    <th>Date</th>
-                    <th>Show Start</th>
-                    <th>Show End</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
+            <div class="row justify-content-center"><h2>All Schedules</h2>
+                <nav class="navbar navbar-light bg-light">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form th:action="@{/MVC/schedules/search-by-film}" method="post" class="mb-3">
+                                <input type="text" name="name" th:value="${name}"  placeholder="find schedule by films name" size="50" >
+                                <button type="submit" class="btn btn-outline-info" >Search</button>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+<!--            <div class=container">-->
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Film</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Show Start</th>
+                                <th scope="col">Show End</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                            </thead>
 
-                <tbody>
-                <tr th:each="schedule : ${schedule_entry}">
-                    <td th:text="${schedule.films.name}"></td>
-                    <td th:text="${schedule.dateShow}"></td>
-                    <td th:text="${schedule.showStart}"></td>
-                    <td th:text="${schedule.showEnd}"></td>
-                    <td th:text="${schedule.price}"></td>
-                    <td><a th:href="@{/MVC/schedules/update/{id}(id=${schedule.scheduleId})}">Edit</a></td>
-                    <td><a th:href="@{/MVC/schedules/delete/{id}(id=${schedule.scheduleId})}">Delete</a></td>
-                </tr>
-                </tbody>
-            </table>
+                            <tbody>
+                            <tr th:each="schedule : ${schedule_entry}">
+                                <td th:text="${schedule.films.name}"></td>
+                                <td th:text="${schedule.dateShow}"></td>
+                                <td th:text="${schedule.showStart}"></td>
+                                <td th:text="${schedule.showEnd}"></td>
+                                <td th:text="${schedule.price}"></td>
+                                <td><a th:href="@{/MVC/schedules/update/{id}(id=${schedule.scheduleId})}">Edit</a></td>
+                                <td><a th:href="@{/MVC/schedules/delete/{id}(id=${schedule.scheduleId})}">Delete</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <p><a href="/MVC/new-schedule" style="text-decoration: none, color: black">Add a new schedule</a></p>
+                        <input class="btn btn-dark btn-lg" type="button" value="Back Home" id="btnClear4" onclick="clearSearch()"/>
+                        <script type="text/javascript">
+                            function clearSearch() {
+                                window.location = "[[@{/MVC/schedules}]]";
+                            }
+                        </script>
+                    </div>
+                </div>
+<!--            </div>-->
         </div>
-
     </div>
-    <p><a href="/MVC/new-schedule">Add a new schedule</a></p>
 </body>
 </html>
