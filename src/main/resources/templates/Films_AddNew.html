@@ -64,14 +64,20 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
                 <button input type="submit" value="Add Film" >Save changes</button>
+                <input class="btn btn-outline-secondary" type="button" value="Close" id="btnClear" onclick="clearSearch()" />
             </div>
         </div>
     </div>
 </div>
     </form>
 </div>
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/MVC/Film}]]";
+    }
+</script>
 <!--<div align="center">-->
 <!--    <h2>Add New Film</h2>-->
 <!--    <form action="#"-->
