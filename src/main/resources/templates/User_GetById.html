@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title th:text="${user_entry}">Get By Id User</title>
+</head>
+<body>
+<div th:switch="${user_entry}">
+    <h2 th:case="null">No user found</h2>
+    <div th:case="*">
+        <h2 th:text="${user_entry}"></h2>
+        <table>
+            <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Email ID</th>
+                <th>Password</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td th:text="${user_entry.user_id}"></td>
+                <td th:text="${user_entry.user_name}"></td>
+                <td th:text="${user_entry.email_id}"></td>
+                <td th:text="${user_entry.pass_word}"></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

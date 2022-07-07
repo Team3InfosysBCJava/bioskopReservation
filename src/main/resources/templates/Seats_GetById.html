@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Get Seat</title>
+</head>
+<body>
+<div th:switch="${seats_entry}">
+    <h2 th:case="null">No seats found</h2>
+    <div th:case="*">
+        <h2></h2>
+        <table>
+            <thead>
+            <tr>
+                <th>seatId</th>
+                <th>seatNumber</th>
+                <th>studioName</th>
+                <th>isAvailable</th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td th:text="${seats_entry.seatId}"></td>
+                <td th:text="${seats_entry.seatNumber}"></td>
+                <td th:text="${seats_entry.studioName}"></td>
+                <td th:text="${seats_entry.isAvailable}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

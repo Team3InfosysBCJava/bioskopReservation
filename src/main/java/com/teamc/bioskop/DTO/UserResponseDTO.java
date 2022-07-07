@@ -13,7 +13,9 @@ public class UserResponseDTO {
 
     private Long user_id;
 
-    private Reservation reservation ;
+
+
+    private String user_name;
 
     private String email_id;
 
@@ -25,6 +27,7 @@ public class UserResponseDTO {
                 "userID=" + user_id +
                 ", email=" + email_id +
                 ", password=" + pass_word +
+                ", username=" + user_name +
                 '}';
     }
 

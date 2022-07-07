@@ -38,7 +38,6 @@
         <label for="schedule">Schedule ID</label>
         <input type="text" th:field="*{schedule.scheduleId}" id="schedule" placeholder="schedule"><br/>
         <span th:if="${#fields.hasErrors('schedule')}" th:errors="*{schedule}"></span>
-
         <input type="submit" value="Add Reservation">
     </form>
 </div>
