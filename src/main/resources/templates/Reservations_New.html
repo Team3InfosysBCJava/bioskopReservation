@@ -1,34 +1,55 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Add New Reservation</title>
     <style type="text/css">
-    label {
+
+    .modal{
+      background-color: #9ab3be;
+      width: 500px;
+      padding: 30px;
+      border: 5px solid gray;
+      margin: 100px;
+    }
+    .modal .modal-body label{
         display: inline-block;
         width: 200px;
         margin: 5px;
         text-align: left;
     }
-    input[type=text] {
+    .modal .modal-body .input[type=text] {
         display: inline-block;
         width: 200px;
     }
-    input[type=submit] {
-        padding: 5px;
-        margin: 10px;
+    .modal .modal-footer {
+        padding: 55px;
+        margin: 5px;
+        text-align: right;
+    }
+    .modal .modal-header .modal-title {
+        font-size: 17px;
+        font-weight: 500;
+        white-space: nowrap;
+        opacity: 1;
     }
 </style>
 </head>
 <body>
 <div align="center">
-    <h2>Add New Reservation</h2>
     <form action="#"
           th:action="@{/MVC/Reservation/add}"
           th:object="${reservation}"
           method="post">
-
+          <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Film</h5>
+        <!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                    </div>
+                    <div class="modal-body">
         <!--        user-->
         <label for="user">User ID</label>
         <input type="text" th:field="*{user.userId}" id="user" placeholder="user"><br/>
@@ -38,8 +59,21 @@
         <label for="schedule">Schedule ID</label>
         <input type="text" th:field="*{schedule.scheduleId}" id="schedule" placeholder="schedule"><br/>
         <span th:if="${#fields.hasErrors('schedule')}" th:errors="*{schedule}"></span>
-        <input type="submit" value="Add Reservation">
+        <div class="modal-footer">
+            <!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+                            <button input type="submit" value="Add Reservations" >Save changes</button>
+                            <input class="btn btn-outline-secondary" type="button" value="Back Reservations" id="btnClear" onclick="clearSearch()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/MVC/Reservations}]]";
+    }
+</script>
 </body>
 </html>
