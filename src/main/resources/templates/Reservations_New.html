@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Add New Reservation</title>
+    <style type="text/css">
+    label {
+        display: inline-block;
+        width: 200px;
+        margin: 5px;
+        text-align: left;
+    }
+    input[type=text] {
+        display: inline-block;
+        width: 200px;
+    }
+    input[type=submit] {
+        padding: 5px;
+        margin: 10px;
+    }
+</style>
 </head>
 <body>
 <div align="center">
@@ -16,13 +32,12 @@
         <!--        user-->
         <label for="user">User ID</label>
         <input type="text" th:field="*{user.userId}" id="user" placeholder="user"><br/>
-        <span th:if="${}#fields.hasErrors('user')}" th:errors="*{user}"></span>
+        <span th:if="${#fields.hasErrors('user')}" th:errors="*{user}"></span>
 
         <!--        schedule-->
         <label for="schedule">Schedule ID</label>
         <input type="text" th:field="*{schedule.scheduleId}" id="schedule" placeholder="schedule"><br/>
-        <span th:if="${}#fields.hasErrors('schedule')}" th:errors="*{schedule}"></span>
-
+        <span th:if="${#fields.hasErrors('schedule')}" th:errors="*{schedule}"></span>
         <input type="submit" value="Add Reservation">
     </form>
 </div>

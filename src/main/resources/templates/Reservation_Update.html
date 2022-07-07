@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Edit Reservation</title>
+    <style type="text/css">
+    label {
+        display: inline-block;
+        width: 200px;
+        margin: 5px;
+        text-align: left;
+    }
+    input[type=text] {
+        display: inline-block;
+        width: 200px;
+    }
+    input[type=submit] {
+        padding: 5px;
+        margin: 10px;
+    }
+</style>
+</head>
+<body>
+<div align="center">
+    <h2>Edit Reservation</h2>
+    <form action="#"
+          th:action="@{/MVC/Reservation/update-reservation/{id}(id=${reservation.reservationId})}"
+          th:object="${reservation}"
+          method="post">
+
+        <!--        user-->
+        <label for="user">User ID</label>
+        <input type="text" th:field="*{user.userId}" id="user" placeholder="user"><br/>
+        <span th:if="${#fields.hasErrors('user')}" th:errors="*{user}"></span>
+
+        <!--        schedule-->
+        <label for="schedule">Schedule ID</label>
+        <input type="text" th:field="*{schedule.scheduleId}" id="schedule" placeholder="schedule"><br/>
+        <span th:if="${#fields.hasErrors('schedule')}" th:errors="*{schedule}"></span>
+
+        <input type="submit" value="Edit Reservation">
+    </form>
+</div>
+</body>
+</html>

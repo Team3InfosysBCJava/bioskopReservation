@@ -2,6 +2,10 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <title>Cinema Reservation</title>
     <style>
         a {
@@ -15,18 +19,94 @@
         h1 {
         font-family: sans-serif;
         }
+
+        /* Style The Dropdown Button */
+        .dropbtn {
+          background-color: #f8f9fa;
+          color: black;
+          padding: 16px;
+          font-size: 16px;
+          border: none;
+          cursor: pointer;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f8f9fa;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+        }
+
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {background-color: #f1f1f1}
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+          background-color: #f8f9fa;
+        }
+
     </style>
 </head>
 <body>
-<div align="center">
-    <h1>Cinema Reservation</h1>
-    <h3>==================================</h3>
-    <h3>MAIN MENU</h3>
-        <a href="#">1. Registration</a><br/>
-        <a href="#">2. Films (Now Airing)</a><br/>
-        <a href="/MVC/schedules">3. Check schedules</a><br/>
-        <a href="#">4. Available seats</a><br/>
-        <a href="/MVC/Reservations">5. Make a reservation</a><br/>
-</div>
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Cinema Reservation</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item dropdown">
+                    <div class="dropdown">
+                        <button class="dropbtn">Features</button>
+                        <i class='bx bx-caret-down icon'></i>
+                        <div class="dropdown-content">
+                            <a href="/MVC/User/Signup">1. Registration</a>
+                            <a href="/MVC/Film">2. Films (Now Airing)</a>
+                            <a href="/MVC/schedules">3. Check schedules</a>
+                            <a href="#">4. Available seats</a>
+                            <a href="/MVC/Reservations">5. Make a reservation</a>
+                        </div>
+                    </div>
+<!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                        Dropdown-->
+<!--                    </a>-->
+<!--                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--                        <li><a class="dropdown-item" href="#">Action</a></li>-->
+<!--                        <li><a class="dropdown-item" href="#">Another action</a></li>-->
+<!--                        <li><hr class="dropdown-divider"></li>-->
+<!--                        <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+<!--                    </ul>-->
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
 </body>
 </html>
