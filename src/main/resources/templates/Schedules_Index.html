@@ -19,6 +19,13 @@
                                 <button type="submit" class="btn btn-outline-info" >Search</button>
                             </form>
                         </div>
+                        <div class="col-md-6">
+                            <form class="form-inline" th:action="@{/MVC/schedules}">
+                                <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" placeholder="Search Anything Except Your Happiness" required/>
+                             <button class="btn btn-outline-info" type="submit">Search</button>&nbsp;        &nbsp;
+                             <input class="btn btn-outline-secondary" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+                         </form>
+                     </div>
                     </div>
                 </nav>
             </div>
