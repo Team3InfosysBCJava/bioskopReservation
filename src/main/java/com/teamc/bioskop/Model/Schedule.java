@@ -38,6 +38,7 @@ public class Schedule {
     @Column(name = "date_show")
     private LocalDate dateShow;
 
+
     @ManyToOne
     @JoinColumn(name = "seat_id")
     private Seats seats;
