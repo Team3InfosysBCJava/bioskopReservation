@@ -1,53 +1,167 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>All User</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/sidebars.css}" rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Get All User</title>
+
 </head>
 <body>
+<nav class="sidebar close">
+    <header>
+        <div class="image-text">
+                <span class="image">
+                    <img src="logoinfosys.jpg" alt="">
+                </span>
+            <div class="text logo-text">
+                <span class="name">User</span>
+                <span class="profession">Registration</span>
+            </div>
+        </div>
 
+        <i class='bx bx-chevron-right toggle'></i>
+    </header>
 
+    <div class="menu-bar">
+        <div class="menu">
+            <!--      <li class="search-box">-->
+            <!--        <i class='bx bx-search icon'></i>-->
+            <!--        <input type="text" placeholder="Search...">-->
+            <!--      </li>-->
+            <li class="search-box">
+                <form class="d-flex" role="search" th:action="@{/MVC/User}">
+                    <button type="submit" class="bx bx-search icon"> </button>
+                    <input class="btn btn-outline-secondary" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+                </form>
+            </li>
 
-<div th:switch="${User_masuk}">
-    <h2 th:case="null">No user found</h2>
-    <div th:case="*">
-        <h2>All User</h2>
+            <ul class="menu-links">
+                <li class="nav-link">
+                    <a href="/MVC">
+                        <i class='bx bx-home-alt icon' ></i>
+                        <span class="text nav-text">Homepage</span>
+                    </a>
+                </li>
 
-        <table>
-            <thead>
-            <tr>
-                <th>User</th>
-                <th>Username</th>
-                <th>Email ID</th>
-                <th>Password</th>
+                <li class="nav-link">
+                    <a href="#">
+                        <i class='bx bx-receipt icon'></i>
+                        <span class="text nav-text">Features</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
-            </tr>
-            </thead>
+        <div class="bottom-content">
+            <!--            <li class="">-->
+            <!--                <a href="#">-->
+            <!--                    <i class='bx bx-log-out icon' ></i>-->
+            <!--                    <span class="text nav-text">Logout</span>-->
+            <!--                </a>-->
+            <!--            </li>-->
 
+            <li class="mode">
+                <div class="sun-moon">
+                    <i class='bx bx-moon icon moon'></i>
+                    <i class='bx bx-sun icon sun'></i>
+                </div>
+                <span class="mode-text text">Dark mode</span>
 
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
+            </li>
 
-
-            <tbody>
-            <tr th:each="User : ${User_masuk}">
-                <td th:text="${User.userId}"></td>
-                <td th:text="${User.username}"></td>
-                <td th:text="${User.emailId}"></td>
-                <td th:text="${User.password}"></td>
-                <td><a th:href="@{/MVC/User/update/{id}(id=${User.userId})}">Edit</a>     </td>
-
-                <td><a th:href="@{/MVC/User/delete/{id}(id=${User.userId})}">Delete</a>   </td>
-            </tr>
-            </tbody>
-        </table>
+        </div>
     </div>
 
-</div>
-<p><a href="/MVC/User/Signup">Add a new user</a></p>
+</nav>
+<section class="home">
+    <div class="text">Get All User</div>
+    <div th:switch="${User_masuk}" class="container">
+        <h2 th:case="null">No User Available!</h2>
+        <div th:case="*">
+            <!--    <nav class="navbar navbar-light bg-light">-->
+            <!--      <a class="navbar-brand"><h4>Film</h4></a>-->
+            <!--      <form class="form-inline" method="get" th:action="@{/MVC/Film/{id}(id=null)}">-->
+            <!--        <input class="form-control mr-sm-2" th:value="${stringId}" id="id" type="text" placeholder="Search By Id" aria-label="Search">-->
+            <!--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+            <!--      </form>-->
+            <!--    </nav>-->
+            <!--      <button type="button" class="btn">-->
+            <!--        <a href="/MVC/Film/new-film">Add New Film</a>-->
+            <!--      </button>-->
+            <div class="button">
+                <i class='bx bx-list-plus icon'></i>
+                <a class="btn" href="/MVC/User/Signup" role="button">Add a New User</a>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th  scope="col">User ID</th>
+                    <th  scope="col">Username</th>
+                    <th  scope="col">Email ID</th>
+                    <th  scope="col">Password</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="User : ${User_masuk}">
+                    <td th:text="${User.userId}"></td>
+                    <td th:text="${User.username}"></td>
+                    <td th:text="${User.emailId}"></td>
+                    <td th:text="${User.password}"></td>
+                    <td>
+                        <i class='bx bxs-edit icon'></i>
+                        <a th:href="@{/MVC/User/update/{id}(id=${User.userId})}">Edit</a>
+                    </td>
+                    <td>
+                        <i class='bx bx-trash icon'></i>
+                        <a th:href="@{/MVC/User/delete/{id}(id=${User.userId})}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--    <p><a href="/signup">Add a new user</a></p>-->
+    </div>
+</section>
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+<script>
+          const body = document.querySelector('body'),
+          sidebar = body.querySelector('nav'),
+          toggle = body.querySelector(".toggle"),
+          searchBtn = body.querySelector(".search-box"),
+          modeSwitch = body.querySelector(".toggle-switch"),
+          modeText = body.querySelector(".mode-text");
 
+
+        toggle.addEventListener("click" , () =>{
+            sidebar.classList.toggle("close");
+        })
+
+        searchBtn.addEventListener("click" , () =>{
+            sidebar.classList.remove("close");
+        })
+
+        modeSwitch.addEventListener("click" , () =>{
+            body.classList.toggle("dark");
+
+            if(body.classList.contains("dark")){
+                modeText.innerText = "Light mode";
+            }else{
+                modeText.innerText = "Dark mode";
+
+            }
+});
+    </script>
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/MVC/User}]]";
+    }
+</script>
 </body>
 </html>
