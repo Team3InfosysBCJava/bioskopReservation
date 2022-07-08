@@ -7,6 +7,12 @@
     <link th:href="@{/sidebars.css}" rel="stylesheet"/>
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+
     <title>All Schedules</title>
 
 </head>
@@ -125,7 +131,7 @@
 <!--            </div>-->
 
             <div class="button" data-bs-toggle="modal" data-bs-target="#modalNew">
-                <i class='bx bx-list-plus icon'>Add New Schedule</i>
+                <i class='bx bx-list-plus icon'></i>Add New Schedule</a>
             </div>
 <!--            ================TABLE============-->
             <table class="table table-striped">
@@ -136,8 +142,7 @@
                     <th scope="col">Show Start</th>
                     <th scope="col">Show End</th>
                     <th scope="col">Price</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -162,67 +167,82 @@
     </div>
 
     <div class="modal fade" id="modalNew" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
             <div class="modal-content">
+
+<!--                        =======MODAL HEADER===========-->
                 <div class="modal-header">
                     <h5 class="modal-title" id="editLabel">Add Schedule</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
                 <form th:method="post" th:action="@{/MVC/schedules/add-schedule}" th:object="${schedule}" >
+
+<!--                        ========MODAL BODY=============-->
                     <div class="modal-body">
+                        <div class="container">
 
-                        <div class="mb-3">
-                            <label for="films" class="form-label">Film ID</label>
-                            <input type="text" class="form-control" th:field="*{films.filmId}" id="films" placeholder="films"><br/>
-                            <span th:if="${#fields.hasErrors('films')}" th:errors="*{films}"></span>
-                        </div>
+<!--                            ========ROW ONE==========-->
+                            <div class="row">
 
-                        <div class="mb-3">
-                            <!--    //dateShow-->
-                            <label for="dateShow" class="form-label">Date Show</label>
-                            <input type="text" class="form-control" th:field="*{dateShow}" id="dateShow" placeholder="date show"><br/>
-                            <span th:if="${#fields.hasErrors('dateShow')}" th:errors="*{dateShow}"></span>
-                        </div>
+                                <div class=" col-md-6">
+                                    <label for="films" class="form-label">Film ID</label>
+                                    <input type="text" class="form-control" th:field="*{films.filmId}" id="films" placeholder="films" aria-describedby="emailHelp"><br/>
+                                    <span th:if="${#fields.hasErrors('films')}" th:errors="*{films}"></span>
+                                </div>
 
-                        <div class="mb-3">
-                            <!--    //seats-->
-                            <label for="seats" class="form-label">Seat ID</label>
-                            <input type="text" class="form-control" th:field="*{seats.seatId}" id="seats" placeholder="seats"><br/>
-                            <span th:if="${#fields.hasErrors('seats')}" th:errors="*{seats}"></span>
-                        </div>
-
-                        <div class="mb-3">
-                            <!--    //showStart-->
-                            <label for="showStart" class="form-label">Show Start</label>
-                            <input type="text" class="form-control" th:field="*{showStart}" id="showStart" placeholder="show start"><br/>
-                            <span th:if="${#fields.hasErrors('showStart')}" th:errors="*{showStart}"></span>
-                        </div>
-
-                        <!--    //showEnd-->
-                        <div class="mb-3">
-
-                            <label for="showEnd" class="form-label">Show End</label>
-                            <input type="text" class="form-control" th:field="*{showEnd}" id="showEnd" placeholder="show end"><br/>
-                            <span th:if="${#fields.hasErrors('showEnd')}" th:errors="*{showEnd}"></span>
-                        </div>
-
-                        <!--    //price-->
-                        <div class="mb-3">
-                            <label for="price" class="form-label">Price</label>
-                            <input type="text" class="form-control" th:field="*{price}" id="price" placeholder="price"><br/>
-                            <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
-                        </div>
-
+                                <div class="col-md-6">
+                                    <!--    //dateShow-->
+                                    <label for="dateShow" class="form-label">Date Show</label>
+                                    <input type="text" class="form-control" th:field="*{dateShow}" id="dateShow" placeholder="date show" aria-describedby="emailHelp"><br/>
+                                    <span th:if="${#fields.hasErrors('dateShow')}" th:errors="*{dateShow}"></span>
+                                </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-outline-primary" >Save changes</button>
-                                <input class="btn btn-outline-secondary" type="button" value="Back Schedules" id="btnClear" onclick="clearSearch()" />
 
-                                <!-- <button type="button" class="btn btn-secondary"
-                                data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Yes</button> -->
+
+<!--                            =======ROW TWO=========-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!--    //seats-->
+                                    <label for="seats" class="form-label">Seat ID</label>
+                                    <input type="text" class="form-control" th:field="*{seats.seatId}" id="seats" placeholder="seats" aria-describedby="emailHelp"><br/>
+                                    <span th:if="${#fields.hasErrors('seats')}" th:errors="*{seats}"></span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <!--    //showStart-->
+                                    <label for="showStart" class="form-label">Show Start</label>
+                                    <input type="text" class="form-control" th:field="*{showStart}" id="showStart" placeholder="show start" aria-describedby="emailHelp"><br/>
+                                    <span th:if="${#fields.hasErrors('showStart')}" th:errors="*{showStart}"></span>
+                                </div>
                             </div>
+
+
+<!--                            ====== ROW THREE =========-->
+                            <div class="row">
+                                <!--    //showEnd-->
+                                <div class="col-md-6">
+
+                                    <label for="showEnd" class="form-label">Show End</label>
+                                    <input type="text" class="form-control" th:field="*{showEnd}" id="showEnd" placeholder="show end" aria-describedby="emailHelp"><br/>
+                                    <span th:if="${#fields.hasErrors('showEnd')}" th:errors="*{showEnd}"></span>
+                                </div>
+
+                                <!--    //price-->
+                                <div class="col-md-6">
+                                    <label for="price" class="form-label">Price</label>
+                                    <input type="text" class="form-control" th:field="*{price}" id="price" placeholder="price" aria-describedby="emailHelp"><br/>
+                                    <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+<!--                    ======== MODAL FOOTER ======== -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-primary" >Save changes</button>
+                        <input class="btn btn-outline-secondary" type="button" value="Back Schedules" id="btnClear" onclick="clearSearch()" />
+                    </div>
                 </form>
             </div>
         </div>
