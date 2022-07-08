@@ -12,7 +12,7 @@
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
-    </script>
+  </script>
 
   <title>Get All Films</title>
 
@@ -43,8 +43,7 @@
             <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="Search" required>
             <button input class="btn" type="button" id="btnClear" onclick="clearSearch()"><i
                 class='bx bx-refresh icon'></i></button>
-            <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
-          </form>
+         </form>
         </li>
         </li>
         <li class="search-box">
@@ -53,18 +52,8 @@
             <input type="text" name="id" id="id" th:value="${id}" placeholder="ID" required>
             <button input class="btn" type="button" id="btnClear2" onclick="clearSearch()"><i
                 class='bx bx-refresh icon'></i></button>
-            <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
           </form>
         </li>
-
-        <!--      <li class="search-box">-->
-        <!--        <form class="d-flex" role="search" th:action="@{/MVC/Film}">-->
-        <!--          <button type="submit" class="bx bx-search icon"> </button>-->
-        <!--        <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="Search..." required>-->
-        <!--        <input class="btn btn-outline-secondary" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />-->
-        <!--        </form>-->
-        <!--      </li>-->
-
         <ul class="menu-links">
           <li class="nav-link">
             <a href="/MVC">
@@ -72,8 +61,6 @@
               <span class="text nav-text">Homepage</span>
             </a>
           </li>
-
-
           <li class="nav-link dropdown">
             <i class="dropbtn">
               <i class='bx bx-down-arrow icon bx-fade-down'></i>
@@ -87,28 +74,24 @@
               <a href="/MVC/User/Signup">Registration</a>
             </div>
           </li>
-
           <li class="nav-link">
             <a href="/MVC/User">
               <i class='bx bx-user icon'></i>
               <span class="text nav-text">User</span>
             </a>
           </li>
-
           <li class="nav-link">
             <a href="/MVC/Seats">
               <i class='bx bx-chair icon'></i>
               <span class="text nav-text">Seats</span>
             </a>
           </li>
-
           <li class="nav-link">
             <a href="/MVC/schedules">
               <i class='bx bx-calendar icon'></i>
               <span class="text nav-text">Schedule</span>
             </a>
           </li>
-
           <li class="nav-link">
             <a href="/MVC/Reservations">
               <i class='bx bx-note icon'></i>
@@ -121,7 +104,6 @@
               <span class="text nav-text">PDF</span>
             </a>
           </li>
-
         </ul>
       </div>
 
@@ -144,7 +126,6 @@
             <span class="switch"></span>
           </div>
         </li>
-
       </div>
     </div>
 
@@ -180,11 +161,7 @@
               <a data-bs-toggle="modal" th:attr="data-bs-target='#modalDelete'+${Films.filmId}"
                 class='bx bxs-trash icon' role="button"></a>
             </td>
-            <!-- <td>
-              <i class='bx bx-trash icon'></i>
-              <a th:href="@{/MVC/Film/delete/{id}(id=${Films.filmId})}">Delete</a>
-            </td> -->
-          </tr>
+              </tr>
         </tbody>
       </table>
     </div>
@@ -210,11 +187,6 @@
                   th:value="${Films.isPlaying}" id="isPlaying" placeholder="1 or 0">
                 <span th:if="${#fields.hasErrors('isPlaying')}" th:errors="{isPlaying}"></span>
               </div>
-              <!-- <div class="form-check form-switch">
-                <input name="isPlaying" th:checked="isPlaying" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                <label  for="isPlaying" class="form-check-label">Playing</label>
-                <span th:if="${#fields.hasErrors('isPlaying')}" th:errors="{isPlaying}"></span>
-              </div> -->
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

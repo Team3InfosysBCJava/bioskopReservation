@@ -76,7 +76,6 @@ public class ReservationContMVC {
             return "Reservations_New";
         }
         bookingService.createBooking(reservation);
-
         return "redirect:/MVC/Reservations";
     }
 
@@ -99,7 +98,6 @@ public class ReservationContMVC {
             return "Reservation_Update";
         }
         reservation.setReservationId(id);
-        bookingService.updateBooking(reservation);
         return "redirect:/MVC/Reservations";
     }
 
@@ -113,6 +111,7 @@ public class ReservationContMVC {
         bookingService.deleteSBookingById(id);
         return "redirect:/MVC/Reservations";
     }
+
     /**
      * Search filmname
      */
