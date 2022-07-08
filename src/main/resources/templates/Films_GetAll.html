@@ -1,208 +1,315 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link th:href="@{/sidebars.css}" rel="stylesheet" />
+  <link th:href="@{/print.min.css}" rel="stylesheet" />
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+
   <title>Get All Films</title>
 
 </head>
+
 <body>
-<nav class="sidebar close">
-  <header>
-    <div class="image-text">
-                <span class="image">
-                                     <img src="https://ist.id/image/Logo-09.png" alt="" width="30"  class="d-inline-block align-text-top">
-<!--                    <img src="logoinfosys.jpg" alt="">-->
-                </span>
-      <div class="text logo-text">
-        <span class="name">Cinema</span>
-        <span class="profession">Reservation</span>
+  <nav class="sidebar close">
+    <header>
+      <div class="image-text">
+        <span class="image">
+          <img src="https://ist.id/image/Logo-09.png" alt="" width="30" class="d-inline-block align-text-top">
+          <!--                    <img src="logoinfosys.jpg" alt="">-->
+        </span>
+        <div class="text logo-text">
+          <span class="name">Cinema</span>
+          <span class="profession">Reservation</span>
+        </div>
       </div>
-    </div>
 
-    <i class='bx bx-chevron-right toggle'></i>
-  </header>
+      <i class='bx bx-chevron-right toggle'></i>
+    </header>
 
-  <div class="menu-bar">
-    <div class="menu">
-      <li class="search-box">
-        <i class='bx bx-search icon'></i>
-        <form class="d-flex" role="search" th:action="@{/MVC/Film}">
-          <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="Search" required>
-          <button input class="btn" type="button" id="btnClear" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button><!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
-        </form>
-      </li>
-    </li>
-    <li class="search-box">
-      <i class='bx bx-search icon'></i>
-      <form class="d-flex" role="search" th:action="@{/MVC/Film/Id}">
-        <input type="text" name="id" id="id" th:value="${id}" placeholder="ID" required>
-        <button input class="btn" type="button" id="btnClear2" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
-        <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
-      </form>
-    </li>
-
-      <!--      <li class="search-box">-->
-      <!--        <form class="d-flex" role="search" th:action="@{/MVC/Film}">-->
-      <!--          <button type="submit" class="bx bx-search icon"> </button>-->
-      <!--        <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="Search..." required>-->
-      <!--        <input class="btn btn-outline-secondary" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />-->
-      <!--        </form>-->
-      <!--      </li>-->
-
-      <ul class="menu-links">
-        <li class="nav-link">
-          <a href="/MVC">
-            <i class='bx bx-home-alt icon' ></i>
-            <span class="text nav-text">Homepage</span>
-          </a>
+    <div class="menu-bar">
+      <div class="menu">
+        <li class="search-box">
+          <i class='bx bx-search icon'></i>
+          <form class="d-flex" role="search" th:action="@{/MVC/Film}">
+            <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="Search" required>
+            <button input class="btn" type="button" id="btnClear" onclick="clearSearch()"><i
+                class='bx bx-refresh icon'></i></button>
+            <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
+          </form>
+        </li>
+        </li>
+        <li class="search-box">
+          <i class='bx bx-search icon'></i>
+          <form class="d-flex" role="search" th:action="@{/MVC/Film/Id}">
+            <input type="text" name="id" id="id" th:value="${id}" placeholder="ID" required>
+            <button input class="btn" type="button" id="btnClear2" onclick="clearSearch()"><i
+                class='bx bx-refresh icon'></i></button>
+            <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
+          </form>
         </li>
 
+        <!--      <li class="search-box">-->
+        <!--        <form class="d-flex" role="search" th:action="@{/MVC/Film}">-->
+        <!--          <button type="submit" class="bx bx-search icon"> </button>-->
+        <!--        <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="Search..." required>-->
+        <!--        <input class="btn btn-outline-secondary" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />-->
+        <!--        </form>-->
+        <!--      </li>-->
 
-        <li class="nav-link dropdown">
-          <i class="dropbtn">
-            <i class='bx bx-down-arrow icon bx-fade-down'></i>
-            <span class="text nav-text">Features</span>
-            <i class='bx bx-down-arrow icon' style='color:rgba(0,0,0,0)' ></i>
-          </i>
-          <div class="dropdown-content">
-            <a href="/MVC/schedules">Check schedules</a>
-            <a href="/MVC/Seats">Available seats</a>
-            <a href="/MVC/Reservation/new">Make a reservation</a>
-            <a href="/MVC/User/Signup">Registration</a>
+        <ul class="menu-links">
+          <li class="nav-link">
+            <a href="/MVC">
+              <i class='bx bx-home-alt icon'></i>
+              <span class="text nav-text">Homepage</span>
+            </a>
+          </li>
+
+
+          <li class="nav-link dropdown">
+            <i class="dropbtn">
+              <i class='bx bx-down-arrow icon bx-fade-down'></i>
+              <span class="text nav-text">Features</span>
+              <i class='bx bx-down-arrow icon' style='color:rgba(0,0,0,0)'></i>
+            </i>
+            <div class="dropdown-content">
+              <a href="/MVC/schedules">Check schedules</a>
+              <a href="/MVC/Seats">Available seats</a>
+              <a href="/MVC/Reservation/new">Make a reservation</a>
+              <a href="/MVC/User/Signup">Registration</a>
+            </div>
+          </li>
+
+          <li class="nav-link">
+            <a href="/MVC/User">
+              <i class='bx bx-user icon'></i>
+              <span class="text nav-text">User</span>
+            </a>
+          </li>
+
+          <li class="nav-link">
+            <a href="/MVC/Seats">
+              <i class='bx bx-chair icon'></i>
+              <span class="text nav-text">Seats</span>
+            </a>
+          </li>
+
+          <li class="nav-link">
+            <a href="/MVC/schedules">
+              <i class='bx bx-calendar icon'></i>
+              <span class="text nav-text">Schedule</span>
+            </a>
+          </li>
+
+          <li class="nav-link">
+            <a href="/MVC/Reservations">
+              <i class='bx bx-note icon'></i>
+              <span class="text nav-text">Reservation</span>
+            </a>
+          </li>
+          <li class="nav-link">
+            <a role="button" onclick="printJS('PDF', 'html')">
+              <i class='bx bx-note icon'></i>
+              <span class="text nav-text">PDF</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="bottom-content">
+        <!--            <li class="">-->
+        <!--                <a href="#">-->
+        <!--                    <i class='bx bx-log-out icon' ></i>-->
+        <!--                    <span class="text nav-text">Logout</span>-->
+        <!--                </a>-->
+        <!--            </li>-->
+
+        <li class="mode">
+          <div class="sun-moon">
+            <i class='bx bx-moon icon moon'></i>
+            <i class='bx bx-sun icon sun'></i>
+          </div>
+          <span class="mode-text text">Dark mode</span>
+
+          <div class="toggle-switch">
+            <span class="switch"></span>
           </div>
         </li>
 
-        <li class="nav-link">
-          <a href="/MVC/User">
-            <i class='bx bx-user icon'></i>
-            <span class="text nav-text">User</span>
-          </a>
-        </li>
-
-        <li class="nav-link">
-          <a href="/MVC/Seats">
-            <i class='bx bx-chair icon'></i>
-            <span class="text nav-text">Seats</span>
-          </a>
-        </li>
-
-        <li class="nav-link">
-          <a href="/MVC/schedules">
-            <i class='bx bx-calendar icon'></i>
-            <span class="text nav-text">Schedule</span>
-          </a>
-        </li>
-
-        <li class="nav-link">
-          <a href="/MVC/Reservations">
-            <i class='bx bx-note icon'></i>
-            <span class="text nav-text">Reservation</span>
-          </a>
-        </li>
-
-      </ul>
-    </div>
-
-    <div class="bottom-content">
-      <!--            <li class="">-->
-      <!--                <a href="#">-->
-      <!--                    <i class='bx bx-log-out icon' ></i>-->
-      <!--                    <span class="text nav-text">Logout</span>-->
-      <!--                </a>-->
-      <!--            </li>-->
-
-      <li class="mode">
-        <div class="sun-moon">
-          <i class='bx bx-moon icon moon'></i>
-          <i class='bx bx-sun icon sun'></i>
-        </div>
-        <span class="mode-text text">Dark mode</span>
-
-        <div class="toggle-switch">
-          <span class="switch"></span>
-        </div>
-      </li>
-
-    </div>
-  </div>
-
-</nav>
-<section class="home">
-  <div class="text">Get All Film</div>
-  <div th:switch="${films}" class="container">
-    <h2 th:case="null">No Film yet!</h2>
-    <div th:case="*">
-      <div class="button">
-        <i class='bx bx-list-plus icon'></i>
-        <a class="btn" href="/MVC/Film/new-film" role="button">Add New Film</a>
       </div>
-      <table class="table table-striped">
+    </div>
+
+  </nav>
+  <section class="home">
+    <div class="text">Get All Film</div>
+    <div th:if="${films}==null" class="container">
+      <h2>No Film yet!</h2>
+    </div>
+    <div th:unless="${films}==null" class="container">
+      <div class="button" data-bs-toggle="modal" data-bs-target="#modalNew">
+        <i class='bx bx-list-plus icon'></i>Add Film
+      </div>
+      <table id="PDF" class="table table-striped">
         <thead>
-        <tr>
-          <th  scope="col">Film id</th>
-          <th  scope="col">Film Name</th>
-          <th  scope="col">Is Playing</th>
-          <th  scope="col">Action</th>
-        </tr>
+          <tr>
+            <th scope="col">Film id</th>
+            <th scope="col">Film Name</th>
+            <th scope="col">Is Playing</th>
+            <th scope="col">Action</th>
+          </tr>
         </thead>
         <tbody>
-        <tr th:each="Films : ${films}">
-          <td th:text="${Films.filmId}"></td>
-          <td th:text="${Films.name}"></td>
-          <td th:text="${Films.isPlaying}"></td>
-          <td>
-            <i class='bx bxs-edit icon'></i>
-            <a th:href="@{/MVC/Film/update/{id}(id=${Films.filmId})}">Edit</a>
-          </td>
-          <td>
-            <i class='bx bx-trash icon'></i>
-            <a th:href="@{/MVC/Film/delete/{id}(id=${Films.filmId})}">Delete</a>
-          </td>
-        </tr>
+          <tr th:each="Films : ${films}">
+            <td th:text="${Films.filmId}"></td>
+            <td th:text="${Films.name}"></td>
+            <td th:text="${Films.isPlaying}"></td>
+            <td>
+              <a data-bs-toggle="modal" th:attr="data-bs-target='#modalUpdate'+${Films.filmId}" class='bx bxs-edit icon'
+                role="button"></a>
+            </td>
+            <td>
+              <a data-bs-toggle="modal" th:attr="data-bs-target='#modalDelete'+${Films.filmId}"
+                class='bx bxs-trash icon' role="button"></a>
+            </td>
+            <!-- <td>
+              <i class='bx bx-trash icon'></i>
+              <a th:href="@{/MVC/Film/delete/{id}(id=${Films.filmId})}">Delete</a>
+            </td> -->
+          </tr>
         </tbody>
       </table>
     </div>
-    <!--    <p><a href="/signup">Add a new user</a></p>-->
-  </div>
-</section>
+    <!-- start modal -->
+    <div class="modal" th:each="Films : ${films}" th:id="'modalUpdate'+${Films.filmId}" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Update Film</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form th:method="post" th:action="@{/MVC/Film/update-film/{id}(id=${Films.filmId})}" th:object="${film_add}">
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="name" class="form-label">Film Name</label>
+                <input type="text" class="form-control" th:name="name" th:value="${Films.name}" id="name"
+                  placeholder="name">
+                <span th:if="${#fields.hasErrors('name')}" th:errors="{name}"></span>
+              </div>
+              <div class="mb-3">
+                <label for="isPlaying" class="form-label">Status</label>
+                <input type="number" min="0" max="1" maxlength="1" class="form-control" th:name="isPlaying"
+                  th:value="${Films.isPlaying}" id="isPlaying" placeholder="1 or 0">
+                <span th:if="${#fields.hasErrors('isPlaying')}" th:errors="{isPlaying}"></span>
+              </div>
+              <!-- <div class="form-check form-switch">
+                <input name="isPlaying" th:checked="isPlaying" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label  for="isPlaying" class="form-check-label">Playing</label>
+                <span th:if="${#fields.hasErrors('isPlaying')}" th:errors="{isPlaying}"></span>
+              </div> -->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal" th:each="Films : ${films}" th:id="'modalDelete'+${Films.filmId}" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete Film</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form th:method="post" th:action="@{/MVC/Film/delete/{id}(id=${Films.filmId})}">
+            <div class="modal-body">
+              <h3>ciyussss pengen di delete?</h3>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Delete</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="modalNew" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add New Film</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form th:method="post" th:action="@{/MVC/Film/add-film}" th:object="${film_add}">
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="name" class="form-label">Film Name</label>
+                <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="name">
+                <span th:if="${#fields.hasErrors('name')}" th:errors="{name}"></span>
+              </div>
+              <div class="mb-3">
+                <label for="isPlaying" class="form-label">Status</label>
+                <input type="number" min="0" max="1" maxlength="1" class="form-control" th:field="*{isPlaying}"
+                  id="isPlaying" placeholder="1 or 0">
+                <span th:if="${#fields.hasErrors('isPlaying')}" th:errors="{isPlaying}"></span>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
-<script>
-          const body = document.querySelector('body'),
-          sidebar = body.querySelector('nav'),
-          toggle = body.querySelector(".toggle"),
-          searchBtn = body.querySelector(".search-box"),
-          modeSwitch = body.querySelector(".toggle-switch"),
-          modeText = body.querySelector(".mode-text");
+    <!-- end modal -->
+  </section>
+
+  <script th:src="@{/print.min.js}"></script>
+  <script>
+    const body = document.querySelector('body'),
+      sidebar = body.querySelector('nav'),
+      toggle = body.querySelector(".toggle"),
+      searchBtn = body.querySelector(".search-box"),
+      modeSwitch = body.querySelector(".toggle-switch"),
+      modeText = body.querySelector(".mode-text");
 
 
-        toggle.addEventListener("click" , () =>{
-            sidebar.classList.toggle("close");
-        })
+    toggle.addEventListener("click", () => {
+      sidebar.classList.toggle("close");
+    })
 
-        searchBtn.addEventListener("click" , () =>{
-            sidebar.classList.remove("close");
-        })
+    searchBtn.addEventListener("click", () => {
+      sidebar.classList.remove("close");
+    })
 
-        modeSwitch.addEventListener("click" , () =>{
-            body.classList.toggle("dark");
+    modeSwitch.addEventListener("click", () => {
+      body.classList.toggle("dark");
 
-            if(body.classList.contains("dark")){
-                modeText.innerText = "Light mode";
-            }else{
-                modeText.innerText = "Dark mode";
+      if (body.classList.contains("dark")) {
+        modeText.innerText = "Light mode";
+      } else {
+        modeText.innerText = "Dark mode";
 
-            }
-});
-    </script>
-<script type="text/javascript">
+      }
+    });
+  </script>
+  <script type="text/javascript">
     function clearSearch() {
-        window.location = "[[@{/MVC/Film}]]";
+      window.location = "[[@{/MVC/Film}]]";
     }
-</script>
+  </script>
 </body>
+
 </html>
