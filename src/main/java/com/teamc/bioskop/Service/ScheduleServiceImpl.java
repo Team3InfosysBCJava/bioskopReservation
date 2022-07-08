@@ -84,9 +84,9 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<Schedule> getScheduleBySearchName(String keyword){
+    public List<Schedule> search(String keyword){
         if (keyword != null){
-            return scheduleRepository.search(keyword);
+            return scheduleRepository.searchByName(keyword);
         }
 
         return scheduleRepository.findAll();
