@@ -3,21 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Add New Schedule</title>
+    <link th:href="@{/sidebars.css}" rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Add New Seats</title>
     <style type="text/css">
-    label {
+
+.modal{
+      background-color: #9ab3be;
+      width: 500px;
+      padding: 30px;
+      border: 5px solid gray;
+      margin: 100px;
+    }
+    .modal .modal-body label{
         display: inline-block;
         width: 200px;
         margin: 5px;
         text-align: left;
     }
-    input[type=text] {
+    .modal .modal-body .input[type=text] {
         display: inline-block;
         width: 200px;
     }
-    input[type=submit] {
-        padding: 5px;
-        margin: 10px;
+    .modal .modal-footer {
+        padding: 55px;
+        margin: 5px;
+        text-align: right;
+    }
+    .modal .modal-header .modal-title {
+        font-size: 17px;
+        font-weight: 500;
+        white-space: nowrap;
+        opacity: 1;
     }
 </style>
 </head>
@@ -25,9 +43,10 @@
 <div align="center">
     <h2>Add New Seats</h2>
     <form action="#"
-          th:action="@{/MVC/Seats/add-seats}"
+          th:action="@{/MVC/Seats/new-seats}"
           th:object="${seats}"
           method="post">
+
 
 <!--        &lt;!&ndash;    //seatId&ndash;&gt;-->
 <!--        <label for="Seats">seatId</label>-->
