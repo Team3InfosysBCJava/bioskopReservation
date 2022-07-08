@@ -3,56 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Add New User</title>
+    <title>Add New Film</title>
     <style type="text/css">
-    label {
+
+    .modal{
+      background-color: #9ab3be;
+      width: 500px;
+      padding: 30px;
+      border: 5px solid gray;
+      margin: 100px;
+    }
+    .modal .modal-body label{
         display: inline-block;
         width: 200px;
         margin: 5px;
         text-align: left;
     }
-    input[type=text] {
+    .modal .modal-body .input[type=text] {
         display: inline-block;
         width: 200px;
     }
-    input[type=submit] {
-        padding: 5px;
-        margin: 10px;
+    .modal .modal-footer {
+        padding: 55px;
+        margin: 5px;
+        text-align: right;
     }
+    .modal .modal-header .modal-title {
+        font-size: 17px;
+        font-weight: 500;
+        white-space: nowrap;
+        opacity: 1;
+    }
+
 </style>
 </head>
 <body>
 <div align="center">
-    <h2>Add New User</h2>
     <form action="#"
           th:action="@{/MVC/User/add-user}"
           th:object="${user}"
           method="post">
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add a New User</h5>
+                        <!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                    </div>
+                    <div class="modal-body">
+                        <!--                <p>Modal body text goes here.</p>-->
 
-        <!--    //films-->
-<!--        <label for="userId">User ID</label>-->
-<!--        <input type="text" th:field="*{userId}" id="userId" placeholder="User ID"><br/>-->
-<!--        <span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span>-->
-
-        <!--    //dateShow-->
-        <label for="username">Username</label>
-        <input type="text" th:field="*{username}" id="username" placeholder="Username"><br/>
-        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
-
-        <!--    //seats-->
-        <label for="emailId">Email ID</label>
-        <input type="text" th:field="*{emailId}" id="emailId" placeholder="email ID"><br/>
-        <span th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}"></span>
-
-        <!--    //showStart-->
-        <label for="password">Password</label>
-        <input type="text" th:field="*{password}" id="password" placeholder="Password"><br/>
-        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                        <label for="username">Username</label>
+                        <input type="text" th:field="*{username}" id="username" placeholder="Enter your username !"><br/>
+                        <span th:if="${#fields.hasErrors('username')}" th:errors="*{usernamme}"></span>
 
 
+                        <label for="emailId">Email ID</label>
+                        <input type="text" th:field="*{emailId}" id="emailId" placeholder="Enter your Email id !"><br/>
+                        <span th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}"></span>
 
-        <input type="submit" value="Add User">
+                        <label for="password">Password</label>
+                        <input type="text" th:field="*{password}" id="password" placeholder="Enter your password !"><br/>
+                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+
+                    </div>
+                    <div class="modal-footer">
+                        <!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+                        <button input type="submit" value="Add Film" >Register</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/MVC/User}]]";
+    }
+</script>
+<!--<div align="center">-->
+<!--    <h2>Add New Film</h2>-->
+<!--    <form action="#"-->
+<!--          th:action="@{/MVC/Film/add-film}"-->
+<!--          th:object="${films}"-->
+<!--          method="post">-->
+
+<!--    //films-->
+<!--        <label for="filmId">Film ID</label>-->
+<!--        <input type="text" th:field="*{filmId}" id="filmId" placeholder="filmId"><br/>-->
+<!--        <span th:if="${#fields.hasErrors('filmId')}" th:errors="*{filmId}"></span>-->
+
+<!--    //dateShow-->
+<!--        <label for="name">Film Name</label>-->
+<!--        <input type="text" th:field="*{name}" id="name" placeholder="name"><br/>-->
+<!--        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>-->
+
+<!--        &lt;!&ndash;    //seats&ndash;&gt;-->
+<!--        <label for="isPlaying">Status</label>-->
+<!--        <input type="text" th:field="*{isPlaying}" id="isPlaying" placeholder="0 or 1"><br/>-->
+<!--        <span th:if="${#fields.hasErrors('isPlaying')}" th:errors="*{isPlaying}"></span>-->
+
+
+
+<!--        <input type="submit" value="Add Schedule">-->
+<!--    </form>-->
+<!--</div>-->
 </body>
 </html>

@@ -35,8 +35,16 @@
           <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="Search" required>
           <button input class="btn" type="button" id="btnClear" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button><!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
         </form>
-
       </li>
+    </li>
+    <li class="search-box">
+      <i class='bx bx-search icon'></i>
+      <form class="d-flex" role="search" th:action="@{/MVC/Film/Id}">
+        <input type="text" name="id" id="id" th:value="${id}" placeholder="ID" required>
+        <button input class="btn" type="button" id="btnClear2" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
+        <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
+      </form>
+    </li>
 
       <!--      <li class="search-box">-->
       <!--        <form class="d-flex" role="search" th:action="@{/MVC/Film}">-->
@@ -53,6 +61,7 @@
             <span class="text nav-text">Homepage</span>
           </a>
         </li>
+
 
         <li class="nav-link dropdown">
           <i class="dropbtn">

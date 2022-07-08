@@ -3,72 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/sidebars.css}" rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>All Schedules</title>
+
 </head>
 <body>
-    <div th:switch="${schedule_entry}">
+<nav class="sidebar close">
+    <header>
+        <div class="image-text">
+                <span class="image">
+                                     <img src="https://ist.id/image/Logo-09.png" alt="" width="30"  class="d-inline-block align-text-top">
+                    <!--                    <img src="logoinfosys.jpg" alt="">-->
+                </span>
+            <div class="text logo-text">
+                <span class="name">Cinema</span>
+                <span class="profession">Reservation</span>
+            </div>
+        </div>
+
+        <i class='bx bx-chevron-right toggle'></i>
+    </header>
+
+    <div class="menu-bar">
+        <div class="menu">
+            <li class="search-box">
+                <i class='bx bx-search icon'></i>
+                <form class="d-flex" role="search" th:action="@{/MVC/schedules}">
+                    <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="search" required>
+                    <button class="btn" type="button" id="btnClear" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
+                    <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
+                </form>
+
+            </li>
+        </li>
+        <li class="search-box">
+          <i class='bx bx-search icon'></i>
+          <form class="d-flex" role="search" th:action="@{/MVC/schedules/search-by-film}">
+            <input type="text" name="name" th:value="${name}" placeholder="Title Film" required>
+            <button input class="btn" type="button" id="btnClear2" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
+            <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
+          </form>
+        </li>
+
+            <!--      <li class="search-box">-->
+            <!--        <form class="d-flex" role="search" th:action="@{/MVC/Film}">-->
+            <!--          <button type="submit" class="bx bx-search icon"> </button>-->
+            <!--        <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="Search..." required>-->
+            <!--        <input class="btn btn-outline-secondary" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />-->
+            <!--        </form>-->
+            <!--      </li>-->
+
+            <ul class="menu-links">
+                <li class="nav-link">
+                    <a href="/MVC">
+                        <i class='bx bx-home-alt icon' ></i>
+                        <span class="text nav-text">Homepage</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="/MVC/Film">
+                      <i class='bx bx-film icon'></i>
+                      <span class="text nav-text">Film</span>
+                    </a>
+                  </li>
+          
+                  <li class="nav-link">
+                    <a href="/MVC/User">
+                      <i class='bx bx-user icon'></i>
+                      <span class="text nav-text">User</span>
+                    </a>
+                  </li>
+          
+                  <li class="nav-link">
+                    <a href="/MVC/Seats">
+                      <i class='bx bx-chair icon'></i>
+                      <span class="text nav-text">Seats</span>
+                    </a>
+                  </li>
+          
+                  <li class="nav-link">
+                    <a href="/MVC/Reservations">
+                      <i class='bx bx-note icon'></i>
+                      <span class="text nav-text">Reservation</span>
+                    </a>
+                  </li>
+          
+            </ul>
+        </div>
+
+        <div class="bottom-content">
+            <!--            <li class="">-->
+            <!--                <a href="#">-->
+            <!--                    <i class='bx bx-log-out icon' ></i>-->
+            <!--                    <span class="text nav-text">Logout</span>-->
+            <!--                </a>-->
+            <!--            </li>-->
+
+            <li class="mode">
+                <div class="sun-moon">
+                    <i class='bx bx-moon icon moon'></i>
+                    <i class='bx bx-sun icon sun'></i>
+                </div>
+                <span class="mode-text text">Dark mode</span>
+
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
+            </li>
+
+        </div>
+    </div>
+
+</nav>
+<section class="home">
+    <div class="text">Schedules</div>
+    <div th:switch="${schedule_entry}" class="container">
         <h2 th:case="null">No schedule found</h2>
         <div th:case="*">
-            <div class="row justify-content-center"><h2>All Schedules</h2>
-                <nav class="navbar navbar-light bg-light">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <form th:action="@{/MVC/schedules/search-by-film}" method="post" class="mb-3">
-                                <input type="text" name="name" th:value="${name}"  placeholder="find schedule by films name" size="50" >
-                                <button type="submit" class="btn btn-outline-info" >Search</button>
-                            </form>
-                        </div>
-                        <div class="col-md-6">
-                            <form class="form-inline" th:action="@{/MVC/schedules}">
-                                <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" placeholder="Search Anything Except Your Happiness" required/>
-                             <button class="btn btn-outline-info" type="submit">Search</button>&nbsp;        &nbsp;
-                             <input class="btn btn-outline-secondary" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
-                         </form>
-                     </div>
-                    </div>
-                </nav>
+            <div class="button">
+                <i class='bx bx-list-plus icon'></i>
+                <a class="btn" href="/MVC/new-schedule" role="button">Add New Schedule</a>
             </div>
-<!--            <div class=container">-->
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <table class="table">
-                            <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">Film</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Show Start</th>
-                                <th scope="col">Show End</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Edit</th>
-                                <th scope="col">Delete</th>
-                            </tr>
-                            </thead>
 
-                            <tbody>
-                            <tr th:each="schedule : ${schedule_entry}">
-                                <td th:text="${schedule.films.name}"></td>
-                                <td th:text="${schedule.dateShow}"></td>
-                                <td th:text="${schedule.showStart}"></td>
-                                <td th:text="${schedule.showEnd}"></td>
-                                <td th:text="${schedule.price}"></td>
-                                <td><a th:href="@{/MVC/schedules/update/{id}(id=${schedule.scheduleId})}">Edit</a></td>
-                                <td><a th:href="@{/MVC/schedules/delete/{id}(id=${schedule.scheduleId})}">Delete</a></td>
-                            </tr>
-                            </tbody>
-                        </table>
+<!--            ================TABLE============-->
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Film</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Show Start</th>
+                    <th scope="col">Show End</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="schedule : ${schedule_entry}">
+                    <td th:text="${schedule.films.name}"></td>
+                    <td th:text="${schedule.dateShow}"></td>
+                    <td th:text="${schedule.showStart}"></td>
+                    <td th:text="${schedule.showEnd}"></td>
+                    <td th:text="${schedule.price}"></td>
+                    <td>
+                        <i class='bx bxs-edit icon'></i>
+                        <a th:href="@{/MVC/schedules/update/{id}(id=${schedule.scheduleId})}">Edit</a>
+                    </td>
+                    <td>
+                        <i class='bx bx-trash icon'></i>
+                        <a th:href="@{/MVC/schedules/delete/{id}(id=${schedule.scheduleId})}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<script>
+          const body = document.querySelector('body'),
+          sidebar = body.querySelector('nav'),
+          toggle = body.querySelector(".toggle"),
+          searchBtn = body.querySelector(".search-box"),
+          modeSwitch = body.querySelector(".toggle-switch"),
+          modeText = body.querySelector(".mode-text");
 
-                        <p><a href="/MVC/new-schedule" style="text-decoration: none, color: black">Add a new schedule</a></p>
-                        <input class="btn btn-dark btn-lg" type="button" value="Back Home" id="btnClear4" onclick="clearSearch()"/>
-                        <script type="text/javascript">
+
+        toggle.addEventListener("click" , () =>{
+            sidebar.classList.toggle("close");
+        })
+
+        searchBtn.addEventListener("click" , () =>{
+            sidebar.classList.remove("close");
+        })
+
+        modeSwitch.addEventListener("click" , () =>{
+            body.classList.toggle("dark");
+
+            if(body.classList.contains("dark")){
+                modeText.innerText = "Light mode";
+            }else{
+                modeText.innerText = "Dark mode";
+
+            }
+});
+    </script>
+    <script type="text/javascript">
                             function clearSearch() {
                                 window.location = "[[@{/MVC/schedules}]]";
                             }
-                        </script>
-                    </div>
-                </div>
-<!--            </div>-->
-        </div>
-    </div>
+    </script>
+    }
 </body>
 </html>

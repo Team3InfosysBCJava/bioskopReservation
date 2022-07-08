@@ -29,22 +29,24 @@
           th:object="${user}"
           method="post">
 
-        <label for="userId">User ID</label>
+<!--            //user ID-->
+        <label for="userId">User ID   : </label>
         <input type="text" th:field="*{userId}" id="userId" placeholder="User ID"><br/>
         <span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span>
 
-        <!--    //username-->
-        <label for="username">Username</label>
+<!--               username-->
+        <label for="username">Username   : </label>
         <input type="text" th:field="*{username}" id="username" placeholder="Username"><br/>
         <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
 
-        <!--    //EMAIL ID-->
-        <label for="emailId">Email ID</label>
+        <!--    //email ID-->
+        <label for="emailId">Email ID   : </label>
         <input type="text" th:field="*{emailId}" id="emailId" placeholder="Email ID"><br/>
         <span th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}"></span>
 
-        <!--    //Password-->
-        <label for="password">Password</label>
+
+        <!--    //password-->
+        <label for="password">Password   : </label>
         <input type="text" th:field="*{password}" id="password" placeholder="Password"><br/>
         <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 
