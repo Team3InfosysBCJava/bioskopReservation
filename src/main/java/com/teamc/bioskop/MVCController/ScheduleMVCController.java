@@ -42,19 +42,19 @@ public class ScheduleMVCController {
         if(name!=null) {
             List<Schedule> schedules = scheduleService.getScheduleBySearchName(film.getName());
             //pake stream
-            List<ScheduleResponseDTO> results = schedules.stream()
-                    .map(Schedule::convertToResponse)
-                    .collect(Collectors.toList());
-            model.addAttribute("schedule_entry", results);
+            // List<ScheduleResponseDTO> results = schedules.stream()
+            //         .map(Schedule::convertToResponse)
+            //         .collect(Collectors.toList());
+            model.addAttribute("schedule_entry", schedules);
         }else {
             List<Schedule> schedules = scheduleService.getAll();
-            List<ScheduleResponseDTO> schedulesMaps = new ArrayList<>();
+            // List<ScheduleResponseDTO> schedulesMaps = new ArrayList<>();
             //manual for each
-            for (Schedule data : schedules){
-                ScheduleResponseDTO scheduleDTO = data.convertToResponse();
-                schedulesMaps.add(scheduleDTO);
-            }
-            model.addAttribute("schedule_entry", schedulesMaps);
+            // for (Schedule data : schedules){
+            //     ScheduleResponseDTO scheduleDTO = data.convertToResponse();
+            //     schedulesMaps.add(scheduleDTO);
+            // }
+            model.addAttribute("schedule_entry", schedules);
         }
         return "Schedules_Index";
     }
