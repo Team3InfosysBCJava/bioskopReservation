@@ -88,7 +88,6 @@ public class ScheduleServiceImpl implements ScheduleService {
         if (keyword != null){
             return scheduleRepository.searchByName(keyword);
         }
-
         return scheduleRepository.findAll();
     }
 }

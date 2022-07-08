@@ -28,6 +28,7 @@ public class ScheduleMVCController {
     private final ScheduleService scheduleService;
     private final ScheduleRepository scheduleRepository;
 
+
     //HOMEPAGE
     @GetMapping("/MVC")
     public String showHomepage(){
