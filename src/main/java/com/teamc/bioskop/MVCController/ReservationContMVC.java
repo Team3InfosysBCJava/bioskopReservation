@@ -36,6 +36,7 @@ public class ReservationContMVC {
                 .collect(Collectors.toList());
         model.addAttribute("Reservation_entry",results);
         model.addAttribute("keyword",keyword);
+        model.addAttribute("reservation",new Reservation());
         return "Index_Reservation";
     }
 
@@ -75,6 +76,7 @@ public class ReservationContMVC {
             return "Reservations_New";
         }
         bookingService.createBooking(reservation);
+
         return "redirect:/MVC/Reservations";
     }
 
