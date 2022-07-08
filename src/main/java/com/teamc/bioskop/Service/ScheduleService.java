@@ -17,6 +17,6 @@ public interface ScheduleService {
     Schedule getReferenceById (Integer id);
     List<Schedule> getScheduleByFilmName(String name);
     List<Schedule> getScheduleByFilmNameLike(String name);
-    List<Schedule> getScheduleBySearchName(String name);
+    List<Schedule> search(String name);
 
 }

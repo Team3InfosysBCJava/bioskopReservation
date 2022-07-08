@@ -1,29 +1,21 @@
 package com.teamc.bioskop.MVCController;
 
 import com.teamc.bioskop.DTO.ScheduleResponseDTO;
-import com.teamc.bioskop.Exception.ResourceNotFoundException;
 import com.teamc.bioskop.Model.Films;
 import com.teamc.bioskop.Model.Schedule;
-import com.teamc.bioskop.Response.ResponseHandler;
 import org.springframework.data.repository.query.Param;
 import com.teamc.bioskop.Service.ScheduleService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Schedules;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -40,7 +32,7 @@ public class ScheduleMVCController {
     @PostMapping("/MVC/schedules/search-by-film")
     public String searchFilm(Films film, Model model, String name) {
         if(name!=null) {
-            List<Schedule> schedules = scheduleService.getScheduleBySearchName(film.getName());
+            List<Schedule> schedules = scheduleService.search(film.getName());
             //pake stream
             // List<ScheduleResponseDTO> results = schedules.stream()
             //         .map(Schedule::convertToResponse)
@@ -79,7 +71,7 @@ public class ScheduleMVCController {
     //GET ALL
     @GetMapping("/MVC/schedules")
     public String search(Model model, @Param("keyword") String keyword){
-        List<Schedule> result = scheduleService.getScheduleBySearchName(keyword);
+        List<Schedule> result = scheduleService.search(keyword);
         model.addAttribute("schedule_entry", result);
         model.addAttribute("keyword",keyword);
 

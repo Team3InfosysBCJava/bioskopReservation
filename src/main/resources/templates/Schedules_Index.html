@@ -30,32 +30,13 @@
     <div class="menu-bar">
         <div class="menu">
             <li class="search-box">
-                <i class='bx bx-search icon'></i>
-                <form class="d-flex" role="search" th:action="@{/MVC/schedules}">
-                    <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="search" required>
-                    <button class="btn" type="button" id="btnClear" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
-                    <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
-                </form>
-
+              <i class='bx bx-search icon'></i>
+              <form class="d-flex" role="search" th:action="@{/MVC/schedules}">
+                <input type="text" name="keyword" th:value="${keyword}" placeholder="Title" required>
+                <button input class="btn" type="button" id="btnClear2" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
+                <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
+              </form>
             </li>
-        </li>
-        <li class="search-box">
-          <i class='bx bx-search icon'></i>
-          <form class="d-flex" role="search" th:action="@{/MVC/schedules/search-by-film}">
-            <input type="text" name="name" th:value="${name}" placeholder="Title Film" required>
-            <button input class="btn" type="button" id="btnClear2" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
-            <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
-          </form>
-        </li>
-
-            <!--      <li class="search-box">-->
-            <!--        <form class="d-flex" role="search" th:action="@{/MVC/Film}">-->
-            <!--          <button type="submit" class="bx bx-search icon"> </button>-->
-            <!--        <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="Search..." required>-->
-            <!--        <input class="btn btn-outline-secondary" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />-->
-            <!--        </form>-->
-            <!--      </li>-->
-
             <ul class="menu-links">
                 <li class="nav-link">
                     <a href="/MVC">
