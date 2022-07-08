@@ -34,6 +34,15 @@ public class FilmsContMVC {
     }
 
     //GET BY ID
+    @GetMapping("/MVC/Film/Id")
+    public String searchbyID(Model model, @Param("id") Long id){
+       Films films = filmsService.getReferenceById(id);
+    //    FilmsResponseDTO result = films.convertToResponse();
+        model.addAttribute("films", films);
+        model.addAttribute("id",id);
+        return "Films_GetAll";
+    }
+
     @GetMapping("/MVC/Film/{id}")
     public String showFilmById(@PathVariable("id") Long filmId, String stringId, Model model) {
 

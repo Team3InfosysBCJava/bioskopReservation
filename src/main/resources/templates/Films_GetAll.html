@@ -36,8 +36,16 @@
           <button input class="btn" type="button" id="btnClear" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
           <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
         </form>
-
       </li>
+    </li>
+    <li class="search-box">
+      <i class='bx bx-search icon'></i>
+      <form class="d-flex" role="search" th:action="@{/MVC/Film/Id}">
+        <input type="text" name="id" id="id" th:value="${id}" placeholder="ID" required>
+        <button input class="btn" type="button" id="btnClear2" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
+        <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
+      </form>
+    </li>
 
       <!--      <li class="search-box">-->
       <!--        <form class="d-flex" role="search" th:action="@{/MVC/Film}">-->
@@ -56,9 +64,30 @@
         </li>
 
         <li class="nav-link">
-          <a href="#">
-            <i class='bx bx-receipt icon'></i>
-            <span class="text nav-text">Features</span>
+          <a href="/MVC/User">
+            <i class='bx bx-user icon'></i>
+            <span class="text nav-text">User</span>
+          </a>
+        </li>
+        
+        <li class="nav-link">
+          <a href="/MVC/Seats">
+            <i class='bx bx-chair icon'></i>
+            <span class="text nav-text">Seats</span>
+          </a>
+        </li>
+
+        <li class="nav-link">
+          <a href="/MVC/schedules">
+            <i class='bx bx-calendar icon'></i>
+            <span class="text nav-text">Schedule</span>
+          </a>
+        </li>
+
+        <li class="nav-link">
+          <a href="/MVC/Reservations">
+            <i class='bx bx-note icon'></i>
+            <span class="text nav-text">Reservation</span>
           </a>
         </li>
       </ul>

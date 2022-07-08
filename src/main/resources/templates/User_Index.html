@@ -33,8 +33,9 @@
             <!--        <input type="text" placeholder="Search...">-->
             <!--      </li>-->
             <li class="search-box">
+                <i class='bx bx-search icon'></i>
                 <form class="d-flex" role="search" th:action="@{/MVC/User}">
-                    <button type="submit" class="bx bx-search icon"> </button>
+                    <!-- <button type="submit" class="bx bx-search icon"> </button> -->
                     <input class="btn btn-outline-secondary" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
                 </form>
             </li>
@@ -47,12 +48,36 @@
                     </a>
                 </li>
 
+
                 <li class="nav-link">
-                    <a href="#">
-                        <i class='bx bx-receipt icon'></i>
-                        <span class="text nav-text">Features</span>
+                    <a href="/MVC/Film">
+                      <i class='bx bx-film icon'></i>
+                      <span class="text nav-text">Film</span>
                     </a>
-                </li>
+                  </li>
+          
+                  <li class="nav-link">
+                    <a href="/MVC/Seats">
+                      <i class='bx bx-chair icon'></i>
+                      <span class="text nav-text">Seats</span>
+                    </a>
+                  </li>
+
+                  <li class="nav-link">
+                    <a href="/MVC/schedules">
+                      <i class='bx bx-calendar icon'></i>
+                      <span class="text nav-text">Schedule</span>
+                    </a>
+                  </li>
+          
+                  <li class="nav-link">
+                    <a href="/MVC/Reservations">
+                      <i class='bx bx-note icon'></i>
+                      <span class="text nav-text">Reservation</span>
+                    </a>
+                  </li>
+                  
+
             </ul>
         </div>
 
