@@ -31,13 +31,22 @@
         <div class="menu">
             <li class="search-box">
                 <i class='bx bx-search icon'></i>
-                <form class="d-flex" role="search" th:action="@{/MVC/schedules/search-by-film}">
-                    <input type="text" name="name" id="name" th:value="${name}" placeholder="search" required>
+                <form class="d-flex" role="search" th:action="@{/MVC/schedules}">
+                    <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="search" required>
                     <button class="btn" type="button" id="btnClear" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
                     <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
                 </form>
 
             </li>
+        </li>
+        <li class="search-box">
+          <i class='bx bx-search icon'></i>
+          <form class="d-flex" role="search" th:action="@{/MVC/schedules/search-by-film}">
+            <input type="text" name="name" th:value="${name}" placeholder="Title Film" required>
+            <button input class="btn" type="button" id="btnClear2" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
+            <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
+          </form>
+        </li>
 
             <!--      <li class="search-box">-->
             <!--        <form class="d-flex" role="search" th:action="@{/MVC/Film}">-->
@@ -55,12 +64,48 @@
                     </a>
                 </li>
 
+                <li class="nav-link dropdown">
+                    <i class="dropbtn">
+                      <i class='bx bx-down-arrow icon bx-fade-down'></i>
+                      <span class="text nav-text">Features</span>
+                      <i class='bx bx-down-arrow icon' style='color:rgba(0,0,0,0)' ></i>
+                    </i>
+                    <div class="dropdown-content">
+                      <a href="/MVC/schedules">Check schedules</a>
+                      <a href="/MVC/Seats">Available seats</a>
+                      <a href="/MVC/Reservation/new">Make a reservation</a>
+                      <a href="/MVC/User/Signup">Registration</a>
+                    </div>
+                  </li>
+
                 <li class="nav-link">
-                    <a href="#">
-                        <i class='bx bx-receipt icon'></i>
-                        <span class="text nav-text">Features</span>
+                    <a href="/MVC/Film">
+                      <i class='bx bx-film icon'></i>
+                      <span class="text nav-text">Film</span>
                     </a>
-                </li>
+                  </li>
+          
+                  <li class="nav-link">
+                    <a href="/MVC/User">
+                      <i class='bx bx-user icon'></i>
+                      <span class="text nav-text">User</span>
+                    </a>
+                  </li>
+          
+                  <li class="nav-link">
+                    <a href="/MVC/Seats">
+                      <i class='bx bx-chair icon'></i>
+                      <span class="text nav-text">Seats</span>
+                    </a>
+                  </li>
+          
+                  <li class="nav-link">
+                    <a href="/MVC/Reservations">
+                      <i class='bx bx-note icon'></i>
+                      <span class="text nav-text">Reservation</span>
+                    </a>
+                  </li>
+          
             </ul>
         </div>
 
