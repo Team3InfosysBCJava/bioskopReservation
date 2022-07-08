@@ -50,14 +50,15 @@ public class ReservationContMVC {
         model.addAttribute("id",id);
         return "Index_Reservation";
     }
-//    @GetMapping("/MVC/Reservation/{id}")
-//    public String showReservationById(@PathVariable("id") Long id, Model model){
-//        Optional<Reservation> reservation = bookingService.getBookingById(id);
-//        Reservation reservationGet = reservation.get();
-//        BookingResponseDTO result = reservationGet.convertToResponse();
-//        model.addAttribute("Reservation_entry", result);
-//        return "Reservation_GetById";
-//    }
+
+   @GetMapping("/MVC/Reservation/{id}")
+   public String showReservationById(@PathVariable("id") Long id, Model model){
+       Optional<Reservation> reservation = bookingService.getBookingById(id);
+       Reservation reservationGet = reservation.get();
+       BookingResponseDTO result = reservationGet.convertToResponse();
+       model.addAttribute("Reservation_entry", result);
+       return "Reservation_GetById";
+   }
 
     /**
      * Create

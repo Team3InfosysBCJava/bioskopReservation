@@ -14,7 +14,6 @@ public interface FilmsService {
    void deleteFilmById(Long id);
    List<Films> getByIsPlaying(Integer isPlaying);
    Films getReferenceById (Long id);
-
    public List<Films> search(String keyword);
 
 
