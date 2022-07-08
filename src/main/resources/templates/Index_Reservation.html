@@ -50,12 +50,12 @@
       </li>
       <li class="search-box">
         <i class='bx bx-search icon'></i>
-        <form class="d-flex" role="search" th:action="@{/MVC/Reservation/searchFilm}">
-          <input type="text" name="name" th:value="${name}" placeholder="Title Film" required>
+        <form class="d-flex" role="search" th:action="@{/MVC/Reservation/searchFilm}" method="post">
+          <input type="text" name="name" th:value="${name}" placeholder="Title Film">
           <button input class="btn" type="button" id="btnClear2" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
           <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
         </form>
-      </li>
+        </li>
 
       <!--      <li class="search-box">-->
       <!--        <form class="d-flex" role="search" th:action="@{/MVC/Film}">-->
