@@ -3,6 +3,10 @@ package com.teamc.bioskop.MVCController;
 import com.teamc.bioskop.DTO.ScheduleResponseDTO;
 import com.teamc.bioskop.Model.Films;
 import com.teamc.bioskop.Model.Schedule;
+import com.teamc.bioskop.Repository.ScheduleRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import com.teamc.bioskop.Service.ScheduleService;
 import lombok.AllArgsConstructor;
@@ -21,6 +25,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ScheduleMVCController {
     private final ScheduleService scheduleService;
+    private final ScheduleRepository scheduleRepository;
 
     //HOMEPAGE
     @GetMapping("/MVC")
@@ -71,8 +76,14 @@ public class ScheduleMVCController {
     //GET ALL
     @GetMapping("/MVC/schedules")
     public String search(Model model, @Param("keyword") String keyword){
+
+        Integer pageNumber = 1;
+        Pageable firstPageWithTwoElements = PageRequest.of(pageNumber, 10);
+        Page<Schedule> page = scheduleRepository.findAll(firstPageWithTwoElements);
+
         List<Schedule> result = scheduleService.search(keyword);
-        model.addAttribute("schedule_entry", result);
+
+        model.addAttribute("schedule_entry", page);
         model.addAttribute("keyword",keyword);
 
         return "Schedules_Index";
