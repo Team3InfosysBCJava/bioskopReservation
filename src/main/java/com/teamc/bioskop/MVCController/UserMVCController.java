@@ -7,6 +7,7 @@ import com.teamc.bioskop.Model.Schedule;
 import com.teamc.bioskop.Model.User;
 import com.teamc.bioskop.Service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,9 +43,10 @@ public class UserMVCController {
 
 
     @GetMapping("/MVC/User")
-    public String showUserlist(Model model) {
-        List<User> User = userService.getAll();
+    public String showUserlist(Model model, @Param("keyword")String keyword) {
+        List<User> User = userService.search(keyword);
         model.addAttribute("User_masuk", User);
+        model.addAttribute("keyword", keyword);
         return "User_Index"; //ngambil file html
     }
 
