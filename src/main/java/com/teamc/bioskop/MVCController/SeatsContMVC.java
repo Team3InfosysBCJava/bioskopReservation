@@ -6,6 +6,7 @@ import com.teamc.bioskop.Model.Schedule;
 import com.teamc.bioskop.Model.Seats;
 import com.teamc.bioskop.Service.SeatsService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -49,9 +50,10 @@ public class SeatsContMVC {
 
     //GET ALL
     @GetMapping("/MVC/Seats")
-    public String showSeatsList(Model model){
-        List<Seats> result = seatsService.findAllseats();
+    public String showSeatsList(Model model, @Param("keyword") String keyword) {
+        List<Seats> result = seatsService.search(keyword);
         model.addAttribute("seats_entry", result);
+        model.addAttribute("keyword",keyword);
         return "Seat_Index";
     }
 

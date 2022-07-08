@@ -13,9 +13,10 @@
 <nav class="sidebar close">
     <header>
         <div class="image-text">
-                <span class="image">
-                    <img src="logoinfosys.jpg" alt="">
-                </span>
+            <span class="image">
+                <img src="https://ist.id/image/Logo-09.png" alt="" width="30"  class="d-inline-block align-text-top">
+<!--                    <img src="logoinfosys.jpg" alt="">-->
+</span>
             <div class="text logo-text">
                 <span class="name">Seats</span>
                 <span class="profession">Add New Seats</span>
@@ -32,10 +33,11 @@
             <!--        <input type="text" placeholder="Search...">-->
             <!--      </li>-->
             <li class="search-box">
+                <i class='bx bx-search icon'></i>
                 <form class="d-flex" role="search" th:action="@{/MVC/Seats}">
-                    <button type="submit" class="bx bx-search icon"> </button>
-                    <input class="btn btn-outline-secondary" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
-                </form>
+                    <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="Search" required>
+                    <button input class="btn" type="button" id="btnClear" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button><!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
+        </form>
             </li>
 
             <ul class="menu-links">
@@ -46,11 +48,46 @@
                     </a>
                 </li>
 
-                <li class="nav-link">
-                    <a href="#">
-                        <i class='bx bx-receipt icon'></i>
-                        <span class="text nav-text">Features</span>
+                <li class="nav-link dropdown">
+                    <i class="dropbtn">
+                      <i class='bx bx-down-arrow icon bx-fade-down'></i>
+                      <span class="text nav-text">Features</span>
+                      <i class='bx bx-down-arrow icon' style='color:rgba(0,0,0,0)' ></i>
+                    </i>
+                    <div class="dropdown-content">
+                      <a href="/MVC/schedules">Check schedules</a>
+                      <a href="/MVC/Seats">Available seats</a>
+                      <a href="/MVC/Reservation/new">Make a reservation</a>
+                      <a href="/MVC/User/Signup">Registration</a>
+                    </div>
+                  </li>
+        
+                  <li class="nav-link">
+                    <a href="/MVC/Film">
+                      <i class='bx bx-film icon'></i>
+                      <span class="text nav-text">Film</span>
                     </a>
+                  </li>
+                  
+                <li class="nav-link">
+                  <a href="/MVC/User">
+                    <i class='bx bx-user icon'></i>
+                    <span class="text nav-text">User</span>
+                  </a>
+                </li>
+        
+                <li class="nav-link">
+                  <a href="/MVC/schedules">
+                    <i class='bx bx-calendar icon'></i>
+                    <span class="text nav-text">Schedule</span>
+                  </a>
+                </li>
+        
+                <li class="nav-link">
+                  <a href="/MVC/Reservations">
+                    <i class='bx bx-note icon'></i>
+                    <span class="text nav-text">Reservation</span>
+                  </a>
                 </li>
             </ul>
         </div>

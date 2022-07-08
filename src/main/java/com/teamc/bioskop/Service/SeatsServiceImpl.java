@@ -74,4 +74,12 @@ public class SeatsServiceImpl implements SeatsService {
         return this.seatRepository.getSeatAvailable(isAvailable);
     }
 
+    @Override
+    public List<Seats> search(String keyword) {
+            if (keyword != null){
+            return seatRepository.search(keyword);
+        }
+        return seatRepository.findAll();
+    }
+
 }
