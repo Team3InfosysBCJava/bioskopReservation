@@ -142,37 +142,6 @@
 
 </nav>
 <section class="home">
-  <!-- coba start modal -->
-  <div class="row">
-    <div class="col">
-        <div class="me-3 d-grid gap-2 d-flex">
-            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <lord-icon
-                    src="https://cdn.lordicon.com/diyeocup.json"
-                    trigger="morph"
-                    colors="primary:#ffffff"
-                    style="width:25px;height:25px">
-                </lord-icon>
-                Create New Reservations
-            </button>
-        </div>
-    </div>
-    <div class="col">
-        <div class="d-grid gap-3 d-flex justify-content-end">
-            <button class="btn btn-success" type="button" onclick="printJS('content-table', 'html')">
-                <lord-icon
-                    src="https://cdn.lordicon.com/biwxmlnf.json"
-                    trigger="morph"
-                    colors="primary:#ffffff"
-                    style="width:25px;height:25px">
-                </lord-icon>
-                Save PDF
-            </button>
-        </div>
-    </div>
-</div>
-  <!-- coba end modal -->
-
   <div class="text">Get All Reservation</div>
   <div th:switch="${Reservation_entry}" class="container">
     <h2 th:case="null">No Reservation yet!</h2>
