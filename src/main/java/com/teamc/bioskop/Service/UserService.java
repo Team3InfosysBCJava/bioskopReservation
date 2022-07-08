@@ -12,4 +12,5 @@ public interface UserService {
     void deleteUserById(Long users_Id);
     User updateUser(User user) throws Exception;
     User getReferenceById(Long Id);
+    List<User> search(String keyword);
 }
