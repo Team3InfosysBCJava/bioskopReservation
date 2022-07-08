@@ -119,11 +119,14 @@
     <div th:switch="${schedule_entry}" class="container">
         <h2 th:case="null">No schedule found</h2>
         <div th:case="*">
-            <div class="button">
-                <i class='bx bx-list-plus icon'></i>
-                <a class="btn" href="/MVC/new-schedule" role="button">Add New Schedule</a>
-            </div>
+<!--            <div class="button" data-bs-toggle="modal" data-bs-target="#modalNew">-->
 
+<!--                <a class="btn" href="/MVC/new-schedule" role="button">Add New Schedule</a>-->
+<!--            </div>-->
+
+            <div class="button" data-bs-toggle="modal" data-bs-target="#modalNew">
+                <i class='bx bx-list-plus icon'>Add New Schedule</i>
+            </div>
 <!--            ================TABLE============-->
             <table class="table table-striped">
                 <thead>
@@ -157,7 +160,78 @@
             </table>
         </div>
     </div>
+
+    <div class="modal fade" id="modalNew" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editLabel">Add Schedule</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form th:method="post" th:action="@{/MVC/schedules/add-schedule}" th:object="${schedule}" >
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <label for="films" class="form-label">Film ID</label>
+                            <input type="text" class="form-control" th:field="*{films.filmId}" id="films" placeholder="films"><br/>
+                            <span th:if="${#fields.hasErrors('films')}" th:errors="*{films}"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <!--    //dateShow-->
+                            <label for="dateShow" class="form-label">Date Show</label>
+                            <input type="text" class="form-control" th:field="*{dateShow}" id="dateShow" placeholder="date show"><br/>
+                            <span th:if="${#fields.hasErrors('dateShow')}" th:errors="*{dateShow}"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <!--    //seats-->
+                            <label for="seats" class="form-label">Seat ID</label>
+                            <input type="text" class="form-control" th:field="*{seats.seatId}" id="seats" placeholder="seats"><br/>
+                            <span th:if="${#fields.hasErrors('seats')}" th:errors="*{seats}"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <!--    //showStart-->
+                            <label for="showStart" class="form-label">Show Start</label>
+                            <input type="text" class="form-control" th:field="*{showStart}" id="showStart" placeholder="show start"><br/>
+                            <span th:if="${#fields.hasErrors('showStart')}" th:errors="*{showStart}"></span>
+                        </div>
+
+                        <!--    //showEnd-->
+                        <div class="mb-3">
+
+                            <label for="showEnd" class="form-label">Show End</label>
+                            <input type="text" class="form-control" th:field="*{showEnd}" id="showEnd" placeholder="show end"><br/>
+                            <span th:if="${#fields.hasErrors('showEnd')}" th:errors="*{showEnd}"></span>
+                        </div>
+
+                        <!--    //price-->
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="text" class="form-control" th:field="*{price}" id="price" placeholder="price"><br/>
+                            <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+                        </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-outline-primary" >Save changes</button>
+                                <input class="btn btn-outline-secondary" type="button" value="Back Schedules" id="btnClear" onclick="clearSearch()" />
+
+                                <!-- <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Yes</button> -->
+                            </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
 </section>
+
+
 <script>
           const body = document.querySelector('body'),
           sidebar = body.querySelector('nav'),

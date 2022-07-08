@@ -2,6 +2,7 @@ package com.teamc.bioskop.MVCController;
 
 import com.teamc.bioskop.DTO.ScheduleResponseDTO;
 import com.teamc.bioskop.Model.Films;
+import com.teamc.bioskop.Model.Reservation;
 import com.teamc.bioskop.Model.Schedule;
 import com.teamc.bioskop.Repository.ScheduleRepository;
 import org.springframework.data.domain.Page;
@@ -85,7 +86,7 @@ public class ScheduleMVCController {
 
         model.addAttribute("schedule_entry", page);
         model.addAttribute("keyword",keyword);
-
+        model.addAttribute("schedule",new Schedule());
         return "Schedules_Index";
     }
 
