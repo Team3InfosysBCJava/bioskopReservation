@@ -7,8 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link th:href="@{/sidebars.css}" rel="stylesheet" />
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -157,7 +155,7 @@
       <h2 th:case="null">No Reservation yet!</h2>
       <div th:case="*">
         <div class="button" data-bs-toggle="modal" data-bs-target="#modalNew">
-          <i class='bx bx-list-plus icon'></i>Add New Reservation</a>
+          <i class='bx bx-list-plus icon'></i>Add New Reservation
         </div>
 
         <table class="table table-striped">
@@ -212,22 +210,21 @@
               <div class="modal-header">
                   <h5 class="modal-title" id="editLabel">Add Reservations</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <form th:method="post" th:action="@{/MVC/Reservation/add}" th:object="${reservation}" >
+                  </div>
+                  <form th:method="post" th:action="@{/MVC/Reservation/add}" th:object="${reservation}" >
                   <div class="modal-body">
                             <!--        user-->
                   <div class="mb-3">
                   <label  for="user" class="form-label">User ID</label>
 
-                  <input type="text" class="form-control" th:field="*{user.userId}" id="user" placeholder="user" aria-describedby="emailHelp">
+                  <input type="text" class="form-control" th:field="*{user.userId}" id="user" placeholder="user">
                   <span th:if="${#fields.hasErrors('user')}" th:errors="*{user}"></span>
                  
         <!--        schedule-->
                   <div class="mb-3">
                   <label  for="schedule" class="form-label">Schedule ID</label>
-                  <input type="text" class="form-control" th:field="*{schedule.scheduleId}" id="schedule" placeholder="schedule" aria-describedby="emailHelp">
+                  <input type="text" class="form-control" th:field="*{schedule.scheduleId}" id="schedule" placeholder="schedule">
                   <span th:if="${#fields.hasErrors('schedule')}" th:errors="*{schedule}"></span>
-       
                   </div>
                   <div class="modal-footer">
                       <button type="submit" class="btn btn-outline-primary" >Save changes</button>
