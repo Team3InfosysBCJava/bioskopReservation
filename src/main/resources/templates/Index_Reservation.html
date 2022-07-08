@@ -7,6 +7,9 @@
   <link th:href="@{/sidebars.css}" rel="stylesheet" />
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
   <title>Get All Films</title>
 
 </head>
@@ -70,6 +73,20 @@
           </a>
         </li>
 
+        <li class="nav-link dropdown">
+          <i class="dropbtn">
+            <i class='bx bx-down-arrow icon bx-fade-down'></i>
+            <span class="text nav-text">Features</span>
+            <i class='bx bx-down-arrow icon' style='color:rgba(0,0,0,0)' ></i>
+          </i>
+          <div class="dropdown-content">
+            <a href="/MVC/schedules">Check schedules</a>
+            <a href="/MVC/Seats">Available seats</a>
+            <a href="/MVC/Reservation/new">Make a reservation</a>
+            <a href="/MVC/User/Signup">Registration</a>
+          </div>
+        </li>
+
         <li class="nav-link">
           <a href="/MVC/Film">
             <i class='bx bx-film icon'></i>
@@ -90,16 +107,13 @@
             <span class="text nav-text">Seats</span>
           </a>
         </li>
-        
+
         <li class="nav-link">
           <a href="/MVC/schedules">
             <i class='bx bx-calendar icon'></i>
             <span class="text nav-text">Schedule</span>
           </a>
         </li>
-
-
-
       </ul>
     </div>
 
@@ -128,6 +142,36 @@
 
 </nav>
 <section class="home">
+  <!-- coba start modal -->
+  <div class="row">
+    <div class="col">
+        <div class="me-3 d-grid gap-2 d-flex">
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <lord-icon
+                    src="https://cdn.lordicon.com/diyeocup.json"
+                    trigger="morph"
+                    colors="primary:#ffffff"
+                    style="width:25px;height:25px">
+                </lord-icon>
+                Create New Reservations
+            </button>
+        </div>
+    </div>
+    <div class="col">
+        <div class="d-grid gap-3 d-flex justify-content-end">
+            <button class="btn btn-success" type="button" onclick="printJS('content-table', 'html')">
+                <lord-icon
+                    src="https://cdn.lordicon.com/biwxmlnf.json"
+                    trigger="morph"
+                    colors="primary:#ffffff"
+                    style="width:25px;height:25px">
+                </lord-icon>
+                Save PDF
+            </button>
+        </div>
+    </div>
+</div>
+  <!-- coba end modal -->
 
   <div class="text">Get All Reservation</div>
   <div th:switch="${Reservation_entry}" class="container">
@@ -185,7 +229,8 @@
     <!--    <p><a href="/signup">Add a new user</a></p>-->
   </div>
 </section>
-
+<script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
+<script th:src="@{/styles/js/print.min.js}"></script>
 <script>
           const body = document.querySelector('body'),
           sidebar = body.querySelector('nav'),
