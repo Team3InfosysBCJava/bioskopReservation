@@ -5,6 +5,7 @@ import com.teamc.bioskop.Model.Films;
 import com.teamc.bioskop.Model.Reservation;
 import com.teamc.bioskop.Model.Schedule;
 import com.teamc.bioskop.Repository.ScheduleRepository;
+import com.teamc.bioskop.Service.ScheduleServiceImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +27,8 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ScheduleMVCController {
     private final ScheduleService scheduleService;
-    private final ScheduleRepository scheduleRepository;
+    private final ScheduleServiceImpl scheduleServiceImpl;
+
 
     //HOMEPAGE
     @GetMapping("/MVC")
@@ -78,8 +80,14 @@ public class ScheduleMVCController {
     @GetMapping("/MVC/schedules")
     public String search(Model model, @Param("keyword") String keyword, @Param("page") String page){
 
+        Integer pageNumber = null;
+
+        //check null pointer
+        if(page != null){
+            pageNumber = scheduleServiceImpl.pageUpdate(page);
+        }
+
         //Pagination
-        Integer pageNumber = Integer.parseInt(page);
         Page<Schedule> result = scheduleService.search(keyword, pageNumber);
 
         //Return Output
