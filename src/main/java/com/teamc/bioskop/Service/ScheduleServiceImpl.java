@@ -1,11 +1,12 @@
 package com.teamc.bioskop.Service;
 
-import com.teamc.bioskop.Model.Reservation;
-import com.teamc.bioskop.Model.User;
 import com.teamc.bioskop.Repository.ScheduleRepository;
 import com.teamc.bioskop.Exception.ResourceNotFoundException;
 import com.teamc.bioskop.Model.Schedule;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -84,10 +85,12 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<Schedule> search(String keyword){
+    public Page<Schedule> search(String keyword, Integer page){
+        Pageable firstPageWithTwoElements = PageRequest.of(page, 10);
         if (keyword != null){
-            return scheduleRepository.searchByName(keyword);
+            return scheduleRepository.searchByName(keyword, null);
         }
-        return scheduleRepository.findAll();
+        return scheduleRepository.findAll(firstPageWithTwoElements);
     }
+
 }

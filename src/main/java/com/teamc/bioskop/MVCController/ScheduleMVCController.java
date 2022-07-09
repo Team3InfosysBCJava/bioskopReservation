@@ -38,7 +38,7 @@ public class ScheduleMVCController {
     @PostMapping("/MVC/schedules/search-by-film")
     public String searchFilm(Films film, Model model, String name) {
         if(name!=null) {
-            List<Schedule> schedules = scheduleService.search(film.getName());
+            Page<Schedule> schedules = scheduleService.search(film.getName(), null);
             //pake stream
             // List<ScheduleResponseDTO> results = schedules.stream()
             //         .map(Schedule::convertToResponse)
@@ -76,15 +76,14 @@ public class ScheduleMVCController {
 
     //GET ALL
     @GetMapping("/MVC/schedules")
-    public String search(Model model, @Param("keyword") String keyword){
+    public String search(Model model, @Param("keyword") String keyword, @Param("page") String page){
 
-        Integer pageNumber = 1;
-        Pageable firstPageWithTwoElements = PageRequest.of(pageNumber, 10);
-        Page<Schedule> page = scheduleRepository.findAll(firstPageWithTwoElements);
+        //Pagination
+        Integer pageNumber = Integer.parseInt(page);
+        Page<Schedule> result = scheduleService.search(keyword, pageNumber);
 
-        List<Schedule> result = scheduleService.search(keyword);
-
-        model.addAttribute("schedule_entry", page);
+        //Return Output
+        model.addAttribute("schedule_entry", result);
         model.addAttribute("keyword",keyword);
         model.addAttribute("schedule",new Schedule());
         return "Schedules_Index";

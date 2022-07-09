@@ -1,6 +1,8 @@
 package com.teamc.bioskop.Repository;
 
 import com.teamc.bioskop.Model.Schedule;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,6 +17,6 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {
     public List<Schedule> getScheduleFilmsNameLike (@Param("name")String name);
 
     @Query("Select s from Schedule s where s.films.name like %:name%")
-    public List<Schedule> searchByName(@Param("name")String name);
+    public Page<Schedule> searchByName(@Param("name")String name, Pageable pageable);
 
 }
