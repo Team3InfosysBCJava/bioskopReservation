@@ -163,6 +163,34 @@
             </table>
         </div>
     </div>
+    <br>
+    <br>
+
+<!--   =========== PAGINATION ==========-->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" th:href="@{/MVC/schedules?page=prev}">Previous</a>
+            </li>
+
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=1}">1</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=2}">2</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=3}">3</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=4}">4</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=5}">5</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=6}">6</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=7}">7</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=8}">8</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=9}">9</a></li>
+
+            <li class="page-item">
+                <a class="page-link" th:href="@{/MVC/schedules?page=next}">Next</a>
+            </li>
+        </ul>
+    </nav>
+
+
+<!--    =========== MODAL ==========-->
 
     <div class="modal fade" id="modalNew" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
