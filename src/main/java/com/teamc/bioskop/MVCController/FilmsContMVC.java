@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -27,9 +28,11 @@ public class FilmsContMVC {
     @GetMapping("/MVC/Film")
     public String showFilmList(Model model, @Param("keyword") String keyword) {
         List<Films> films = filmsService.search(keyword);
+
         //alias masuk ke file html
         model.addAttribute("films", films);
         model.addAttribute("keyword",keyword);
+        model.addAttribute("film_add", new Films());
         return "Films_GetAll"; //ngambil file html
     }
 
@@ -76,6 +79,12 @@ public class FilmsContMVC {
         if (result.hasErrors()) {
             return "Films_AddNew";
         }
+        // if (films.getIsPlaying().equals(null)) {
+        //     films.setIsPlaying(0);
+        // }
+        // else {
+        //     films.setIsPlaying(1);
+        // }
 
         filmsService.createFilm(films);
         return "redirect:/MVC/Film";
