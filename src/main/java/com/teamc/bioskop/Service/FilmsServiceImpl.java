@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -93,9 +94,9 @@ public class FilmsServiceImpl implements FilmsService {
         if (keyword != null){
             return filmsRepository.searchByName(keyword, null);
         } else if (page == null){
-            return filmsRepository.findAll(PageRequest.of(1, 10));
+            return filmsRepository.findAll(PageRequest.of(0, 10,Sort.by("filmId")));
         } else {
-            return filmsRepository.findAll(PageRequest.of(page, 10));
+            return filmsRepository.findAll(PageRequest.of(page, 10,Sort.by("filmId")));
         }
     }
 

@@ -92,7 +92,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         if (keyword != null){
             return scheduleRepository.searchByName(keyword, null);
         } else if (page == null){
-            return scheduleRepository.findAll(PageRequest.of(1, 10, Sort.by("films.name")));
+            return scheduleRepository.findAll(PageRequest.of(0, 10, Sort.by("films.name")));
         } else {
             return scheduleRepository.findAll(PageRequest.of(page, 10, Sort.by("films.name")));
         }
