@@ -43,6 +43,7 @@ public class FilmsContMVC {
     //    FilmsResponseDTO result = films.convertToResponse();
         model.addAttribute("films", films);
         model.addAttribute("id",id);
+        model.addAttribute("film_add", new Films());
         return "Films_GetAll";
     }
 
@@ -77,7 +78,7 @@ public class FilmsContMVC {
     @PostMapping("/MVC/Film/add-film")
     public String showAddFilm(@Valid Films films, BindingResult result, Model model){
         if (result.hasErrors()) {
-            return "Films_AddNew";
+            return "redirect:/MVC/Film";
         }
         // if (films.getIsPlaying().equals(null)) {
         //     films.setIsPlaying(0);
@@ -85,7 +86,6 @@ public class FilmsContMVC {
         // else {
         //     films.setIsPlaying(1);
         // }
-
         filmsService.createFilm(films);
         return "redirect:/MVC/Film";
     }
@@ -110,7 +110,7 @@ public class FilmsContMVC {
     public String showUpdateFilms(@PathVariable("id") Long filmId, @Valid Films films, BindingResult result, Model model){
         if (result.hasErrors()) {
             films.setFilmId(filmId);
-            return "Films_Update";
+            return "redirect:/MVC/Film";
         }
 
         films.setFilmId(filmId);

@@ -150,7 +150,7 @@
             <td th:text="${seat.seatId}"></td>
             <td th:text="${seat.seatNumber}"></td>
             <td th:text="${seat.studioName}"></td>
-            <td th:text="${seat.isAvailable}"></td>
+            <td th:text="${seat.isAvailable} ? 'Available' : ' No Available '"></td>
 <!--                <i class='bx bxs-edit icon'></i>-->
 <!--                <a th:href="@{/MVC/Seats/update-seats/{id}(id=${seats.seatId})}">Edit</a>-->
 <!--                </td>-->

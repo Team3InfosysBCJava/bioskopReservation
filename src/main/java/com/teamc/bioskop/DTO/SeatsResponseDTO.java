@@ -11,7 +11,7 @@ public class SeatsResponseDTO {
     private Long seatId;
     private Long seatNumber;
     private String studioName;
-    private int isAvailable;
+    private Boolean isAvailable;
 
     @Override
     public String toString() {

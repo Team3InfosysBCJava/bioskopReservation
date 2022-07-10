@@ -49,6 +49,7 @@ public class ReservationContMVC {
         BookingResponseDTO result = reservation.convertToResponse();
         model.addAttribute("Reservation_entry", result);
         model.addAttribute("id",id);
+        model.addAttribute("reservation",new Reservation());
         return "Index_Reservation";
     }
 
@@ -98,6 +99,7 @@ public class ReservationContMVC {
             return "Reservation_Update";
         }
         reservation.setReservationId(id);
+        bookingService.updateBooking(reservation);
         return "redirect:/MVC/Reservations";
     }
 
@@ -122,8 +124,9 @@ public class ReservationContMVC {
         //pake stream
         List<BookingResponseDTO> results = reservations.stream()
                 .map(Reservation::convertToResponse)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());  
            model.addAttribute("Reservation_entry", results);
+           model.addAttribute("reservation",new Reservation());
     }else {
         List<Reservation> reservations = bookingService.getAll();
         List<BookingResponseDTO> reservationsMaps = new ArrayList<>();
@@ -134,6 +137,7 @@ public class ReservationContMVC {
           }
 //        Collections.reverse(reservationsMaps);
         model.addAttribute("Reservation_entry", reservationsMaps);
+        model.addAttribute("reservation",new Reservation());
     }
     return "Index_Reservation";
     }

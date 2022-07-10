@@ -61,7 +61,7 @@ public class FilmsServiceImpl implements FilmsService {
         filmsRepository.deleteAllById(Collections.singleton(filmId));
     }
 
-    public  List<Films> getByIsPlaying(Integer isPlaying){
+    public  List<Films> getByIsPlaying(Boolean isPlaying){
         List<Films> optionalFilms = filmsRepository.getFilmByIsPlaying(isPlaying);
         if (optionalFilms.isEmpty()){
             throw new ResourceNotFoundException("Films not exist with status available : " + isPlaying);

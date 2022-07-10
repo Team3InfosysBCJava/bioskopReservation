@@ -10,7 +10,7 @@ import lombok.*;
 public class FilmsResponseDTO {
     private Long filmId;
     private String title;
-    private Integer status;
+    private Boolean status;
 
     @Override
     public String toString() {
