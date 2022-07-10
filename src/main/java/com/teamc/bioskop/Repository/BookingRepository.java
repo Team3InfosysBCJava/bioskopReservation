@@ -18,13 +18,13 @@ public interface BookingRepository extends JpaRepository<Reservation,Long> {
             "r.schedule.films.name, ' ', r.schedule.films.isPlaying, ' ', " +
             "r.schedule.scheduleId, ' ', r.schedule.dateShow, ' ', r.schedule.showStart, ' ', r.schedule.showEnd, ' ', r.schedule.price, ' ', " +
             "r.schedule.seats.seatId, ' ', r.schedule.seats.seatNumber, ' ', r.schedule.seats.studioName, ' ', r.schedule.seats.isAvailable, ' ', " +
-            "r.user.userId, ' ', r.user.username, ' ', r.user.emailId) LIKE %?1%")
+            "r.user.userId, ' ', r.user.username, ' ', r.user.emailId) LIKE %?1% ORDER BY r.reservationId ASC")
     public Page<Reservation> search(String keyword, Pageable pageable);
 
-    @Query("Select r from Reservation r where r.schedule.films.name like %:name%")
+    @Query("Select r from Reservation r where r.schedule.films.name like %:name% ORDER BY r.schedule.films.name ASC")
     public Page<Reservation> getBookingFilm(@Param("name")String name , Pageable pageable);
 
-    @Query("Select r from Reservation r where r.reservationId =?1")
+    @Query("Select r from Reservation r where r.reservationId =?1 ORDER BY r.reservationId ASC")
     public Page<Reservation> getBookingId(Long id , Pageable pageable);
 
 

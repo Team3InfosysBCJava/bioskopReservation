@@ -8,6 +8,7 @@ import com.teamc.bioskop.Model.Seats;
 import com.teamc.bioskop.Repository.BookingRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -83,9 +84,9 @@ public class BookingServiceImpl implements BookingService{
         if(name != null){
             return bookingRepository.getBookingFilm(name, null);
         }else if(page == null){
-            return bookingRepository.findAll(PageRequest.of(0,10));
+            return bookingRepository.findAll(PageRequest.of(0,10,Sort.by("schedule.films.name")));
         }else{
-            return bookingRepository.findAll(PageRequest.of(page,10));
+            return bookingRepository.findAll(PageRequest.of(page,10,Sort.by("schedule.films.name")));
         }
     }
 
@@ -94,9 +95,9 @@ public class BookingServiceImpl implements BookingService{
         if(id != null){
             return bookingRepository.getBookingId(id, null);
         }else if(page == null){
-            return bookingRepository.findAll(PageRequest.of(0,10));
+            return bookingRepository.findAll(PageRequest.of(0,10,Sort.by("reservationId")));
         }else{
-            return bookingRepository.findAll(PageRequest.of(page,10));
+            return bookingRepository.findAll(PageRequest.of(page,10,Sort.by("reservationId")));
         }
     }
 
@@ -106,9 +107,9 @@ public class BookingServiceImpl implements BookingService{
         if(keyword != null){
             return bookingRepository.search(keyword,null);
         }else if(page == null){
-            return bookingRepository.findAll(PageRequest.of(0,10));
+            return bookingRepository.findAll(PageRequest.of(0,10,Sort.by("reservationId")));
         }else{
-         return bookingRepository.findAll(PageRequest.of(page,10));
+         return bookingRepository.findAll(PageRequest.of(page,10,Sort.by("reservationId")));
         }
     }
 
