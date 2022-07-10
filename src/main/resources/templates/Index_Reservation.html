@@ -107,7 +107,7 @@
             </a>
           </li>
           <li class="nav-link">
-            <a role="button" onclick="printJS('Table-PDF', 'html')">
+            <a role="button" onclick="printJS('Table-Show', 'html')">
               <i class='bx bx-note icon'></i>
               <span class="text nav-text">PDF</span>
             </a>
@@ -154,7 +154,8 @@
               <th scope="col">Date Film</th>
               <th scope="col">Start Film</th>
               <th scope="col">End Film</th>
-              <th scope="col">Action</th>
+              <th scope="col">Action</a>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -163,57 +164,22 @@
               <td th:text="${Reservation.user_name}"></td>
               <td th:text="${Reservation.email_user}"></td>
               <td th:text="${Reservation.film_name}"></td>
-              <td th:text="${Reservation.status_show}"></td>
+              <td th:text="${Reservation.status_show}? 'Playing' : 'Coming Soon'"></td>
               <td th:text="${Reservation.price}"></td>
               <td th:text="${Reservation.studio}"></td>
               <td th:text="${Reservation.seat_num}"></td>
-              <td th:text="${Reservation.status_seat}"></td>
+              <td th:text="${Reservation.status_seat} ? 'Available' : 'Unavailable'"></td>
               <td th:text="${Reservation.date_film}"></td>
               <td th:text="${Reservation.start_film}"></td>
               <td th:text="${Reservation.end_film}"></td>
               <td>
                 <a data-bs-toggle="modal" th:attr="data-bs-target='#modalUpdate'+${Reservation.reservation_id}"
-                  class='bx bxs-edit icon' role="button"></a>
+                  class="d-print-none bx bxs-edit icon" role="button"></a>
               </td>
               <td>
               <a data-bs-toggle="modal" th:attr="data-bs-target='#modalDelete'+${Reservation.reservation_id}"
-                class='bx bxs-trash icon' role="button"></a>
+                class="d-print-none bx bxs-trash icon" role="button"></a>
               </td>
-               </tr>
-          </tbody>
-        </table>
-
-        <table id="Table-PDF" class="table table-striped visually-hidden">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Username</th>
-              <th scope="col">Email User</th>
-              <th scope="col">Film Name</th>
-              <th scope="col">Status Show</th>
-              <th scope="col">Price</th>
-              <th scope="col">Studio</th>
-              <th scope="col">Seat Number</th>
-              <th scope="col">Status Seat</th>
-              <th scope="col">Date Film</th>
-              <th scope="col">Start Film</th>
-              <th scope="col">End Film</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="Reservation : ${Reservation_entry}">
-              <td th:text="${Reservation.reservation_id}"></td>
-              <td th:text="${Reservation.user_name}"></td>
-              <td th:text="${Reservation.email_user}"></td>
-              <td th:text="${Reservation.film_name}"></td>
-              <td th:text="${Reservation.status_show}"></td>
-              <td th:text="${Reservation.price}"></td>
-              <td th:text="${Reservation.studio}"></td>
-              <td th:text="${Reservation.seat_num}"></td>
-              <td th:text="${Reservation.status_seat}"></td>
-              <td th:text="${Reservation.date_film}"></td>
-              <td th:text="${Reservation.start_film}"></td>
-              <td th:text="${Reservation.end_film}"></td>
                </tr>
           </tbody>
         </table>
@@ -261,7 +227,7 @@
           <h5 class="modal-title">Delete Reservation</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form th:method="post"
+        <form 
           th:action="@{/MVC/Reservation/delete/{id}(id=${Reservation.reservation_id})}"
           th:object="${reservation}">
           <div class="modal-body">

@@ -26,7 +26,7 @@ public class ReservationContMVC {
     private final BookingService bookingService;
 
     /**
-     * Search filmname , default get all
+     * Search anything , default get all
      */
     @GetMapping("/MVC/Reservations")
     public String search(Model model, @Param("keyword") String keyword){
@@ -53,50 +53,26 @@ public class ReservationContMVC {
         return "Index_Reservation";
     }
 
-   @GetMapping("/MVC/Reservation/{id}")
-   public String showReservationById(@PathVariable("id") Long id, Model model){
-       Optional<Reservation> reservation = bookingService.getBookingById(id);
-       Reservation reservationGet = reservation.get();
-       BookingResponseDTO result = reservationGet.convertToResponse();
-       model.addAttribute("Reservation_entry", result);
-       return "Reservation_GetById";
-   }
-
     /**
      * Create
      */
-    @GetMapping("/MVC/Reservation/new")
-    public String showRerservationForm(Reservation reservation){
-
-        return "Reservations_New";
-    }
-
     @PostMapping("/MVC/Reservation/add")
     public String showAddReservation(@Valid Reservation reservation, BindingResult result, Model model){
         if(result.hasErrors()){
-            return "Reservations_New";
+            return "redirect:/MVC/Reservations";
         }
         bookingService.createBooking(reservation);
         return "redirect:/MVC/Reservations";
     }
 
     /**
-     * "@{/MVC/Reservation/update-reservation/{id}(id=${reservation.reservationId})}"
      * Update
       */
-    @GetMapping("/MVC/Reservation/update/{id}")
-    public String showEditReservationForm(@PathVariable("id") Long id, Model model){
-        Optional<Reservation> reservation = bookingService.getBookingById(id);
-        Reservation reservationget = reservation.get();
-        model.addAttribute("reservation", reservationget);
-        return "Reservation_Update";
-    }
-
     @PostMapping("/MVC/Reservation/update-reservation/{id}")
     public String showUpdateReservation(@PathVariable("id") Long id, @Valid Reservation reservation, BindingResult result, Model model){
         if (result.hasErrors()){
             reservation.setReservationId(id);
-            return "Reservation_Update";
+            return "redirect:/MVC/Reservations";
         }
         reservation.setReservationId(id);
         bookingService.updateBooking(reservation);
@@ -144,3 +120,50 @@ public class ReservationContMVC {
 
 }
 
+/** Coding Jounrey
+ * Update By Id
+ * 
+ * @GetMapping("/MVC/Reservation/update/{id}")
+    public String showEditReservationForm(@PathVariable("id") Long id, Model model){
+    Optional<Reservation> reservation = bookingService.getBookingById(id);
+    Reservation reservationget = reservation.get();
+    model.addAttribute("reservation", reservationget);
+    return "Reservation_Update";}
+    
+    @PostMapping("/MVC/Reservation/update-reservation/{id}")
+    public String showUpdateReservation(@PathVariable("id") Long id, @Valid Reservation reservation, BindingResult result, Model model){
+        if (result.hasErrors()){
+            reservation.setReservationId(id);
+            return "Reservation_Update";
+        }
+        reservation.setReservationId(id);
+        bookingService.updateBooking(reservation);
+        return "redirect:/MVC/Reservations";
+    }
+
+    * Create 
+    @GetMapping("/MVC/Reservation/new")
+    public String showRerservationForm(Reservation reservation){
+
+        return "Reservations_New";
+    }
+
+    @PostMapping("/MVC/Reservation/add")
+    public String showAddReservation(@Valid Reservation reservation, BindingResult result, Model model){
+        if(result.hasErrors()){
+            return "redirect:/MVC/Reservations";
+        }
+        bookingService.createBooking(reservation);
+        return "redirect:/MVC/Reservations";
+    }
+
+    * Get By Id 
+   @GetMapping("/MVC/Reservation/{id}")
+   public String showReservationById(@PathVariable("id") Long id, Model model){
+       Optional<Reservation> reservation = bookingService.getBookingById(id);
+       Reservation reservationGet = reservation.get();
+       BookingResponseDTO result = reservationGet.convertToResponse();
+       model.addAttribute("Reservation_entry", result);
+       return "Reservation_GetById";
+   }
+ */
