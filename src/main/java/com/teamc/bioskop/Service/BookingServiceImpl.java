@@ -7,6 +7,8 @@ import com.teamc.bioskop.Model.Schedule;
 import com.teamc.bioskop.Model.Seats;
 import com.teamc.bioskop.Repository.BookingRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class BookingServiceImpl implements BookingService{
 
     private BookingRepository bookingRepository;
+    public static Integer currentPage;
 
     @Override
     public List<Reservation> getAll() {
@@ -75,12 +78,65 @@ public class BookingServiceImpl implements BookingService{
         return this.bookingRepository.getBookingByFilmName(name);
     }
 
-    public List<Reservation> search(String keyword){
-        if (keyword != null){
-            return bookingRepository.search(keyword);
+    @Override
+    public Page<Reservation> getBookingFilm(String name, Integer page) {
+        if(name != null){
+            return bookingRepository.getBookingFilm(name, null);
+        }else if(page == null){
+            return bookingRepository.findAll(PageRequest.of(0,10));
+        }else{
+            return bookingRepository.findAll(PageRequest.of(page,10));
+        }
+    }
+
+    @Override
+    public Page<Reservation> getBookingId(Long id, Integer page) {
+        if(id != null){
+            return bookingRepository.getBookingId(id, null);
+        }else if(page == null){
+            return bookingRepository.findAll(PageRequest.of(0,10));
+        }else{
+            return bookingRepository.findAll(PageRequest.of(page,10));
+        }
+    }
+
+
+    @Override
+    public Page<Reservation> search(String keyword, Integer page) {
+        if(keyword != null){
+            return bookingRepository.search(keyword,null);
+        }else if(page == null){
+            return bookingRepository.findAll(PageRequest.of(0,10));
+        }else{
+         return bookingRepository.findAll(PageRequest.of(page,10));
+        }
+    }
+
+    @Override
+    public Integer pageUpdate(String page) {
+
+        //container
+        Integer pageNumber = null;
+
+        //check params
+        if(page.equals("prev")){
+            currentPage--;
+        }
+        else if(page.equals("next")){
+            currentPage++;
+        } else{
+            currentPage = Integer.parseInt(page);
         }
 
-        return bookingRepository.findAll();
+        if(currentPage == 0){
+            currentPage = 1;
+        }
+        //page in bootstrap template starts from 0
+        pageNumber = currentPage-1;
+        return pageNumber;
     }
+
+
+
 
 }

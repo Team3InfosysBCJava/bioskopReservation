@@ -1,10 +1,12 @@
 package com.teamc.bioskop.MVCController;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.teamc.bioskop.DTO.BookingResponseDTO;
 import com.teamc.bioskop.Model.Films;
 import com.teamc.bioskop.Model.Reservation;
 import com.teamc.bioskop.Service.BookingService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,11 +31,18 @@ public class ReservationContMVC {
      * Search anything , default get all
      */
     @GetMapping("/MVC/Reservations")
-    public String search(Model model, @Param("keyword") String keyword){
-        List<Reservation> reservations = bookingService.search(keyword);
-        List<BookingResponseDTO> results = reservations.stream()
-                .map(Reservation::convertToResponse)
-                .collect(Collectors.toList());
+    public String search(Model model, @Param("keyword") String keyword, @Param("page") String page){
+
+        Integer pageNumber = null;
+
+        //check null pointer
+        if(page != null){
+            pageNumber = bookingService.pageUpdate(page);
+        }
+
+        //Pagination
+        Page<Reservation> results = bookingService.search(keyword,pageNumber);
+
         model.addAttribute("Reservation_entry",results);
         model.addAttribute("keyword",keyword);
         model.addAttribute("reservation",new Reservation());
@@ -41,15 +50,48 @@ public class ReservationContMVC {
     }
 
     /**
-     * Get by ID
+     * Search by ID
      */
     @GetMapping("/MVC/Reservation/Id")
-    public String searchbyID(Model model, @Param("id") Long id){
-        Reservation reservation = bookingService.getReferenceById(id);
-        BookingResponseDTO result = reservation.convertToResponse();
-        model.addAttribute("Reservation_entry", result);
+    public String search(Model model, @Param("id") long id, @Param("page") String page){
+        Integer pageNumber = null;
+
+        //check null pointer
+        if(page != null){
+            pageNumber = bookingService.pageUpdate(page);
+        }
+
+        //Pagination
+        Page<Reservation> results = bookingService.getBookingId(id,pageNumber);
+        model.addAttribute("Reservation_entry", results);
         model.addAttribute("id",id);
         model.addAttribute("reservation",new Reservation());
+        
+     
+        return "Index_Reservation";
+    }
+
+    /**
+     * Search filmname
+     */
+    @PostMapping("/MVC/Reservation/searchFilm")
+    public String searchFilm(Films film, Model model, String name,@Param("page") String page) {
+        Integer pageNumber = null;
+
+        //check null pointer
+        if(page != null){
+            pageNumber = bookingService.pageUpdate(page);
+        }
+
+        //Pagination
+        if(name!=null) {
+            Page<Reservation> results = bookingService.getBookingFilm(film.getName(),pageNumber);
+            model.addAttribute("Reservation_entry", results);
+            model.addAttribute("reservation",new Reservation());
+        }
+        // else {
+        //     return "redirect:/MVC/Reservations";
+        // }
         return "Index_Reservation";
     }
 
@@ -90,33 +132,7 @@ public class ReservationContMVC {
         return "redirect:/MVC/Reservations";
     }
 
-    /**
-     * Search filmname
-     */
-    @PostMapping("/MVC/Reservation/searchFilm")
-    public String searchFilm(Films film, Model model, String name) {
-    if(name!=null) {
-        List<Reservation> reservations = bookingService.getBookingByFilmName(film.getName());
-        //pake stream
-        List<BookingResponseDTO> results = reservations.stream()
-                .map(Reservation::convertToResponse)
-                .collect(Collectors.toList());  
-           model.addAttribute("Reservation_entry", results);
-           model.addAttribute("reservation",new Reservation());
-    }else {
-        List<Reservation> reservations = bookingService.getAll();
-        List<BookingResponseDTO> reservationsMaps = new ArrayList<>();
-        //manual for each
-        for (Reservation data:reservations){
-            BookingResponseDTO reservationDTO = data.convertToResponse();
-             reservationsMaps.add(reservationDTO);
-          }
-//        Collections.reverse(reservationsMaps);
-        model.addAttribute("Reservation_entry", reservationsMaps);
-        model.addAttribute("reservation",new Reservation());
-    }
-    return "Index_Reservation";
-    }
+
 
 }
 
@@ -166,4 +182,18 @@ public class ReservationContMVC {
        model.addAttribute("Reservation_entry", result);
        return "Reservation_GetById";
    }
+    @GetMapping("/MVC/Reservation/Id")
+    public String searchbyID(Model model, @Param("id") Long id){
+        Reservation reservation = bookingService.getReferenceById(id);
+        BookingResponseDTO result = reservation.convertToResponse();
+        model.addAttribute("Reservation_entry", result);
+        model.addAttribute("id",id);
+        model.addAttribute("reservation",new Reservation());
+        return "Index_Reservation";
+    }
+    <form class="d-flex" role="search" th:action="@{/MVC/Reservation/Id}">
+    <input type="text" name="id" id="id" th:value="${id}" placeholder="ID" required>
+    <button input class="btn" type="button" id="btnClear2" onclick="clearSearch()">
+    <i class='bx bx-refresh icon'></i></button>
+    </form>
  */

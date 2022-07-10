@@ -2,6 +2,8 @@ package com.teamc.bioskop.Repository;
 
 import com.teamc.bioskop.Model.Reservation;
 import com.teamc.bioskop.Model.Schedule;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,6 +19,14 @@ public interface BookingRepository extends JpaRepository<Reservation,Long> {
             "r.schedule.scheduleId, ' ', r.schedule.dateShow, ' ', r.schedule.showStart, ' ', r.schedule.showEnd, ' ', r.schedule.price, ' ', " +
             "r.schedule.seats.seatId, ' ', r.schedule.seats.seatNumber, ' ', r.schedule.seats.studioName, ' ', r.schedule.seats.isAvailable, ' ', " +
             "r.user.userId, ' ', r.user.username, ' ', r.user.emailId) LIKE %?1%")
-    public List<Reservation> search(String keyword);
+    public Page<Reservation> search(String keyword, Pageable pageable);
+
+    @Query("Select r from Reservation r where r.schedule.films.name like %:name%")
+    public Page<Reservation> getBookingFilm(@Param("name")String name , Pageable pageable);
+
+    @Query("Select r from Reservation r where r.reservationId =?1")
+    public Page<Reservation> getBookingId(Long id , Pageable pageable);
+
+
 }
 
