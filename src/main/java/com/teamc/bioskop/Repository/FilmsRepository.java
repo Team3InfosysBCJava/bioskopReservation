@@ -20,6 +20,6 @@ public interface FilmsRepository extends JpaRepository<Films, Long> {
     @Query("SELECT f FROM Films f WHERE CONCAT(f.filmId, ' ', f.isPlaying, ' ', f.name, ' ') LIKE %?1%")
     public List<Films> search(String keyword);
 
-    @Query("Select f from Films f where f.name like %:name%")
+    @Query("Select f from Films f where f.name like %:name% ORDER BY f.filmId ASC")
     public Page<Films> searchByName(@Param("name")String name, Pageable pageable);
 }
