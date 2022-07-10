@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -87,12 +88,13 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public Page<Schedule> search(String keyword, Integer page){
+
         if (keyword != null){
             return scheduleRepository.searchByName(keyword, null);
         } else if (page == null){
-            return scheduleRepository.findAll(PageRequest.of(0, 10));
+            return scheduleRepository.findAll(PageRequest.of(1, 10, Sort.by("films.name")));
         } else {
-            return scheduleRepository.findAll(PageRequest.of(page, 10));
+            return scheduleRepository.findAll(PageRequest.of(page, 10, Sort.by("films.name")));
         }
     }
 
