@@ -138,7 +138,7 @@ public class FilmsControllerDTO {
      * FIND FILM By IsPlaying
      */
     @PostMapping("/fimsDTO/{isPlaying}")
-    public ResponseEntity<Object> findFilmIsPlaying(@PathVariable Integer isPlaying) {
+    public ResponseEntity<Object> findFilmIsPlaying(@PathVariable Boolean isPlaying) {
         try {
             List<Films> filmIsPlaying = filmsService.getByIsPlaying(isPlaying);
             logger.info(Line + "Logger Start Find Films is Playing" + Line);

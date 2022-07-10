@@ -14,7 +14,7 @@ public class SeatsRequestDTO {
     private Long seatId;
     private Long seatNumber;
     private String studioName;
-    private int isAvailable;
+    private Boolean isAvailable;
     public Seats convertToEntity(){
         return Seats.builder().seatId(this.seatId).seatNumber(this.seatNumber).studioName(this.studioName).isAvailable(this.isAvailable).build();
     }

@@ -21,10 +21,11 @@ public class BookingResponseDTO {
     private String email_user;
     private String film_name;
     private Integer price;
+    private Integer schedule_id;
     private String studio;
-    private Integer status_show;
+    private Boolean status_show;
     private Long seat_num;
-    private Integer status_seat;
+    private Boolean status_seat;
     private LocalDate date_film;
 
     @DateTimeFormat(pattern = "HH:mm:ss")
@@ -40,6 +41,7 @@ public class BookingResponseDTO {
         return "BookingResponseDTO{" +
                 "reservation_id=" + reservation_id +
                 ", user_id=" + user_id +
+                ", schedule_id=" + schedule_id +
                 ", user_name='" + user_name + '\'' +
                 ", email_user='" + email_user + '\'' +
                 ", film_name='" + film_name + '\'' +

@@ -12,7 +12,7 @@ public interface FilmsService {
    Films createFilm(Films films);
    Films updateFilm(Films films);
    void deleteFilmById(Long id);
-   List<Films> getByIsPlaying(Integer isPlaying);
+   List<Films> getByIsPlaying(Boolean isPlaying);
    Films getReferenceById (Long id);
    public List<Films> search(String keyword);
 

@@ -70,6 +70,10 @@
                     <div class="modal-footer">
                         <!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
                         <button input type="submit" value="Add Film" >Register</button>
+                        <input class="btn btn-outline-secondary" type="button" value="All Users"
+                        id="btnClear" onclick="clearSearch()" />
+                        <input class="btn btn-outline-secondary" type="button" value="Back Home"
+                        id="btnHome" onclick="backHome()" />
 
                     </div>
                 </div>
@@ -109,5 +113,13 @@
 <!--        <input type="submit" value="Add Schedule">-->
 <!--    </form>-->
 <!--</div>-->
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/MVC/User}]]";
+    }
+    function backHome() {
+        window.location = "[[@{/MVC/}]]";
+    }
+</script>
 </body>
 </html>
