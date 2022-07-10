@@ -8,7 +8,7 @@
 
         :root{
             /* ===== Colors ===== */
-
+            /* --body-color: #E4E9F7; */
             --sidebar-color: #517e85;
             --primary-color: #5faebb;
             --primary-color-light: #F6F5FF;
@@ -23,9 +23,11 @@
         }
 
         body{
-            min-height: 200vh;
+            height: 200px;
+            min-height: 100vh;
             background-color: var(--body-color);
             transition: var(--tran-05);
+
         }
 
         ::selection{
@@ -34,7 +36,7 @@
         }
 
         body.dark{
-
+            --body-color: #18191a;
             --sidebar-color: #242526;
             --primary-color: #3a3b3c;
             --primary-color-light: #3a3b3c;
@@ -281,6 +283,7 @@
             left: 20px;
         }
 
+        /*Style untuk Home */
         .home{
             position: absolute;
             top: 0;
@@ -302,6 +305,10 @@
             color: #212529;
             transition: var(--tran-03);
         }
+        .home .icon:hover {
+            background-color: #b6d6dc;
+        }
+
         .home .div text,
         .home .button i{
             color: #ccc;
@@ -316,16 +323,18 @@
             font-size: 20px;
         }
 
-        .home .button{
+        /*buat button modal */
+        .home .button {
             float: right;
-            background-color: #9ab3be;
+            background-color: #96adb7;
             padding: 10px 24px;
             display: inline-block;
             border-radius: 12px;
             transition: var(--tran-05);
         }
-        .home .button a{
-            color: #fff;
+        .home .modal .modal-content {
+            background-color: #8fc2cb;
+            color: rgb(248, 248, 248);
         }
         .home .button:hover{
             background-color: #5faebb;
@@ -337,11 +346,12 @@
             height: 100vh;
             width: calc(100% - 78px);
         }
-        body.dark .home .text{
+        body.dark .home{
+            background-color: var(--body-color);
 
         }
 
-           /* Style The Dropdown Button */
+           /* Style The Dropdown Button di sidebar*/
            .sidebar .menu-bar .dropbtn {
              background-color: transparent;
              display: flex;

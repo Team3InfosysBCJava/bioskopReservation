@@ -100,7 +100,7 @@
           </li>
           <li class="nav-link">
             <a role="button" onclick="printJS('PDF', 'html')">
-              <i class='bx bx-note icon'></i>
+              <i class='bx bxs-file-pdf icon'></i>
               <span class="text nav-text">PDF</span>
             </a>
           </li>
@@ -156,13 +156,39 @@
           </tr>
         </tbody>
       </table>
-
-
     </div>
-    <!-- start modal -->
+
+<!--   =========== PAGINATION ==========-->
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+      <li class="page-item">
+          <a class="page-link" th:href="@{/MVC/Film?page=prev}">Previous</a>
+      </li>
+
+      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=1}">1</a></li>
+      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=2}">2</a></li>
+      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=3}">3</a></li>
+      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=4}">4</a></li>
+      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=5}">5</a></li>
+      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=6}">6</a></li>
+      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=7}">7</a></li>
+      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=8}">8</a></li>
+      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=9}">9</a></li>
+
+      <li class="page-item">
+          <a class="page-link" th:href="@{/MVC/Film?page=next}">Next</a>
+      </li>
+  </ul>
+</nav>
+
+
+    <!-- start modal --> 
+    <!-- Modal Update-->
     <div class="modal" th:each="Films : ${films}" th:id="'modalUpdate'+${Films.filmId}" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
+
+          <!--=======MODAL HEADER===========-->
           <div class="modal-header">
             <h5 class="modal-title">Update Film</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -182,14 +208,15 @@
               </select>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-outline-primary">Save changes</button>
             </div>
           </form>
         </div>
       </div>
     </div>
 
+    <!-- Modal Delete -->
     <div class="modal" th:each="Films : ${films}" th:id="'modalDelete'+${Films.filmId}" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -202,14 +229,15 @@
               <h3>ciyussss pengen di delete?</h3>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Delete</button>
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-outline-danger">Delete</button>
             </div>
           </form>
         </div>
       </div>
     </div>
 
+    <!-- Modal Add New-->
     <div class="modal" id="modalNew" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -231,8 +259,8 @@
               </select>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-outline-primary">Save changes</button>
             </div>
           </form>
         </div>
