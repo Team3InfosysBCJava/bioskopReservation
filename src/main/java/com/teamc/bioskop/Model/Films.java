@@ -20,7 +20,7 @@ public class Films {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long filmId;
     private String name;
-    private Integer isPlaying;
+    private Boolean isPlaying;
 
 
         public FilmsResponseDTO convertToResponse() {

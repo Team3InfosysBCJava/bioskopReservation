@@ -3,6 +3,10 @@ package com.teamc.bioskop.MVCController;
 import com.teamc.bioskop.DTO.FilmsResponseDTO;
 import com.teamc.bioskop.Model.Films;
 import com.teamc.bioskop.Service.FilmsService;
+import com.teamc.bioskop.Service.FilmsServiceImpl;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import lombok.AllArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -10,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -22,14 +27,28 @@ import java.util.Optional;
 public class FilmsContMVC {
 
     private final FilmsService filmsService;
+    private final FilmsServiceImpl filmsServiceImpl; 
 
     //GET ALL
     @GetMapping("/MVC/Film")
-    public String showFilmList(Model model, @Param("keyword") String keyword) {
-        List<Films> films = filmsService.search(keyword);
+    public String showFilmList(Model model, @Param("keyword") String keyword, @Param("page") String page) {
+        
+        Integer pageNumber = null;
+
+        //check null pointer
+        if(page != null){
+            pageNumber = filmsServiceImpl.pageUpdate(page);
+        }
+
+        //Pagination
+        Page<Films> result = filmsService.search(keyword, pageNumber); 
+
+        // List<Films> films = filmsService.search(keyword);
+
         //alias masuk ke file html
-        model.addAttribute("films", films);
+        model.addAttribute("films", result);
         model.addAttribute("keyword",keyword);
+        model.addAttribute("film_add", new Films());
         return "Films_GetAll"; //ngambil file html
     }
 
@@ -40,6 +59,7 @@ public class FilmsContMVC {
     //    FilmsResponseDTO result = films.convertToResponse();
         model.addAttribute("films", films);
         model.addAttribute("id",id);
+        model.addAttribute("film_add", new Films());
         return "Films_GetAll";
     }
 
@@ -74,9 +94,14 @@ public class FilmsContMVC {
     @PostMapping("/MVC/Film/add-film")
     public String showAddFilm(@Valid Films films, BindingResult result, Model model){
         if (result.hasErrors()) {
-            return "Films_AddNew";
+            return "redirect:/MVC/Film";
         }
-
+        // if (films.getIsPlaying().equals(null)) {
+        //     films.setIsPlaying(0);
+        // }
+        // else {
+        //     films.setIsPlaying(1);
+        // }
         filmsService.createFilm(films);
         return "redirect:/MVC/Film";
     }
@@ -101,7 +126,7 @@ public class FilmsContMVC {
     public String showUpdateFilms(@PathVariable("id") Long filmId, @Valid Films films, BindingResult result, Model model){
         if (result.hasErrors()) {
             films.setFilmId(filmId);
-            return "Films_Update";
+            return "redirect:/MVC/Film";
         }
 
         films.setFilmId(filmId);

@@ -5,6 +5,7 @@ import com.teamc.bioskop.Model.Films;
 import com.teamc.bioskop.Model.Reservation;
 import com.teamc.bioskop.Model.Schedule;
 import com.teamc.bioskop.Repository.ScheduleRepository;
+import com.teamc.bioskop.Service.ScheduleServiceImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +27,8 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ScheduleMVCController {
     private final ScheduleService scheduleService;
-    private final ScheduleRepository scheduleRepository;
+    private final ScheduleServiceImpl scheduleServiceImpl;
+
 
     //HOMEPAGE
     @GetMapping("/MVC")
@@ -38,7 +40,7 @@ public class ScheduleMVCController {
     @PostMapping("/MVC/schedules/search-by-film")
     public String searchFilm(Films film, Model model, String name) {
         if(name!=null) {
-            List<Schedule> schedules = scheduleService.search(film.getName());
+            Page<Schedule> schedules = scheduleService.search(film.getName(), null);
             //pake stream
             // List<ScheduleResponseDTO> results = schedules.stream()
             //         .map(Schedule::convertToResponse)
@@ -76,15 +78,20 @@ public class ScheduleMVCController {
 
     //GET ALL
     @GetMapping("/MVC/schedules")
-    public String search(Model model, @Param("keyword") String keyword){
+    public String search(Model model, @Param("keyword") String keyword, @Param("page") String page){
 
-        Integer pageNumber = 1;
-        Pageable firstPageWithTwoElements = PageRequest.of(pageNumber, 10);
-        Page<Schedule> page = scheduleRepository.findAll(firstPageWithTwoElements);
+        Integer pageNumber = null;
 
-        List<Schedule> result = scheduleService.search(keyword);
+        //check null pointer
+        if(page != null){
+            pageNumber = scheduleServiceImpl.pageUpdate(page);
+        }
 
-        model.addAttribute("schedule_entry", page);
+        //Pagination
+        Page<Schedule> result = scheduleService.search(keyword, pageNumber);
+
+        //Return Output
+        model.addAttribute("schedule_entry", result);
         model.addAttribute("keyword",keyword);
         model.addAttribute("schedule",new Schedule());
         return "Schedules_Index";

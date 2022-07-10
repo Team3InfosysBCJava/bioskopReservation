@@ -1,11 +1,13 @@
 package com.teamc.bioskop.Service;
 
-import com.teamc.bioskop.Model.Reservation;
-import com.teamc.bioskop.Model.User;
 import com.teamc.bioskop.Repository.ScheduleRepository;
 import com.teamc.bioskop.Exception.ResourceNotFoundException;
 import com.teamc.bioskop.Model.Schedule;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.Optional;
 public class ScheduleServiceImpl implements ScheduleService {
 
     private ScheduleRepository scheduleRepository;
+    public static Integer currentPage;
 
     //Get All
     public List<Schedule> getAll(){
@@ -84,11 +87,39 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<Schedule> search(String keyword){
+    public Page<Schedule> search(String keyword, Integer page){
+
         if (keyword != null){
-            return scheduleRepository.searchByName(keyword);
+            return scheduleRepository.searchByName(keyword, null);
+        } else if (page == null){
+            return scheduleRepository.findAll(PageRequest.of(0, 10, Sort.by("films.name")));
+        } else {
+            return scheduleRepository.findAll(PageRequest.of(page, 10, Sort.by("films.name")));
+        }
+    }
+
+    public Integer pageUpdate(String page) {
+
+        //container
+        Integer pageNumber = null;
+
+        //check params
+        if(page.equals("prev")){
+            currentPage--;
+        }
+        else if(page.equals("next")){
+            currentPage++;
+        } else {
+            currentPage = Integer.parseInt(page);
         }
 
-        return scheduleRepository.findAll();
+        if(currentPage == 0){
+            currentPage = 1;
+        }
+
+        //page in bootstrap template starts from 0
+        pageNumber = currentPage-1;
+
+        return pageNumber;
     }
 }

@@ -25,9 +25,9 @@ public class Seats {
     private String studioName;
 
     @Column(name = "is_available")
-    private int isAvailable;
+    private Boolean isAvailable;
 
-    public Seats(long seatId, long seatNumber, String studioName, int isAvailable){
+    public Seats(long seatId, long seatNumber, String studioName, Boolean isAvailable){
         super();
         this.seatId = seatId;
         this.seatNumber = seatNumber;
@@ -64,12 +64,12 @@ public class Seats {
         this.studioName = studioName;
     }
 
-    public int getIsAvailable() {
+    public Boolean getIsAvailable() {
 
         return isAvailable;
     }
 
-    public void setIsAvailable(int isAvailable) {
+    public void setIsAvailable(Boolean isAvailable) {
 
         this.isAvailable = isAvailable;
     }

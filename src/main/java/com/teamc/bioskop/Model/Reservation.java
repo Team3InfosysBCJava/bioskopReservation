@@ -41,6 +41,7 @@ public class Reservation {
                 .reservation_id(this.reservationId)
                 .user_id(this.getUser().getUserId())
                 .user_name(this.getUser().getUsername())
+                .schedule_id(this.getSchedule().getScheduleId())
                 .email_user(this.getUser().getEmailId())
                 .film_name(this.getSchedule().getFilms().getName())
                 .price(this.getSchedule().getPrice())

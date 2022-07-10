@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class FilmsRequestDTO {
     private String title;
-    private Integer status;
+    private Boolean status;
 
     public Films convertToEntity(){
         return Films.builder()
