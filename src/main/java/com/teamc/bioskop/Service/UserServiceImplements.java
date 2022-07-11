@@ -3,8 +3,11 @@ package com.teamc.bioskop.Service;
 import java.util.List;
 import java.util.Optional;
 
-import com.teamc.bioskop.Model.Films;
+import com.teamc.bioskop.Model.Schedule;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.teamc.bioskop.Repository.UserRepository;
 import com.teamc.bioskop.Model.User;
@@ -95,6 +98,29 @@ public class UserServiceImplements implements UserService {
 
 
     }
+
+    @Override
+    public List<User> getUserByIsPlaying(String name) {
+        List<User> getUserByIsPlaying = this.userRepository.getUserByIsPlaying(name);
+        if (getUserByIsPlaying.isEmpty()){
+            throw new ResourceNotFoundException("User with film name " + name + " is not exist!!!!!");
+        }
+        return this.userRepository.getUserByIsPlaying(name);
+    }
+
+
+    @Override
+    public Page<User> search(String keyword, Integer pageNumber) {
+        if (keyword != null) {
+            return userRepository.searchByname(keyword, null);
+        }else if (pageNumber == null){
+            return userRepository.findAll(PageRequest.of(0,10, Sort.by("userId")));
+            } else{
+            return userRepository.findAll(PageRequest.of(pageNumber, 10,Sort.by("userId")));
+
+        }
+    }
+
 
     public Integer pageUpdate(String page) {
 

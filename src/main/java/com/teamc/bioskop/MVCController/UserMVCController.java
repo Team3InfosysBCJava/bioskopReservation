@@ -60,7 +60,7 @@ public class UserMVCController {
 //        List<User> User = userService.search(keyword);
         model.addAttribute("User_masuk", result);
         model.addAttribute("keyword", keyword);
-        model.addAttribute("user_add");
+        model.addAttribute("user_add", new User());
         return "User_Index"; //ngambil file htmm
     }
 

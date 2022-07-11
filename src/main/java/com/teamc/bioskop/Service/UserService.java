@@ -16,5 +16,7 @@ public interface UserService {
     User getReferenceById(Long Id);
     List<User> search(String keyword);
 
+    List<User> getUserByIsPlaying(String name);
+
     Page<User> search(String keyword, Integer pageNumber);
 }

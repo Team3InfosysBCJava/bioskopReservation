@@ -133,10 +133,10 @@
 </nav>
 <section class="home">
     <div class="text">Get All User</div>
-    <div th:switch="${User_masuk}" class="container">
-        <h2 th:case="null">No User Available!</h2>
+    <div th:if="${User_masuk}==null" class="container">
+        <h2>No User Found!</h2>
         </div>
-
+        <div th:unless="${User_masuk}==null" class="container">
             <div class="button" data-bs-toggle="modal" data-bs-target="#modalNew">
                 <i class='bx bx-list-plus icon'></i>Add User
 <!--                <a class="btn" href="/MVC/User/Signup" role="button">Add a New User</a>-->
@@ -157,12 +157,12 @@
                     <td th:text="${User.emailId}"></td>
                     <td th:text="${User.password}"></td>
                     <td>
-                        <i class='bx bxs-edit icon'></i>
-                        <a th:href="@{/MVC/User/update/{id}(id=${User.userId})}">Edit</a>
-                    </td>
+                        <a data-bs-toggle="modal" th:attr="data-bs-target='#modalUpdate'+${User.userId}"
+                           class="bx bxs-edit icon d-print-none" role="button"></a>
+                        </td>
                     <td>
-                        <i class='bx bx-trash icon'></i>
-                        <a th:href="@{/MVC/User/delete/{id}(id=${User.userId})}">Delete</a>
+                        <a data-bs-toggle="modal" th:attr="data-bs-target='#modalDelete'+${User.userId}"
+                           class="bx bxs-trash icon d-print-none" role="button"></a>
                     </td>
                 </tr>
                 </tbody>
@@ -170,6 +170,136 @@
         </div>
         <!--    <p><a href="/signup">Add a new user</a></p>-->
     </div>
+
+    <!--   =========== PAGINATION ==========-->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" th:href="@{/MVC/User?page=prev}">Previous</a>
+            </li>
+
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/User?page=1}">1</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/User?page=2}">2</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/User?page=3}">3</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/User?page=4}">4</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/User?page=5}">5</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/User?page=6}">6</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/User?page=7}">7</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/User?page=8}">8</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/User?page=9}">9</a></li>
+
+            <li class="page-item">
+                <a class="page-link" th:href="@{/MVC/User?page=next}">Next</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- start modal -->
+    <!-- Modal Update-->
+    <div class="modal" th:each="User : ${User_masuk}" th:id="'modalUpdate'+${User.userId}" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <!--=======MODAL HEADER===========-->
+                <div class="modal-header">
+                    <h5 class="modal-title">Update User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form th:method="post" th:action="@{/MVC/User/update-user/{id}(id=${User.userId})}" th:object="${user_add}">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="username1" class="form-label">Username</label>
+                            <input type="text" class="form-control" th:username="username" th:value="${User.username}" id="username1"
+                                   placeholder="username">
+                            <span th:if="${#fields.hasErrors('username')}" th:errors="{username}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailId" class="form-label">Email ID</label>
+                            <input type="text" class="form-control" th:emailId="emailId" th:value="${User.emailId}" id="emailId"
+                                   placeholder="Email ID">
+                            <span th:if="${#fields.hasErrors('emailId')}" th:errors="{emailId}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="text" class="form-control" th:password="password" th:value="${User.password}" id="password"
+                                   placeholder="Password">
+                            <span th:if="${#fields.hasErrors('password')}" th:errors="{password}"></span>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete -->
+    <div class="modal" th:each="User : ${User_masuk}" th:id="'modalDelete'+${User.userId}" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form th:method="post" th:action="@{/MVC/User/delete/{id}(id=${User.userId})}">
+                    <div class="modal-body">
+                        <h3>yakin ingin di delete?</h3>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Add New-->
+    <div class="modal" id="modalNew" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form th:method="post" th:action="@{/MVC/User/add-user}" th:object="${user_add}">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="userId" class="form-label">User ID</label>
+                            <input type="text" class="form-control" th:field="*{userId}" id="userId" placeholder="USER ID">
+                            <span th:if="${#fields.hasErrors('UserId')}" th:errors="{userId}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="username2" class="form-label">Username</label>
+                            <input type="text" class="form-control" th:field="*{username}" id="username2" placeholder="username">
+                            <span th:if="${#fields.hasErrors('username')}" th:errors="{username}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailId" class="form-label">Email ID</label>
+                            <input type="text" class="form-control" th:field="*{emailId}" id="emailId1" placeholder="EMAIL ID">
+                            <span th:if="${#fields.hasErrors('emailId')}" th:errors="{emailId}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="text" class="form-control" th:field="*{password}" id="password1" placeholder="Password">
+                            <span th:if="${#fields.hasErrors('password')}" th:errors="{password}"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-primary">Add User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- end modal -->
+
+
 </section>
 <script th:src="@{/print.min.js}"></script>
 <script>
