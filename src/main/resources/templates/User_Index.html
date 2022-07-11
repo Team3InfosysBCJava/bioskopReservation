@@ -209,19 +209,19 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="username1" class="form-label">Username</label>
-                            <input type="text" class="form-control" th:username="username" th:value="${User.username}" id="username1"
+                            <input type="text" class="form-control" th:name="username" th:value="${User.username}" id="username1"
                                    placeholder="username">
                             <span th:if="${#fields.hasErrors('username')}" th:errors="{username}"></span>
                         </div>
                         <div class="mb-3">
                             <label for="emailId" class="form-label">Email ID</label>
-                            <input type="text" class="form-control" th:emailId="emailId" th:value="${User.emailId}" id="emailId"
+                            <input type="text" class="form-control" th:name="emailId" th:value="${User.emailId}" id="emailId"
                                    placeholder="Email ID">
                             <span th:if="${#fields.hasErrors('emailId')}" th:errors="{emailId}"></span>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="text" class="form-control" th:password="password" th:value="${User.password}" id="password"
+                            <input type="text" class="form-control" th:name="password" th:value="${User.password}" id="password"
                                    placeholder="Password">
                             <span th:if="${#fields.hasErrors('password')}" th:errors="{password}"></span>
                         </div>
@@ -244,7 +244,7 @@
                     <h5 class="modal-title">Delete User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form th:method="post" th:action="@{/MVC/User/delete/{id}(id=${User.userId})}">
+                <form th:action="@{/MVC/User/delete/{id}(id=${User.userId})}">
                     <div class="modal-body">
                         <h3>yakin ingin di delete?</h3>
                     </div>
@@ -270,7 +270,7 @@
                         <div class="mb-3">
                             <label for="userId" class="form-label">User ID</label>
                             <input type="text" class="form-control" th:field="*{userId}" id="userId" placeholder="USER ID">
-                            <span th:if="${#fields.hasErrors('UserId')}" th:errors="{userId}"></span>
+                            <span th:if="${#fields.hasErrors('userId')}" th:errors="{userId}"></span>
                         </div>
                         <div class="mb-3">
                             <label for="username2" class="form-label">Username</label>
