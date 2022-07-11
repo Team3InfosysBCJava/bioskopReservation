@@ -15,6 +15,8 @@ import com.teamc.bioskop.Exception.ResourceNotFoundException;
 public class UserServiceImplements implements UserService {
     private final UserRepository userRepository;
 
+    public static Integer currentPage;
+
     /***
      * Get All User
      * @return
@@ -92,5 +94,26 @@ public class UserServiceImplements implements UserService {
         return userRepository.findAll();
 
 
+    }
+
+    public Integer pageUpdate(String page) {
+
+        Integer pageNumber = null;
+
+        if (page.equals("prev")){
+            currentPage--;
+        } else if (page.equals("next")) {
+            currentPage++;
+
+        }else {
+            currentPage = Integer.parseInt(page);
+        }
+        if (currentPage == 0){
+            currentPage = 1;
+        }
+
+        pageNumber = currentPage-1;
+
+        return pageNumber;
     }
 }

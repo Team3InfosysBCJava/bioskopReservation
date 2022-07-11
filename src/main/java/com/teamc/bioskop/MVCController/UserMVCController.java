@@ -6,7 +6,9 @@ import com.teamc.bioskop.DTO.UserResponseDTO;
 import com.teamc.bioskop.Model.Schedule;
 import com.teamc.bioskop.Model.User;
 import com.teamc.bioskop.Service.UserService;
+import com.teamc.bioskop.Service.UserServiceImplements;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,8 @@ public class UserMVCController {
 
     private final UserService userService;
 
+    private final UserServiceImplements userServiceImplements;
+
     @GetMapping("/MVC/User/Signup")
     public String showUserForm(User user) {
         return "User_AddNew";
@@ -34,7 +38,7 @@ public class UserMVCController {
     @PostMapping("/MVC/User/add-user")
     public String showAddUSer(@Valid User user, BindingResult result, Model model){
         if (result.hasErrors()) {
-            return "User_AddNew";
+            return "redirect:/MVC/User";
         }
 
         userService.createUser(user);
@@ -43,11 +47,21 @@ public class UserMVCController {
 
 
     @GetMapping("/MVC/User")
-    public String showUserlist(Model model, @Param("keyword")String keyword) {
-        List<User> User = userService.search(keyword);
-        model.addAttribute("User_masuk", User);
+    public String showUserlist(Model model, @Param("keyword")String keyword, @Param("page") String page) {
+
+        Integer pageNumber = null;
+
+        if (page != null){
+            pageNumber = userServiceImplements.pageUpdate(page);
+        }
+
+        Page<User> result = userService.search(keyword, pageNumber);
+
+//        List<User> User = userService.search(keyword);
+        model.addAttribute("User_masuk", result);
         model.addAttribute("keyword", keyword);
-        return "User_Index"; //ngambil file html
+        model.addAttribute("user_add");
+        return "User_Index"; //ngambil file htmm
     }
 
 
@@ -72,7 +86,7 @@ public class UserMVCController {
     public String showUpdateUser(@PathVariable("id") Long id, @Valid User user, BindingResult result, Model model) throws Exception {
         if (result.hasErrors()) {
             user.setUserId(id);
-            return "User_Update";
+            return "redirect:/MVC/User";
         }
 
         user.setUserId(id);
@@ -82,9 +96,9 @@ public class UserMVCController {
 
 
     @GetMapping("/MVC/User/delete/{id}")
-    public String showDeleteUser(@PathVariable("id") Long id, Model model) {
+    public String showDeleteUser(@PathVariable("id") Long id) {
 ;
-        userService.deleteUserById(id);
+        this.userService.deleteUserById(id);
         return "redirect:/MVC/User";
     }
 

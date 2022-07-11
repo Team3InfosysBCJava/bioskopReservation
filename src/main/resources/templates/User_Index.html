@@ -5,9 +5,15 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{/sidebars.css}" rel="stylesheet" />
+    <link th:href="@{/print.min.css}" rel="stylesheet" />
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
     <title>Get All User</title>
+
 
 </head>
 <body>
@@ -91,7 +97,12 @@
                       <span class="text nav-text">Reservation</span>
                     </a>
                   </li>
-                  
+                <li class="nav-link">
+                    <a role="button" onclick="printJS('PDF', 'html')">
+                        <i class='bx bxs-file-pdf icon'></i>
+                        <span class="text nav-text">PDF</span>
+                    </a>
+                </li>
 
             </ul>
         </div>
@@ -124,22 +135,13 @@
     <div class="text">Get All User</div>
     <div th:switch="${User_masuk}" class="container">
         <h2 th:case="null">No User Available!</h2>
-        <div th:case="*">
-            <!--    <nav class="navbar navbar-light bg-light">-->
-            <!--      <a class="navbar-brand"><h4>Film</h4></a>-->
-            <!--      <form class="form-inline" method="get" th:action="@{/MVC/Film/{id}(id=null)}">-->
-            <!--        <input class="form-control mr-sm-2" th:value="${stringId}" id="id" type="text" placeholder="Search By Id" aria-label="Search">-->
-            <!--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-            <!--      </form>-->
-            <!--    </nav>-->
-            <!--      <button type="button" class="btn">-->
-            <!--        <a href="/MVC/Film/new-film">Add New Film</a>-->
-            <!--      </button>-->
-            <div class="button">
-                <i class='bx bx-list-plus icon'></i>
-                <a class="btn" href="/MVC/User/Signup" role="button">Add a New User</a>
+        </div>
+
+            <div class="button" data-bs-toggle="modal" data-bs-target="#modalNew">
+                <i class='bx bx-list-plus icon'></i>Add User
+<!--                <a class="btn" href="/MVC/User/Signup" role="button">Add a New User</a>-->
             </div>
-            <table class="table table-striped">
+            <table id="PDF" class="table table-striped">
                 <thead>
                 <tr>
                     <th  scope="col">User ID</th>
@@ -169,7 +171,7 @@
         <!--    <p><a href="/signup">Add a new user</a></p>-->
     </div>
 </section>
-
+<script th:src="@{/print.min.js}"></script>
 <script>
           const body = document.querySelector('body'),
           sidebar = body.querySelector('nav'),
