@@ -98,6 +98,12 @@ public class ReservationContMVC {
     /**
      * Create
      */
+    @GetMapping("/MVC/Reservation/new")
+    public String showRerservationForm(Reservation reservation){
+
+        return "Add_Reservation";
+    }
+
     @PostMapping("/MVC/Reservation/add")
     public String showAddReservation(@Valid Reservation reservation, BindingResult result, Model model){
         if(result.hasErrors()){
