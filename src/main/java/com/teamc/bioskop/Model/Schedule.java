@@ -43,11 +43,11 @@ public class Schedule {
     @JoinColumn(name = "seat_id")
     private Seats seats;
 
-    @DateTimeFormat(pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "show_start")
     private LocalTime showStart;
 
-    @DateTimeFormat(pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "show_end")
     private LocalTime showEnd;
 

@@ -88,12 +88,15 @@ public class ScheduleMVCController {
         }
 
         //Pagination
-        Page<Schedule> result = scheduleService.search(keyword, pageNumber);
+//        Page<Schedule> schedulePage = scheduleService.search(keyword, pageNumber);
+//        List<Schedule> result = schedulePage.getContent();
 
+        Page<Schedule> result = scheduleService.search(keyword, pageNumber);
+//        List<Schedule> result = schedulePage.getContent();
         //Return Output
         model.addAttribute("schedule_entry", result);
         model.addAttribute("keyword",keyword);
-        model.addAttribute("schedule",new Schedule());
+        model.addAttribute("schedule_add",new Schedule());
         return "Schedules_Index";
     }
 
@@ -106,7 +109,10 @@ public class ScheduleMVCController {
             Schedule scheduleget = schedule.get();
             ScheduleResponseDTO result = scheduleget.convertToResponse();
             model.addAttribute("schedule_entry", result);
-            return "Schedules_GetById";
+            model.addAttribute("id", id);
+            model.addAttribute("schedule_add", new Schedule());
+
+        return "Schedules_Index";
     }
 
 
@@ -123,7 +129,7 @@ public class ScheduleMVCController {
     public String showUpdateSchedule(@PathVariable("id") Integer id, @Valid Schedule schedule, BindingResult result, Model model){
         if (result.hasErrors()) {
             schedule.setScheduleId(id);
-            return "Schedules_Update";
+            return "redirect:/MVC/schedules";
         }
 
         schedule.setScheduleId(id);
@@ -135,8 +141,6 @@ public class ScheduleMVCController {
     //DELETE BY ID
     @GetMapping("/MVC/schedules/delete/{id}")
     public String showDeleteSchedule(@PathVariable("id") Integer id, Model model) {
-//        Schedule schedule = scheduleService.getScheduleById(id)
-//                .orElseThrow(() -> new IllegalArgumentException("Invalid schedule Id:" + id));
         scheduleService.deleteScheduleById(id);
         return "redirect:/MVC/schedules";
     }
