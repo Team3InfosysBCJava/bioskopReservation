@@ -43,11 +43,11 @@ public class Schedule {
     @JoinColumn(name = "seat_id")
     private Seats seats;
 
-    @DateTimeFormat(pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "show_start")
     private LocalTime showStart;
 
-    @DateTimeFormat(pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "show_end")
     private LocalTime showEnd;
 
@@ -113,4 +113,3 @@ public class Schedule {
 //bikin constructor kosong (bisa diganti dengan penggunaan anotasi @NoArgsConstructor)
 //bikin constructor method untuk semua property (bisa diganti dengan penggunaan anotasi @AllArgsConstructor)
 //bikin setter getter (bisa diganti dengan penggunaan anotasi @SetterGetter)
-
