@@ -42,6 +42,7 @@ public class FilmsServiceImpl implements FilmsService {
         return filmsRepository.findById(filmId);
     }
 
+
     //Post
     @Override
     public Films createFilm(Films films) {
@@ -99,6 +100,18 @@ public class FilmsServiceImpl implements FilmsService {
             return filmsRepository.findAll(PageRequest.of(page, 10,Sort.by("filmId")));
         }
     }
+
+    @Override
+    public Page<Films> getFilmById(Long id, Integer page){
+        if (id != null){
+            return filmsRepository.getFilmId(id, null);
+        } else if (page == null){
+            return filmsRepository.findAll(PageRequest.of(0, 10,Sort.by("filmId")));
+        } else {
+            return filmsRepository.findAll(PageRequest.of(page, 10,Sort.by("filmId")));
+        }
+    }
+
 
     public Integer pageUpdate(String page) {
 

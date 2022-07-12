@@ -18,4 +18,6 @@ public interface FilmsService {
    public List<Films> search(String keyword);
    Page<Films> search(String name,Integer page);
 
+   Page<Films> getFilmById(Long id, Integer page);
+
 }
