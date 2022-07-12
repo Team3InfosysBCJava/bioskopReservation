@@ -5,297 +5,188 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link th:href="@{/sidebars.css}" rel="stylesheet" />
+    <link th:href="@{/sidebars.css}" rel="stylesheet"/>
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
     </script>
 
     <title>All Schedules</title>
 </head>
 
 <body>
-    <nav class="sidebar close">
-        <header>
-            <div class="image-text">
-                <span class="image">
-                    <img src="https://ist.id/image/Logo-09.png" alt="" width="30" class="d-inline-block align-text-top">
-                    <!--                    <img src="logoinfosys.jpg" alt="">-->
-                </span>
-                <div class="text logo-text">
-                    <span class="name">Cinema</span>
-                    <span class="profession">Reservation</span>
+<nav class="sidebar close">
+    <header>
+        <div class="image-text">
+            <span class="image">
+                <img src="https://ist.id/image/Logo-09.png" alt="" width="30"  class="d-inline-block align-text-top">
+                <!--                    <img src="logoinfosys.jpg" alt="">-->
+            </span>
+            <div class="text logo-text">
+                <span class="name">Cinema</span>
+                <span class="profession">Reservation</span>
+            </div>
+        </div>
+
+        <i class='bx bx-chevron-right toggle'></i>
+    </header>
+
+    <div class="menu-bar">
+        <div class="menu">
+            <li class="search-box">
+              <i class='bx bx-search icon'></i>
+              <form class="d-flex" role="search" th:action="@{/MVC/schedules}">
+                <input type="text" name="keyword" th:value="${keyword}" placeholder="Title" required>
+                <button input class="btn" type="button" id="btnClear2" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
+                <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
+              </form>
+            </li>
+            <ul class="menu-links">
+                <li class="nav-link">
+                    <a href="/MVC">
+                        <i class='bx bx-home-alt icon' ></i>
+                        <span class="text nav-text">Homepage</span>
+                    </a>
+                </li>
+
+                <li class="nav-link dropdown">
+                    <i class="dropbtn">
+                      <i class='bx bx-down-arrow icon bx-fade-down'></i>
+                      <span class="text nav-text">Features</span>
+                      <i class='bx bx-down-arrow icon' style='color:rgba(0,0,0,0)' ></i>
+                    </i>
+                    <div class="dropdown-content">
+                      <a href="/MVC/schedules">Check schedules</a>
+                      <a href="/MVC/Seats">Available seats</a>
+                      <a href="/MVC/Reservation/new">Make a reservation</a>
+                      <a href="/MVC/User/Signup">Registration</a>
+                    </div>
+                  </li>
+
+                <li class="nav-link">
+                    <a href="/MVC/Film">
+                      <i class='bx bx-film icon'></i>
+                      <span class="text nav-text">Film</span>
+                    </a>
+                  </li>
+          
+                  <li class="nav-link">
+                    <a href="/MVC/User">
+                      <i class='bx bx-user icon'></i>
+                      <span class="text nav-text">User</span>
+                    </a>
+                  </li>
+          
+                  <li class="nav-link">
+                    <a href="/MVC/Seats">
+                      <i class='bx bx-chair icon'></i>
+                      <span class="text nav-text">Seats</span>
+                    </a>
+                  </li>
+          
+                  <li class="nav-link">
+                    <a href="/MVC/Reservations">
+                      <i class='bx bx-note icon'></i>
+                      <span class="text nav-text">Reservation</span>
+                    </a>
+                  </li>
+                  <li class="nav-link">
+                    <a role="button" onclick="printJS('PDF', 'html')">
+                        <i class='bx bx-note icon'></i>
+                        <span class="text nav-text">PDF</span>
+                    </a>
+                  </li>
+            </ul>
+        </div>
+
+        <div class="bottom-content">
+            <li class="mode">
+                <div class="sun-moon">
+                    <i class='bx bx-moon icon moon'></i>
+                    <i class='bx bx-sun icon sun'></i>
                 </div>
-            </div>
+                <span class="mode-text text">Dark mode</span>
 
-            <i class='bx bx-chevron-right toggle'></i>
-        </header>
-
-        <div class="menu-bar">
-            <div class="menu">
-                <li class="search-box">
-                    <i class='bx bx-search icon'></i>
-                    <form class="d-flex" role="search" th:action="@{/MVC/schedules}">
-                        <input type="text" name="keyword" th:value="${keyword}" placeholder="Title" required>
-                        <button input class="btn" type="button" id="btnClear2" onclick="clearSearch()"><i
-                                class='bx bx-refresh icon'></i></button>
-                        <!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
-                    </form>
-                </li>
-                <ul class="menu-links">
-                    <li class="nav-link">
-                        <a href="/MVC">
-                            <i class='bx bx-home-alt icon'></i>
-                            <span class="text nav-text">Homepage</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link dropdown">
-                        <i class="dropbtn">
-                            <i class='bx bx-down-arrow icon bx-fade-down'></i>
-                            <span class="text nav-text">Features</span>
-                            <i class='bx bx-down-arrow icon' style='color:rgba(0,0,0,0)'></i>
-                        </i>
-                        <div class="dropdown-content">
-                            <a href="/MVC/schedules">Check schedules</a>
-                            <a href="/MVC/Seats">Available seats</a>
-                            <a href="/MVC/Reservation/new">Make a reservation</a>
-                            <a href="/MVC/User/Signup">Registration</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="/MVC/Film">
-                            <i class='bx bx-film icon'></i>
-                            <span class="text nav-text">Film</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="/MVC/User">
-                            <i class='bx bx-user icon'></i>
-                            <span class="text nav-text">User</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="/MVC/Seats">
-                            <i class='bx bx-chair icon'></i>
-                            <span class="text nav-text">Seats</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="/MVC/Reservations">
-                            <i class='bx bx-note icon'></i>
-                            <span class="text nav-text">Reservation</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a role="button" onclick="printJS('PDF', 'html')">
-                            <i class='bx bx-note icon'></i>
-                            <span class="text nav-text">PDF</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="bottom-content">
-                <li class="mode">
-                    <div class="sun-moon">
-                        <i class='bx bx-moon icon moon'></i>
-                        <i class='bx bx-sun icon sun'></i>
-                    </div>
-                    <span class="mode-text text">Dark mode</span>
-
-                    <div class="toggle-switch">
-                        <span class="switch"></span>
-                    </div>
-                </li>
-            </div>
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
+            </li>
         </div>
+    </div>
 
-    </nav>
-    <section class="home">
-        <div class="text">Schedules</div>
-        <div th:if="${schedule_entry}==null" class="container">
-            <h2>No schedule found</h2>
-        </div>
-        <div th:unless="${schedule_entry}==null" class="container">
+</nav>
+<section class="home">
+    <div class="text">Schedules</div>
+    <div th:if="${schedule_entry}==null" class="container">
+        <h2>No schedule found</h2>
+    </div>
+    <div th:unless="${schedule_entry}==null" class="container">
             <div class="button" data-bs-toggle="modal" data-bs-target="#modalNew">
                 <i class='bx bx-list-plus icon'></i>Add New Schedule
             </div>
-            <!--            ================TABLE============-->
+<!--            ================TABLE============-->
             <table id="PDF" class="table table-striped">
                 <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Film</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Show Start</th>
-                        <th scope="col">Show End</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Action</th>
-                    </tr>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Film</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Show Start</th>
+                    <th scope="col">Show End</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Action</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="schedule : ${schedule_entry}">
-                        <td th:text="${schedule.scheduleId}"></td>
-                        <td th:text="${schedule.films.name}"></td>
-                        <td th:text="${schedule.dateShow}"></td>
-                        <td th:text="${schedule.showStart}"></td>
-                        <td th:text="${schedule.showEnd}"></td>
-                        <td th:text="${schedule.price}"></td>
-                        <td>
-                            <a data-bs-toggle="modal" th:attr="data-bs-target='#modalUpdate'+${schedule.scheduleId}"
-                                class="bx bxs-edit icon d-print-none" role="button"></a>
-                        </td>
-                        <td>
-                            <a data-bs-toggle="modal" th:attr="data-bs-target='#modalDelete'+${schedule.scheduleId}"
-                                class="bx bxs-trash icon d-print-none" role="button"></a>
-                        </td>
-                    </tr>
+                <tr th:each="schedule : ${schedule_entry}">
+                    <td th:text="${schedule.scheduleId}"></td>
+                    <td th:text="${schedule.films.name}"></td>
+                    <td th:text="${schedule.dateShow}"></td>
+                    <td th:text="${schedule.showStart}"></td>
+                    <td th:text="${schedule.showEnd}"></td>
+                    <td th:text="${schedule.price}"></td>
+                    <td>
+                        <a data-bs-toggle="modal" th:attr="data-bs-target='#modalUpdate'+${schedule.scheduleId}"
+                        class="bx bxs-edit icon d-print-none" role="button"></a>
+                    </td>
+                    <td>
+                        <a data-bs-toggle="modal" th:attr="data-bs-target='#modalDelete'+${schedule.scheduleId}"
+                           class="bx bxs-trash icon d-print-none" role="button"></a>
+                    </td>
+                </tr>
                 </tbody>
             </table>
-        </div>
-        <br>
-        <br>
-
-        <!--   =========== PAGINATION ==========-->
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item">
-                    <a class="page-link" th:href="@{/MVC/schedules?page=prev}">Previous</a>
-                </li>
-
-                <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=1}">1</a></li>
-                <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=2}">2</a></li>
-                <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=3}">3</a></li>
-                <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=4}">4</a></li>
-                <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=5}">5</a></li>
-                <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=6}">6</a></li>
-                <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=7}">7</a></li>
-                <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=8}">8</a></li>
-                <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=9}">9</a></li>
-
-                <li class="page-item">
-                    <a class="page-link" th:href="@{/MVC/schedules?page=next}">Next</a>
-                </li>
-            </ul>
-        </nav>
-
-
-        <!--    =========== MODAL ==========-->
-        <!--=========== MODAL UPDATE ==========-->
-        <div class="modal" th:each="schedule : ${schedule_entry}" th:id="'modalUpdate'+${schedule.scheduleId}"
-            tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Update Schedule</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form th:method="post" th:action="@{/MVC/schedules/update-schedule/{id}(id=${schedule.scheduleId})}"
-                        th:object="${schedule_add}">
-
-                        <!--========MODAL BODY=============-->
-                        <div class="modal-body">
-                            <div class="container">
-                                <!--                            ========ROW ONE==========-->
-                                <div class="row">
-
-                                    <div class=" col-md-6">
-                                        <label for="films" class="form-label">Film ID</label>
-                                        <input type="text" class="form-control" th:field="*{films.filmId}"
-                                            id="filmsUpdate" placeholder="films"><br />
-                                        <span th:if="${#fields.hasErrors('films')}" th:errors="*{filmsUpdate}"></span>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <!--    //dateShow-->
-                                        <label for="dateShow" class="form-label">Date Show</label>
-                                        <input type="text" class="form-control" th:field="*{dateShow}" id="dateShow" placeholder="date show"><br/>
-                                        <span th:if="${#fields.hasErrors('dateShow')}" th:errors="*{dateShow}"></span>
-                                    </div>
-                                </div>
-
-
-                                <!--                            =======ROW TWO=========-->
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <!--    //seats-->
-                                        <label for="seats" class="form-label">Seat ID</label>
-                                        <input type="text" class="form-control" th:field="*{seats.seatId}" id="seats" placeholder="seats"><br/>
-                                        <span th:if="${#fields.hasErrors('seats')}" th:errors="*{seats}"></span>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <!--    //showStart-->
-                                        <label for="showStart" class="form-label">Show Start</label>
-                                        <input type="text" class="form-control" th:field="*{showStart}" id="showStart" placeholder="show start"><br/>
-                                        <span th:if="${#fields.hasErrors('showStart')}" th:errors="*{showStart}"></span>
-                                    </div>
-                                </div>
-
-
-                                <!--                            ====== ROW THREE =========-->
-                                <div class="row">
-                                    <!--    //showEnd-->
-                                    <div class="col-md-6">
-
-                                        <label for="showEnd" class="form-label">Show End</label>
-                                        <input type="text" class="form-control" th:field="*{showEnd}" id="showEnd" placeholder="show end"><br/>
-                                        <span th:if="${#fields.hasErrors('showEnd')}" th:errors="*{showEnd}"></span>
-                                    </div>
-
-                                    <!--    //price-->
-                                    <div class="col-md-6">
-                                        <label for="price" class="form-label">Price</label>
-                                        <input type="text" class="form-control" th:field="*{price}" id="price" placeholder="price"><br/>
-                                        <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
+    <br>
+    <br>
 
-    <!--=========== MODAL DELETE ==========-->
-    <div class="modal" th:each="schedule : ${schedule_entry}" th:id="'modalDelete'+${schedule.scheduleId}" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Delete Schedule</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form th:method="get" th:action="@{/MVC/schedules/delete/{id}(id=${schedule.scheduleId})}">
-                    <div class="modal-body">
-                        <h3>ciyussss pengen di delete?</h3>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Delete</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<!--   =========== PAGINATION ==========-->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" th:href="@{/MVC/schedules?page=prev}">Previous</a>
+            </li>
+
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=1}">1</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=2}">2</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=3}">3</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=4}">4</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=5}">5</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=6}">6</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=7}">7</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=8}">8</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/schedules?page=9}">9</a></li>
+
+            <li class="page-item">
+                <a class="page-link" th:href="@{/MVC/schedules?page=next}">Next</a>
+            </li>
+        </ul>
+    </nav>
 
 
-<<<<<<< HEAD
-=======
 <!--    =========== MODAL ==========-->
 <!--=========== MODAL UPDATE ==========-->
     <div class="modal" th:each="schedule : ${schedule_entry}" th:id="'modalUpdate'+${schedule.scheduleId}" tabindex="-1">
@@ -400,7 +291,6 @@
     </div>
 
 
->>>>>>> e0c1ce95e7f793fa56b53091b9f8c2cb48db453a
 <!--    MODAL CREATE-->
     <div class="modal fade" id="modalNew" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
