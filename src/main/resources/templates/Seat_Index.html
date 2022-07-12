@@ -195,106 +195,106 @@
 
     <!-- start modal -->
     <!-- Modal Update-->
-    <div class="modal" th:each="Seats : ${seats_entry}" th:id="'modalUpdate'+${seat.seatId}" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
+<!--    <div class="modal" th:each="Seats : ${seats_entry}" th:id="'modalUpdate'+${seat.seatId}" tabindex="-1">-->
+<!--        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">-->
+<!--            <div class="modal-content">-->
 
-                <!--=======MODAL HEADER===========-->
-                <div class="modal-header">
-                    <h5 class="modal-title">Update Seat</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form th:method="post" th:action="@{/MVC/Seats/update/{id}(id=${seat.seatId})}" th:object="${seat_add}">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="seatNumber1" class="form-label">Seat Number</label>
-                            <input type="text" class="form-control" th:seatNumber="seatNumber" th:value="${seat.seatNumber}" id="SeatNumber1"
-                                   placeholder="seatNumber">
-                            <span th:if="${#fields.hasErrors('seatNumber')}" th:errors="{seatNumber}"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label for="studioName" class="form-label">StudioName</label>
-                            <input type="text" class="form-control" th:studioName="studioName" th:value="${seat.studioName}" id="studioName1"
-                                   placeholder="StudioName">
-                            <span th:if="${#fields.hasErrors('studioName')}" th:errors="{studioName}"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label for="isAvailable" class="form-label">Is Available</label>
-                            <input type="text" class="form-control" th:isAvailable="isAvailable" th:value="${seat.isAvailable}" id="isAvailable"
-                                   placeholder="isAvailable">
-                            <span th:if="${#fields.hasErrors('isAvailable')}" th:errors="{isAvailable}"></span>
-                        </div>
+<!--                &lt;!&ndash;=======MODAL HEADER===========&ndash;&gt;-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title">Update Seat</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                </div>-->
+<!--                <form th:method="post" th:action="@{/MVC/Seats/update/{id}(id=${seat.seatId})}" th:object="${seat_add}">-->
+<!--                    <div class="modal-body">-->
+<!--                        <div class="mb-3">-->
+<!--                            <label for="seatNumber1" class="form-label">Seat Number</label>-->
+<!--                            <input type="text" class="form-control" th:seatNumber="seatNumber" th:value="${seat.seatNumber}" id="SeatNumber1"-->
+<!--                                   placeholder="seatNumber">-->
+<!--                            <span th:if="${#fields.hasErrors('seatNumber')}" th:errors="{seatNumber}"></span>-->
+<!--                        </div>-->
+<!--                        <div class="mb-3">-->
+<!--                            <label for="studioName" class="form-label">StudioName</label>-->
+<!--                            <input type="text" class="form-control" th:studioName="studioName" th:value="${seat.studioName}" id="studioName1"-->
+<!--                                   placeholder="StudioName">-->
+<!--                            <span th:if="${#fields.hasErrors('studioName')}" th:errors="{studioName}"></span>-->
+<!--                        </div>-->
+<!--                        <div class="mb-3">-->
+<!--                            <label for="isAvailable" class="form-label">Is Available</label>-->
+<!--                            <input type="text" class="form-control" th:isAvailable="isAvailable" th:value="${seat.isAvailable}" id="isAvailable"-->
+<!--                                   placeholder="isAvailable">-->
+<!--                            <span th:if="${#fields.hasErrors('isAvailable')}" th:errors="{isAvailable}"></span>-->
+<!--                        </div>-->
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-outline-primary">Save changes</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<!--                    </div>-->
+<!--                    <div class="modal-footer">-->
+<!--                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                        <button type="submit" class="btn btn-outline-primary">Save changes</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <!-- Modal Delete -->
-    <div class="modal" th:each="Seats : ${seats_entry}" th:id="'modalDelete'+${seat.seatId}" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Delete Seat</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form th:method="post" th:action="@{/MVC/Seats/delete/{id}(id=${seat.seatId})}">
-                    <div class="modal-body">
-                        <h3>Yakin ingin di Delete?</h3>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-outline-danger">Delete</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<!--    &lt;!&ndash; Modal Delete &ndash;&gt;-->
+<!--    <div class="modal" th:each="Seats : ${seats_entry}" th:id="'modalDelete'+${seat.seatId}" tabindex="-1">-->
+<!--        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title">Delete Seat</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                </div>-->
+<!--                <form th:method="post" th:action="@{/MVC/Seats/delete/{id}(id=${seat.seatId})}">-->
+<!--                    <div class="modal-body">-->
+<!--                        <h3>Yakin ingin di Delete?</h3>-->
+<!--                    </div>-->
+<!--                    <div class="modal-footer">-->
+<!--                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                        <button type="submit" class="btn btn-outline-danger">Delete</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <!-- Modal Add New-->
-    <div class="modal" id="modalNew" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add New Seat</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form th:method="post" th:action="@{/MVC/Seats/new-seats}" th:object="${seat_add}">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="seatId" class="form-label">Seat ID</label>
-                            <input type="text" class="form-control" th:field="*{seatId}" id="seatId" placeholder="SeatID">
-                            <span th:if="${#fields.hasErrors('seatId')}" th:errors="{seatId}"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label for="seatNumber2" class="form-label">Seat Number</label>
-                            <input type="text" class="form-control" th:field="*{seatNumber}" id="seatNumber2" placeholder="seatNumber">
-                            <span th:if="${#fields.hasErrors('seatNumber')}" th:errors="{seatNumber}"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label for="studioName" class="form-label">Studio Name</label>
-                            <input type="text" class="form-control" th:field="*{studioName}" id="studioName" placeholder="studioName">
-                            <span th:if="${#fields.hasErrors('studioName')}" th:errors="{studioName}"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label for="isAvailable" class="form-label">is Available</label>
-                            <input type="text" class="form-control" th:field="*{isAvailable}" id="isAvailable1" placeholder="IsAvailable">
-                            <span th:if="${#fields.hasErrors('isAvialable')}" th:errors="{isAvailable}"></span>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-outline-primary">Add Seat</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<!--    &lt;!&ndash; Modal Add New&ndash;&gt;-->
+<!--    <div class="modal" id="modalNew" tabindex="-1">-->
+<!--        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title">Add New Seat</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                </div>-->
+<!--                <form th:method="post" th:action="@{/MVC/Seats/new-seats}" th:object="${seat_add}">-->
+<!--                    <div class="modal-body">-->
+<!--                        <div class="mb-3">-->
+<!--                            <label for="seatId" class="form-label">Seat ID</label>-->
+<!--                            <input type="text" class="form-control" th:field="*{seatId}" id="seatId" placeholder="SeatID">-->
+<!--                            <span th:if="${#fields.hasErrors('seatId')}" th:errors="{seatId}"></span>-->
+<!--                        </div>-->
+<!--                        <div class="mb-3">-->
+<!--                            <label for="seatNumber2" class="form-label">Seat Number</label>-->
+<!--                            <input type="text" class="form-control" th:field="*{seatNumber}" id="seatNumber2" placeholder="seatNumber">-->
+<!--                            <span th:if="${#fields.hasErrors('seatNumber')}" th:errors="{seatNumber}"></span>-->
+<!--                        </div>-->
+<!--                        <div class="mb-3">-->
+<!--                            <label for="studioName" class="form-label">Studio Name</label>-->
+<!--                            <input type="text" class="form-control" th:field="*{studioName}" id="studioName" placeholder="studioName">-->
+<!--                            <span th:if="${#fields.hasErrors('studioName')}" th:errors="{studioName}"></span>-->
+<!--                        </div>-->
+<!--                        <div class="mb-3">-->
+<!--                            <label for="isAvailable" class="form-label">is Available</label>-->
+<!--                            <input type="text" class="form-control" th:field="*{isAvailable}" id="isAvailable1" placeholder="IsAvailable">-->
+<!--                            <span th:if="${#fields.hasErrors('isAvialable')}" th:errors="{isAvailable}"></span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="modal-footer">-->
+<!--                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                        <button type="submit" class="btn btn-outline-primary">Add Seat</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <!-- end modal -->
 
