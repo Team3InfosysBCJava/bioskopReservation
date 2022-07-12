@@ -2,9 +2,6 @@ package com.teamc.bioskop.Service;
 
 import com.teamc.bioskop.Exception.ResourceNotFoundException;
 import com.teamc.bioskop.Model.Reservation;
-import com.teamc.bioskop.Model.Films;
-import com.teamc.bioskop.Model.Schedule;
-import com.teamc.bioskop.Model.Seats;
 import com.teamc.bioskop.Repository.BookingRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;

@@ -76,7 +76,7 @@
               <i class='bx bx-down-arrow icon' style='color:rgba(0,0,0,0)'></i>
             </i>
             <div class="dropdown-content">
-              <a href="/MVC/Reservations">Check schedules</a>
+              <a href="/MVC/schedules">Check schedules</a>
               <a href="/MVC/Seats">Available seats</a>
               <a href="/MVC/Reservation/new">Make a reservation</a>
               <a href="/MVC/User/Signup">Registration</a>
@@ -101,7 +101,7 @@
             </a>
           </li>
           <li class="nav-link">
-            <a href="/MVC/Reservations">
+            <a href="/MVC/schedules">
               <i class='bx bx-calendar icon'></i>
               <span class="text nav-text">Schedule</span>
             </a>
@@ -172,15 +172,15 @@
               <td th:text="${Reservation.schedule.dateShow}"></td>
               <td th:text="${Reservation.schedule.showStart}"></td>
               <td th:text="${Reservation.schedule.showEnd}"></td>
-                    <td>
+              <td>
                 <a data-bs-toggle="modal" th:attr="data-bs-target='#modalUpdate'+${Reservation.reservationId}"
                   class="d-print-none bx bxs-edit icon" role="button"></a>
               </td>
               <td>
-              <a data-bs-toggle="modal" th:attr="data-bs-target='#modalDelete'+${Reservation.reservationId}"
-                class="d-print-none bx bxs-trash icon" role="button"></a>
+                <a data-bs-toggle="modal" th:attr="data-bs-target='#modalDelete'+${Reservation.reservationId}"
+                  class="d-print-none bx bxs-trash icon" role="button"></a>
               </td>
-               </tr>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -188,30 +188,31 @@
     <!-- start pagination  -->
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
-          <li class="page-item">
-              <a class="page-link" th:href="@{/MVC/Reservations?page=prev}">Previous</a>
-          </li>
+        <li class="page-item">
+          <a class="page-link" th:href="@{/MVC/Reservations?page=prev}">Previous</a>
+        </li>
 
-          <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=1}">1</a></li>
-          <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=2}">2</a></li>
-          <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=3}">3</a></li>
-          <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=4}">4</a></li>
-          <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=5}">5</a></li>
-          <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=6}">6</a></li>
-          <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=7}">7</a></li>
-          <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=8}">8</a></li>
-          <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=9}">9</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=1}">1</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=2}">2</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=3}">3</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=4}">4</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=5}">5</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=6}">6</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=7}">7</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=8}">8</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Reservations?page=9}">9</a></li>
 
-          <li class="page-item">
-              <a class="page-link" th:href="@{/MVC/Reservations?page=next}">Next</a>
-          </li>
+        <li class="page-item">
+          <a class="page-link" th:href="@{/MVC/Reservations?page=next}">Next</a>
+        </li>
       </ul>
-  </nav>
+    </nav>
     <!-- end pagination  -->
 
 
 
     <!-- modal start -->
+    <!--    modal Update start-->
     <div class="modal" th:each="Reservation : ${Reservation_entry}" th:id="'modalUpdate'+${Reservation.reservationId}"
       tabindex="-1">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -226,12 +227,12 @@
             <div class="modal-body">
               <div class="mb-3">
                 <label for="user" class="form-label">User ID</label>
-                <input type="text" class="form-control" th:field="*{user.userId}" id="user" placeholder="user">
+                <input type="text" class="form-control" th:field="*{user.userId}" id="user_id" placeholder="user">
                 <span th:if="${#fields.hasErrors('user')}" th:errors="*{user}"></span>
               </div>
               <div class="mb-3">
                 <label for="schedule" class="form-label">Schedule ID</label>
-                <input type="text" class="form-control" th:field="*{schedule.scheduleId}" id="schedule"
+                <input type="text" class="form-control" th:field="*{schedule.scheduleId}" id="schedule_id"
                   placeholder="schedule">
                 <span th:if="${#fields.hasErrors('schedule')}" th:errors="*{schedule}"></span>
               </div>
@@ -244,7 +245,8 @@
         </div>
       </div>
     </div>
-
+    <!--    modal Update end-->
+    <!--    modal Delete start-->
     <div class="modal" th:each="Reservation : ${Reservation_entry}" th:id="'modalDelete'+${Reservation.reservationId}"
     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -262,13 +264,14 @@
                </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-outline-danger">Delete/button>
+            <button type="submit" class="btn btn-outline-danger">Delete/button></button>
           </div>
         </form>
       </div>
     </div>
   </div>
-
+    <!--    modal Delete end-->
+    <!--    modal Create start-->
     <div class="modal" id="modalNew" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -297,6 +300,7 @@
         </div>
       </div>
     </div>
+    <!--    modal Create end-->
     <!-- end modal -->
   </section>
   <script th:src="@{/print.min.js}"></script>
