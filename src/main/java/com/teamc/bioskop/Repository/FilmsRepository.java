@@ -22,4 +22,7 @@ public interface FilmsRepository extends JpaRepository<Films, Long> {
 
     @Query("Select f from Films f where f.name like %:name% ORDER BY f.filmId ASC")
     public Page<Films> searchByName(@Param("name")String name, Pageable pageable);
+
+    @Query("Select f from Films f where f.filmId =?1 ORDER BY f.filmId ASC")
+    public Page<Films> getFilmId(Long id , Pageable pageable);
 }
