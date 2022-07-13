@@ -25,6 +25,8 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.*;
 @AllArgsConstructor
 @Controller
@@ -40,15 +42,8 @@ public class ReservationContMVC {
     @GetMapping("/MVC/Reservations")
     public String search(Model model, @Param("keyword") String keyword, @Param("page") String page){
         try {
-            Integer pageNumber = null;
-
-            //check null pointer
-            if (page != null) {
-                pageNumber = bookingService.pageUpdate(page);
-            }
-
             //Pagination
-            Page<Reservation> results = bookingService.search(keyword, pageNumber);
+            Page<Reservation> results = bookingService.search(keyword, page);
 
             List<Map<String, Object>> maps = new ArrayList<>();
             logger.info(Line + " Logger Start Get All Films " + Line);
@@ -77,12 +72,12 @@ public class ReservationContMVC {
                 maps.add(reservation);
             }
             logger.info(Line + " Logger End Get All Films " + Line);
-
             model.addAttribute("Reservation_entry", results);
             model.addAttribute("keyword", keyword);
             model.addAttribute("reservation", new Reservation());
             ResponseHandler.generateResponse("Success Get All", HttpStatus.OK, maps);
             return "Index_Reservation";
+
         }catch(Throwable e){
             logger.error(Line + " Logger Start Error " + Line);
             logger.error(e.getMessage());
@@ -100,18 +95,10 @@ public class ReservationContMVC {
     @GetMapping("/MVC/Reservation/Id")
     public String search(Model model, @Param("id") long id, @Param("page") String page){
         try{
-
-            Integer pageNumber = null;
-
-        //check null pointer
-        if(page != null){
-            pageNumber = bookingService.pageUpdate(page);
-        }
-             //Pagination
-        Page<Reservation> results = bookingService.getBookingId(id, pageNumber);
-
+        //Pagination
+        Page<Reservation> results = bookingService.getBookingId(id, page);
+        //Logger
         List<Map<String, Object>> maps = new ArrayList<>();
-
         logger.info(Line + " Logger Start Search By ID " + Line);
         for (Reservation dataresults : results) {
                 Map<String, Object> reservation = new HashMap<>();
@@ -163,13 +150,7 @@ public class ReservationContMVC {
     @PostMapping("/MVC/Reservation/searchFilm")
     public String searchFilm(Films film, Model model, String name,@Param("page") String page) {
         try {
-            Integer pageNumber = null;
-
-            //check null pointer
-            if (page != null) {
-                pageNumber = bookingService.pageUpdate(page);
-            }
-            Page<Reservation> results = bookingService.getBookingFilm(film.getName(), pageNumber);
+            Page<Reservation> results = bookingService.getBookingFilm(film.getName(), page);
             model.addAttribute("Reservation_entry", results);
             model.addAttribute("reservation", new Reservation());
 
@@ -278,6 +259,28 @@ public class ReservationContMVC {
         ResponseHandler.generateResponse(e.getMessage(),HttpStatus.NOT_FOUND,"Table has no value");
         return "error_page";
     }
+    }
+
+    @GetMapping("/page/{pageNo}")
+    public String findPaginated(@PathVariable (value = "pageNo") int pageNo,
+                                @RequestParam("sortField") String sortField,
+                                @RequestParam("sortDir") String sortDir,
+                                Model model) {
+        int pageSize = 5;
+
+        Page<Reservation> page = bookingService.findPaginated(pageNo, pageSize, sortField, sortDir);
+        List<Reservation> listEmployees = page.getContent();
+
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+        model.addAttribute("listEmployees", listEmployees);
+        return "index";
     }
 
 
