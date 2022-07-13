@@ -5,6 +5,7 @@ import com.teamc.bioskop.Model.Reservation;
 import com.teamc.bioskop.Repository.BookingRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -77,36 +78,52 @@ public class BookingServiceImpl implements BookingService{
     }
 
     @Override
-    public Page<Reservation> getBookingFilm(String name, Integer page) {
+    public Page<Reservation> getBookingFilm(String name, String page) {
+        Integer pageNumber = null;
+
+        //check null pointer
+        if(page != null){
+            pageNumber = pageUpdate(page);
+        }
         if(name != null){
             return bookingRepository.getBookingFilm(name, null);
         }else if(page == null){
             return bookingRepository.findAll(PageRequest.of(0,10,Sort.by("schedule.films.name")));
         }else{
-            return bookingRepository.findAll(PageRequest.of(page,10,Sort.by("schedule.films.name")));
+            return bookingRepository.findAll(PageRequest.of(pageNumber,10,Sort.by("schedule.films.name")));
         }
     }
 
     @Override
-    public Page<Reservation> getBookingId(Long id, Integer page) {
+    public Page<Reservation> getBookingId(Long id, String page) {
+        Integer pageNumber = null;
+
+        //check null pointer
+        if(page != null){
+            pageNumber = pageUpdate(page);
+        }
         if(id != null){
             return bookingRepository.getBookingId(id, null);
         }else if(page == null){
             return bookingRepository.findAll(PageRequest.of(0,10,Sort.by("reservationId")));
         }else{
-            return bookingRepository.findAll(PageRequest.of(page,10,Sort.by("reservationId")));
+            return bookingRepository.findAll(PageRequest.of(pageNumber,10,Sort.by("reservationId")));
         }
     }
 
 
     @Override
-    public Page<Reservation> search(String keyword, Integer page) {
+    public Page<Reservation> search(String keyword, String page) {
+        Integer pageNumber = null;
+        if(page != null){
+            pageNumber = pageUpdate(page);
+        }
         if(keyword != null){
             return bookingRepository.search(keyword,null);
         }else if(page == null){
             return bookingRepository.findAll(PageRequest.of(0,10,Sort.by("reservationId")));
         }else{
-         return bookingRepository.findAll(PageRequest.of(page,10,Sort.by("reservationId")));
+         return bookingRepository.findAll(PageRequest.of(pageNumber,10,Sort.by("reservationId")));
         }
     }
 
@@ -134,7 +151,14 @@ public class BookingServiceImpl implements BookingService{
         return pageNumber;
     }
 
+    @Override
+    public Page<Reservation> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
 
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        return this.bookingRepository.findAll(pageable);
+    }
 
 
 }
