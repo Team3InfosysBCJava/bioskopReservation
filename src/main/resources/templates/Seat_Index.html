@@ -167,7 +167,7 @@
                 </tbody>
             </table>
         </div>
-        <!--    <p><a href="/signup">Add a new user</a></p>-->
+        <!--    <p><a href="/signup">Add a new seat</a></p>-->
     </div>
     <!--   =========== PAGINATION ==========-->
     <nav aria-label="Page navigation example">
@@ -196,7 +196,7 @@
 <!--     start modal -->
 
 <!--     Modal Update-->
-    <div class="modal" th:each="Seats : ${seats_entry}" th:id="'modalUpdate'+${seat.seatId}" tabindex="-1">
+    <div class="modal" th:each="seat : ${seats_entry}" th:Id="'modalUpdate'+${seat.seatId}" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 
@@ -205,11 +205,11 @@
                     <h5 class="modal-title">Update Seat</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form th:method="post" th:action="@{/MVC/Seats/update-seats/{id}(id=${seats.seatId})}" th:object="${seats}">
+                <form th:method="post" th:action="@{/MVC/Seats/update-seats/{id}(id=${seat.seatId})}" th:object="${seat_add}">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="seatNumber1" class="form-label">Seat Number</label>
-                            <input type="text" class="form-control" th:field="seatNumber" th:value="${seat.seatNumber}" id="seatNumber1"
+                            <input type="text" class="form-control" th:seatNumber1="seatNumber" th:value="${seat.seatNumber}" id="seatNumber1"
                                    placeholder="seatNumber">
                             <span th:if="${#fields.hasErrors('seatNumber')}" th:errors="{seatNumber}"></span>
                         </div>
@@ -237,14 +237,14 @@
     </div>
 
     <!-- Modal Delete -->
-    <div class="modal" th:each="Seats : ${seats_entry}" th:id="'modalDelete'+${seat.seatId}" tabindex="-1">
+    <div class="modal" th:each="seat : ${seats_entry}" th:id="'modalDelete'+${seat.seatId}" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Delete Seat</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form th:method="post" th:action="@{/MVC/Seats/delete/{id}(id=${seat.seatId})}">
+                <form th:action="@{/MVC/Seats/delete/{id}(id=${seat.seatId})}">
                     <div class="modal-body">
                         <h3>Yakin ingin di Delete?</h3>
                     </div>
@@ -265,7 +265,7 @@
                     <h5 class="modal-title">Add New Seat</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form th:method="post" th:action="@{/MVC/Seats/new-seats}" th:object="${seat_add}">
+                <form th:method="post" th:action="@{/MVC/Seats/add-seats}" th:object="${seat_add}">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="seatId" class="form-label">Seat ID</label>
