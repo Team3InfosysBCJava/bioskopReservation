@@ -1,14 +1,19 @@
 package com.teamc.bioskop.MVCController;
 
 import com.teamc.bioskop.DTO.FilmsResponseDTO;
+import com.teamc.bioskop.DTO.ResponseHandler;
 import com.teamc.bioskop.Model.Films;
+import com.teamc.bioskop.Model.Reservation;
 import com.teamc.bioskop.Service.FilmsService;
 import com.teamc.bioskop.Service.FilmsServiceImpl;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import lombok.AllArgsConstructor;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -19,48 +24,109 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @AllArgsConstructor
 @Controller
 public class FilmsContMVC {
 
     private final FilmsService filmsService;
-    private final FilmsServiceImpl filmsServiceImpl; 
+    private final FilmsServiceImpl filmsServiceImpl;
+    private static final Logger logger = LogManager.getLogger(FilmsContMVC.class);
+    private static final String Line = "====================";
 
     //GET ALL
     @GetMapping("/MVC/Film")
     public String showFilmList(Model model, @Param("keyword") String keyword, @Param("page") String page) {
-        
-        Integer pageNumber = null;
+        try {
+            Integer pageNumber = null;
 
-        //check null pointer
-        if(page != null){
-            pageNumber = filmsServiceImpl.pageUpdate(page);
+            //check null pointer
+            if (page != null) {
+                pageNumber = filmsServiceImpl.pageUpdate(page);
+            }
+
+            //Pagination
+            Page<Films> results = filmsService.search(keyword, pageNumber);
+
+            List<Map<String, Object>> maps = new ArrayList<>();
+            logger.info(Line + " Logger Start Get All Films " + Line);
+            for (Films dataresults : results) {
+                Map<String, Object> films = new HashMap<>();
+                logger.info(Line);
+                logger.info("Film id : " + dataresults.getFilmId() +
+                        ", Film Name : " + dataresults.getName() +
+                        ", Status Playing : " + dataresults.getIsPlaying());
+                logger.info("Line");
+                films.put("Id :", dataresults.getFilmId());
+                films.put("Film Name :", dataresults.getName());
+                films.put("Status :", dataresults.getIsPlaying());
+                maps.add(films);
+            }
+            logger.info(Line + " Logger End Get All Films " + Line);
+
+            //alias masuk ke file html
+            model.addAttribute("films", results);
+            model.addAttribute("keyword", keyword);
+            model.addAttribute("film_add", new Films());
+            return "Films_GetAll"; //ngambil file html
+        }catch(Throwable e){
+            logger.error(Line + " Logger Start Error " + Line);
+            logger.error(e.getMessage());
+            logger.error(Line + " Logger End Error " + Line);
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("errorStatus", HttpStatus.NOT_FOUND);
+            ResponseHandler.generateResponse(e.getMessage(),HttpStatus.NOT_FOUND, "Table Has No Value!");
+            return "error_page";
         }
-
-        //Pagination
-        Page<Films> result = filmsService.search(keyword, pageNumber); 
-
-        // List<Films> films = filmsService.search(keyword);
-
-        //alias masuk ke file html
-        model.addAttribute("films", result);
-        model.addAttribute("keyword",keyword);
-        model.addAttribute("film_add", new Films());
-        return "Films_GetAll"; //ngambil file html
     }
 
     //GET BY ID
     @GetMapping("/MVC/Film/Id")
-    public String searchbyID(Model model, @Param("id") Long id){
-       Films films = filmsService.getReferenceById(id);
-    //    FilmsResponseDTO result = films.convertToResponse();
-        model.addAttribute("films", films);
-        model.addAttribute("id",id);
-        model.addAttribute("film_add", new Films());
-        return "Films_GetAll";
+    public String searchbyID(Model model, @Param("id") Long id, @Param("page") String page) {
+        try {
+
+            Integer pageNumber = null;
+
+            if (page != null) {
+                pageNumber = filmsServiceImpl.pageUpdate(page);
+            }
+
+            //Pagination
+            Page<Films> results = filmsServiceImpl.getFilmById(id, pageNumber);
+//           Films films = filmsService.getReferenceById(id);
+
+            List<Map<String, Object>> maps = new ArrayList<>();
+
+            logger.info(Line + " Logger Start Search By Id " + Line);
+            for (Films dataresults : results) {
+                Map<String, Object> films = new HashMap<>();
+                logger.info(Line);
+                logger.info("Film id : " + dataresults.getFilmId() +
+                        ", Film Name : " + dataresults.getName() +
+                        ", Status Playing : " + dataresults.getIsPlaying());
+                logger.info("Line");
+                films.put("Id :", dataresults.getFilmId());
+                films.put("Film Name :", dataresults.getName());
+                films.put("Status :", dataresults.getIsPlaying());
+                maps.add(films);
+            }
+            logger.info(Line + " Logger End Get All Films " + Line);
+
+            model.addAttribute("films", results);
+            model.addAttribute("id", id);
+            model.addAttribute("film_add", new Films());
+            ResponseHandler.generateResponse("Success Search By Id", HttpStatus.OK, maps);
+            return "Films_GetAll";
+        } catch (Exception e) {
+            logger.error(Line + " Logger Start Error " + Line);
+            logger.error(e.getMessage());
+            logger.error(Line + " Logger End Error " + Line);
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("errorStatus", HttpStatus.NOT_FOUND);
+            ResponseHandler.generateResponse(e.getMessage(), HttpStatus.NOT_FOUND, "Table has no value");
+            return "error_page";
+        }
     }
 
     @GetMapping("/MVC/Film/{id}")
@@ -93,24 +159,50 @@ public class FilmsContMVC {
 
     @PostMapping("/MVC/Film/add-film")
     public String showAddFilm(@Valid Films films, BindingResult result, Model model){
-        if (result.hasErrors()) {
+        try{
+            Films results = filmsServiceImpl.createFilm(films);
+
+            //logger
+            logger.info(Line + " Logger Start Create " + Line);
+            logger.info(results);
+            logger.info(Line + " Logger End Create " + Line);
+
+            ResponseHandler.generateResponse("Success Created",HttpStatus.CREATED, results);
             return "redirect:/MVC/Film";
+        } catch (Exception e) {
+            logger.info(Line + " Logger Start Create " + Line);
+            logger.info(e.getMessage());
+            logger.info(Line + " Logger End Create " + Line);
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("errorStatus", HttpStatus.BAD_REQUEST);
+            ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, "Bad Request");
+            return "error_page";
         }
-        // if (films.getIsPlaying().equals(null)) {
-        //     films.setIsPlaying(0);
-        // }
-        // else {
-        //     films.setIsPlaying(1);
-        // }
-        filmsService.createFilm(films);
-        return "redirect:/MVC/Film";
     }
 
     //DELETE
     @GetMapping("/MVC/Film/delete/{id}")
-    public String showDeleteFilm(@PathVariable("id") Long filmId) {
-        this.filmsService.deleteFilmById(filmId);
-        return "redirect:/MVC/Film";
+    public String showDeleteFilm(@PathVariable("id") Long id, Model model) {
+        try {
+            Films results = filmsServiceImpl.findbyId(id)
+            .orElseThrow(() -> new IllegalArgumentException("Invalid film id: " + id));
+        filmsServiceImpl.deleteFilmById(id);
+
+            logger.info(Line + " Logger Start Delete " + Line);
+            logger.info(results);
+            logger.info(Line + " Logger End Create " + Line);
+
+            ResponseHandler.generateResponse("Success Created", HttpStatus.OK, results);
+            return "redirect:/MVC/Film";
+        } catch(Exception e) {
+            logger.error(Line + " Logger Start Error " + Line);
+            logger.error(e.getMessage());
+            logger.error(Line + " Logger End Error " + Line);
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("errorStatus", HttpStatus.NOT_FOUND);
+            ResponseHandler.generateResponse(e.getMessage(), HttpStatus.NOT_FOUND, "Table has no value");
+            return "error_page";
+        }
     }
 
     //UPDATE
@@ -123,15 +215,30 @@ public class FilmsContMVC {
     }
 
     @PostMapping("/MVC/Film/update-film/{id}")
-    public String showUpdateFilms(@PathVariable("id") Long filmId, @Valid Films films, BindingResult result, Model model){
-        if (result.hasErrors()) {
+    public String showUpdateFilms(@PathVariable("id") Long filmId, @Valid Films films, BindingResult result, Model model) {
+        try {
             films.setFilmId(filmId);
+            Films results = filmsServiceImpl.updateFilm(films);
+
+            //logger
+            logger.info(Line + " Logger Start Create " + Line);
+            logger.info(results);
+            logger.info(Line + " Logger End Create " + Line);
+
+            ResponseHandler.generateResponse("Success Created", HttpStatus.OK, results);
+
             return "redirect:/MVC/Film";
+        } catch (Exception e) {
+
+            logger.error(Line + " Logger Start Error " + Line);
+            logger.error(e.getMessage());
+            logger.error(Line + " Logger End Error " + Line);
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("errorStatus", HttpStatus.BAD_REQUEST);
+            ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, "Bad Request");
+            return "error_page";
         }
 
-        films.setFilmId(filmId);
-        filmsService.updateFilm(films);
-        return "redirect:/MVC/Film";
     }
 
 }

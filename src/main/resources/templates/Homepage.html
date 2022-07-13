@@ -8,19 +8,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <title>Cinema Reservation</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         body {
         background-image: url(https://wallpaperaccess.com/full/229832.jpg);
+        font-family: 'Poppins', sans-serif;
         }
-   /* width: 200px;
-    margin: 5px;
-     text-align: left;
-   padding: 5px;
-     text-decoration: none;
-       } */
       h1 {
-     font-family: sans-serif;
-    }
-</style>
+        font-family: 'Poppins', sans-serif;
+        }
+    </style>
 
 </head>
 <body>
@@ -69,9 +65,9 @@
 <header role="banner">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container">
-                  <span class="image">
-                                     <img src="https://ist.id/image/Logo-09.png" alt="" width="30"  class="d-inline-block align-text-top">
-                                              </span>
+            <span class="image">
+                <img src="https://ist.id/image/Logo-09.png" alt="" width="30"  class="d-inline-block align-text-top">
+            </span>
             <a class="navbar-brand" href="/MVC"> Cinema XXI</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -82,19 +78,44 @@
                         <a class="nav-link active" href="/MVC">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/MVC/Film">Films (Now Airing)</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Features
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                            <li><a class="dropdown-item" href="/MVC/Film">Films (Now Airing)</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="/MVC/schedules">Check schedules</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="/MVC/Seats">Available seats</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="/MVC/Reservation/new">Make a reservation</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="/MVC/User/Signup">Registration</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/MVC/Film">Films</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="/MVC/schedules">Check schedules</a>
+                        <a class="nav-link" href="/MVC/schedules">schedules</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/MVC/Seats">Available seats</a>
+                        <a class="nav-link" href="/MVC/Seats">seats</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/MVC/Reservation/new">Make a reservation</a>
+                        <a class="nav-link" href="/MVC/Reservations">reservation</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/MVC/User/Signup">Registration</a>
+                        <a class="nav-link" href="/MVC/User">User</a>
                     </li>
                 </ul>
             </div>
