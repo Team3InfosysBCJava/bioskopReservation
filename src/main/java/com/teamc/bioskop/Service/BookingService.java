@@ -20,9 +20,10 @@ public interface BookingService {
     Reservation updateBooking(Reservation booking);
     Reservation getReferenceById (Long Id);
     List<Reservation> getBookingByFilmName(String name);
-    Page<Reservation> getBookingFilm(String name , Integer page);
-    Page<Reservation> search(String keyword,Integer page);
+    Page<Reservation> getBookingFilm(String name , String page);
+    Page<Reservation> search(String keyword,String page);
     Integer pageUpdate(String page);
-    Page<Reservation> getBookingId(Long id, Integer page);
+    Page<Reservation> getBookingId(Long id, String page);
+    Page<Reservation> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 
     }
