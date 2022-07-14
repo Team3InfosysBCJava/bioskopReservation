@@ -1,11 +1,14 @@
 package com.teamc.bioskop.MVCController;
 
+import com.teamc.bioskop.DTO.FilmsResponseDTO;
 import com.teamc.bioskop.DTO.ScheduleResponseDTO;
 import com.teamc.bioskop.DTO.SeatsResponseDTO;
+import com.teamc.bioskop.Model.Films;
 import com.teamc.bioskop.Model.Schedule;
 import com.teamc.bioskop.Model.Seats;
 import com.teamc.bioskop.Service.SeatsService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,24 +53,58 @@ public class SeatsContMVC {
 
     //GET ALL
     @GetMapping("/MVC/Seats")
-    public String showSeatsList(Model model, @Param("keyword") String keyword) {
-        List<Seats> result = seatsService.search(keyword);
+    public String showSeatsList(Model model, @Param("keyword") String keyword, @Param("page") String page) {
+       Integer pageNumber = null;
+
+       //check null pointer
+        if (page != null){
+            pageNumber = seatsService.pageUpdate(page);
+        }
+
+        //Pagination
+        Page<Seats> result = seatsService.searchByNumber(keyword,pageNumber);
+
+        //List<Seats>seats = seatsServices.searchByNumber(keyword,pageNumber);
+
+        //alias masuk ke file Html
         model.addAttribute("seats_entry", result);
         model.addAttribute("keyword",keyword);
-        return "Seat_Index";
+        model.addAttribute("seat_add", new Seats());
+        return "Seat_Index"; //ngambil file Html
     }
 
 
     //GET BY ID
-    @GetMapping("/MVC/Seats/{id}")
-    public String showSeatsById(@PathVariable("id") Long id, Model model){
-
-        Optional<Seats> seats = seatsService.findbyid(id);
-        Seats seatget = seats.get();
-        SeatsResponseDTO results = seatget.convertToResponses();
-        model.addAttribute("seats_entry", results);
+    @GetMapping("/MVC/Seats/Id")
+    public String showSeatsById(Model model,@Param("id") Long Id){
+    Seats seats = seatsService.getReferenceById(Id);
+        model.addAttribute("seats", seats);
+        model.addAttribute("id", Id);
+        model.addAttribute("seats_entry", new Seats());
         return "Seats_GetById";
     }
+
+//    @GetMapping("/MVC/Seats/{id}")
+//    public String showSeatById(@PathVariable("id") Long id, Model model) {
+//
+//        Optional<Seats> seats = seatsService.findbyid(id);
+//        Long integerId = null;
+//        Seats seatsget = seats.get();
+//        SeatsResponseDTO result = new SeatsResponseDTO();
+//        Seats seat = new Seats();
+//
+//        if(seats.isEmpty()){
+//            integerId = Long.parseLong(StringId);
+//            seat = seatsService.getReferenceById(integerId);
+//            result = seats.convertToResponse();
+//        } else {
+//            seatsget = seats.get();
+//            result = seatsget.convertToResponse();
+//        }
+//
+//        model.addAttribute("seat_getId", result);
+//        return "Seats_GetById";
+
 
 
     //UPDATE
@@ -92,12 +129,12 @@ public class SeatsContMVC {
     }
 
 
-    //DELETE BY ID
+    //DELETE
     @GetMapping("/MVC/Seats/delete/{id}")
-    public String showDeleteSeats(@PathVariable("id") Long id, Model model) {
+    public String showDeleteSeats(@PathVariable("id") Long id) {
 //        Seats seats = seatsService.getSeatsById(id)
 //                .orElseThrow(() -> new IllegalArgumentException("Invalid seats Id:" + id));
-        seatsService.deleteseat(id);
+        this.seatsService.deleteseat(id);
         return "redirect:/MVC/Seats";
     }
 }

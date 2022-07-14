@@ -1,6 +1,7 @@
 package com.teamc.bioskop.Service;
 
 import com.teamc.bioskop.Model.Seats;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,5 +15,6 @@ public interface SeatsService {
     void deleteseat(Long seatId);
     Seats getReferenceById (Long id);
     List<Seats> getSeatAvailable(Boolean isAvailable);
-    List<Seats> search(String keyword);
+    Page<Seats> searchByNumber(String keyword, Integer page);
+    Integer pageUpdate(String page);
 }

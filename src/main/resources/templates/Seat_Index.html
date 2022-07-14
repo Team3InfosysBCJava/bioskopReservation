@@ -5,21 +5,27 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{/sidebars.css}" rel="stylesheet" />
+    <link th:href="@{/print.min.css}" rel="stylesheet" />
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>All Seats</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+    <title>Get All Seat</title>
+
+
 </head>
 <body>
 <nav class="sidebar close">
     <header>
         <div class="image-text">
-            <span class="image">
-                <img src="https://ist.id/image/Logo-09.png" alt="" width="30"  class="d-inline-block align-text-top">
-<!--                    <img src="logoinfosys.jpg" alt="">-->
-</span>
+                <span class="image">
+                    <img src="https://ist.id/image/Logo-09.png" alt="" width="30" class="d-inline-block align-text-top">
+                </span>
             <div class="text logo-text">
-                <span class="name">Seats</span>
-                <span class="profession">Add New Seats</span>
+                <span class="name">Seat</span>
+                <span class="profession">Add New Seat</span>
             </div>
         </div>
 
@@ -36,8 +42,9 @@
                 <i class='bx bx-search icon'></i>
                 <form class="d-flex" role="search" th:action="@{/MVC/Seats}">
                     <input type="text" name="keyword" id="keyword" th:value="${keyword}" placeholder="Search" required>
-                    <button input class="btn" type="button" id="btnClear" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button><!--            <input class="btn" type="button" id="btnClear" onclick="clearSearch()" />-->
-        </form>
+                    <!-- <button type="submit" class="bx bx-search icon"> </button> -->
+                    <button input class="btn" type="button" id="btnClear" onclick="clearSearch()"><i class='bx bx-refresh icon'></i></button>
+                </form>
             </li>
 
             <ul class="menu-links">
@@ -50,45 +57,53 @@
 
                 <li class="nav-link dropdown">
                     <i class="dropbtn">
-                      <i class='bx bx-down-arrow icon bx-fade-down'></i>
-                      <span class="text nav-text">Features</span>
-                      <i class='bx bx-down-arrow icon' style='color:rgba(0,0,0,0)' ></i>
+                        <i class='bx bx-down-arrow icon bx-fade-down'></i>
+                        <span class="text nav-text">Features</span>
+                        <i class='bx bx-down-arrow icon' style='color:rgba(0,0,0,0)' ></i>
                     </i>
                     <div class="dropdown-content">
-                      <a href="/MVC/schedules">Check schedules</a>
-                      <a href="/MVC/Seats">Available seats</a>
-                      <a href="/MVC/Reservation/new">Make a reservation</a>
-                      <a href="/MVC/User/Signup">Registration</a>
+                        <a href="/MVC/schedules">Check schedules</a>
+                        <a href="/MVC/Seats">Available seats</a>
+                        <a href="/MVC/Reservation/new">Make a reservation</a>
+                        <a href="/MVC/User/Signup">Registration</a>
                     </div>
-                  </li>
-        
-                  <li class="nav-link">
+                </li>
+
+
+                <li class="nav-link">
                     <a href="/MVC/Film">
-                      <i class='bx bx-film icon'></i>
-                      <span class="text nav-text">Film</span>
+                        <i class='bx bx-film icon'></i>
+                        <span class="text nav-text">Film</span>
                     </a>
-                  </li>
-                  
-                <li class="nav-link">
-                  <a href="/MVC/User">
-                    <i class='bx bx-user icon'></i>
-                    <span class="text nav-text">User</span>
-                  </a>
                 </li>
-        
+
                 <li class="nav-link">
-                  <a href="/MVC/schedules">
-                    <i class='bx bx-calendar icon'></i>
-                    <span class="text nav-text">Schedule</span>
-                  </a>
+                    <a href="/MVC/Seats">
+                        <i class='bx bx-chair icon'></i>
+                        <span class="text nav-text">Seats</span>
+                    </a>
                 </li>
-        
+
                 <li class="nav-link">
-                  <a href="/MVC/Reservations">
-                    <i class='bx bx-note icon'></i>
-                    <span class="text nav-text">Reservation</span>
-                  </a>
+                    <a href="/MVC/schedules">
+                        <i class='bx bx-calendar icon'></i>
+                        <span class="text nav-text">Schedule</span>
+                    </a>
                 </li>
+
+                <li class="nav-link">
+                    <a href="/MVC/Reservations">
+                        <i class='bx bx-note icon'></i>
+                        <span class="text nav-text">Reservation</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a role="button" onclick="printJS('PDF', 'html')">
+                        <i class='bx bxs-file-pdf icon'></i>
+                        <span class="text nav-text">PDF</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
 
@@ -117,55 +132,170 @@
 
 </nav>
 <section class="home">
-    <div class="text">Get All Seats</div>
-    <div th:switch="${seats_entry}" class="container">
-        <h2 th:case="null">No Seats Available!</h2>
-        <div th:case="*">
-            <!--    <nav class="navbar navbar-light bg-light">-->
-            <!--      <a class="navbar-brand"><h4>Film</h4></a>-->
-            <!--      <form class="form-inline" method="get" th:action="@{/MVC/Film/{id}(id=null)}">-->
-            <!--        <input class="form-control mr-sm-2" th:value="${stringId}" id="id" type="text" placeholder="Search By Id" aria-label="Search">-->
-            <!--        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-            <!--      </form>-->
-            <!--    </nav>-->
-            <!--      <button type="button" class="btn">-->
-            <!--        <a href="/MVC/Film/new-film">Add New Film</a>-->
-            <!--      </button>-->
-            <div class="button">
-                <i class='bx bx-list-plus icon'></i>
-                <a class="btn" href="/MVC/Seats/new-seats" role="button">Add Seats</a>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th  scope="col">Seats ID</th>
-                    <th  scope="col">Seat Number</th>
-                    <th  scope="col">Studio Name</th>
-                    <th  scope="col">Is Available</th>
-                </tr>
-                </thead>
-
+    <div class="text">Get All Seat</div>
+    <div th:if="${seats_entry}==null" class="container">
+        <h2>No User Found!</h2>
+    </div>
+    <div th:unless="${seats_entry}==null" class="container">
+        <div class="button" data-bs-toggle="modal" data-bs-target="#modalNew">
+            <i class='bx bx-list-plus icon'>Add Seat</i>
+            <!--                <a class="btn" href="/MVC/User/Signup" role="button">Add a New User</a>-->
+        </div>
+        <table id="PDF" class="table table-striped">
+            <thead>
+            <tr>
+                <th  scope="col">Seats ID</th>
+                <th  scope="col">Seat Number</th>
+                <th  scope="col">Studio Name</th>
+                <th  scope="col">Is Available</th>
+            </tr>
+            </thead>
             <tbody>
-            <tr th:each="seat: ${seats_entry}">
-            <td th:text="${seat.seatId}"></td>
-            <td th:text="${seat.seatNumber}"></td>
-            <td th:text="${seat.studioName}"></td>
-            <td th:text="${seat.isAvailable} ? 'Available' : 'Unavailable'"></td>
-<!--                <i class='bx bxs-edit icon'></i>-->
-<!--                <a th:href="@{/MVC/Seats/update-seats/{id}(id=${seats.seatId})}">Edit</a>-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                    <i class='bx bx-trash icon'></i>-->
-<!--                    <a th:href="@{/MVC/Seats/delete/{id}(id=${seats.seatId})}">Delete</a>-->
-<!--                </td>-->
+            <tr th:each="seat : ${seats_entry}">
+                <td th:text="${seat.seatId}"></td>
+                <td th:text="${seat.seatNumber}"></td>
+                <td th:text="${seat.studioName}"></td>
+                <td th:text="${seat.isAvailable} ? 'Available' : 'Unavailable'"></td>
+                <td>
+                    <a data-bs-toggle="modal" th:attr="data-bs-target='#modalUpdate'+${seat.seatId}"
+                       class="bx bxs-edit icon d-print-none" role="button"></a>
+                </td>
+                <td>
+                    <a data-bs-toggle="modal" th:attr="data-bs-target='#modalDelete'+${seat.seatId}"
+                       class="bx bxs-trash icon d-print-none" role="button"></a>
+                </td>
             </tr>
             </tbody>
-            </table>
-        </div>
-        <!--    <p><a href="/signup">Add a new user</a></p>-->
+        </table>
     </div>
-</section>
+    <!--    <p><a href="/signup">Add a new user</a></p>-->
+    </div>
 
+    <!--   =========== PAGINATION ==========-->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" th:href="@{/MVC/Seats?page=prev}">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/Seats?page=1}">1</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/Seats?page=2}">2</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/Seats?page=3}">3</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/Seats?page=4}">4</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/Seats?page=5}">5</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/Seats?page=6}">6</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/Seats?page=7}">7</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/Seats?page=8}">8</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/MVC/Seats?page=9}">9</a></li>
+            <li class="page-item">
+                <a class="page-link" th:href="@{/MVC/Seats?page=next}">Next</a>
+            </li>
+
+        </ul>
+    </nav>
+
+    <!-- start modal -->
+    <!-- Modal Update-->
+    <div class="modal" th:each="seat : ${seats_entry}" th:Id="'modalUpdate'+${seat.seatId}" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <!--=======MODAL HEADER===========-->
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Seat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form th:method="post" th:action="@{/MVC/Seats/update-seats/{id}(id=${seat.seatId})}" th:object="${seat_add}">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="seatNumber1" class="form-label">Seat Number</label>
+                            <input type="text" class="form-control" th:seatNumber1="seatNumber" th:value="${seat.seatNumber}" id="seatNumber1"
+                                   placeholder="seatNumber">
+                            <span th:if="${#fields.hasErrors('seatNumber')}" th:errors="{seatNumber}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="studioName1" class="form-label">StudioName</label>
+                            <input type="text" class="form-control" th:studioName="studioName" th:value="${seat.studioName}" id="studioName1"
+                                   placeholder="StudioName">
+                            <span th:if="${#fields.hasErrors('studioName')}" th:errors="{studioName}"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="isAvailable" class="form-label">Is Available</label>
+                            <input type="text" class="form-control" th:isAvailable="isAvailable" th:value="${seat.isAvailable}" id="isAvailable"
+                                   placeholder="isAvailable">
+                            <span th:if="${#fields.hasErrors('isAvailable')}" th:errors="{isAvailable}"></span>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete -->
+    <div class="modal" th:each="seat : ${seats_entry}" th:id="'modalDelete'+${seat.seatId}" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Seat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form th:action="@{/MVC/Seats/delete/{id}(id=${seat.seatId})}">
+                    <div class="modal-body">
+                        <h3>Yakin ingin di Delete?</h3>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Add New-->
+    <div class="modal" id="modalNew" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Seat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form th:method="post" th:action="@{/MVC/Seats/add-seats}" th:object="${seat_add}">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                                <label for="seatNumber2" class="form-label">Seat Number</label>
+                                <input type="text" class="form-control" th:field="*{seatNumber}" id="seatNumber2" placeholder="seatNumber">
+                                <span th:if="${#fields.hasErrors('seatNumber')}" th:errors="{seatNumber}"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="studioName" class="form-label">Studio Name</label>
+                                <input type="text" class="form-control" th:field="*{studioName}" id="studioName" placeholder="studioName">
+                                <span th:if="${#fields.hasErrors('studioName')}" th:errors="{studioName}"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="isAvailable" class="form-label">is Available</label>
+                                <input type="text" class="form-control" th:field="*{isAvailable}" id="isAvailable1" placeholder="IsAvailable">
+                                <span th:if="${#fields.hasErrors('isAvialable')}" th:errors="{isAvailable}"></span>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-primary">Add Seat</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- end modal -->
+
+
+</section>
+<script th:src="@{/print.min.js}"></script>
 <script>
           const body = document.querySelector('body'),
           sidebar = body.querySelector('nav'),
