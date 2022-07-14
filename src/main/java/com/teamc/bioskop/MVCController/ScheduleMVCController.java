@@ -31,6 +31,11 @@ public class ScheduleMVCController {
 
 
     //HOMEPAGE
+    @GetMapping("/")
+    public String Home(){
+        return "Homepage";
+    }
+    
     @GetMapping("/MVC")
     public String showHomepage(){
         return "Homepage";
