@@ -62,7 +62,7 @@ public class SeatsContMVC {
         }
 
         //Pagination
-        Page<Seats> result = seatsService.searchByNumber(keyword,pageNumber);
+        Page<Seats> result = seatsService.Search(keyword,pageNumber);
 
         //List<Seats>seats = seatsServices.searchByNumber(keyword,pageNumber);
 
@@ -120,11 +120,11 @@ public class SeatsContMVC {
     public String showUpdateSeats(@PathVariable("id") Long id, @Valid Seats seats, BindingResult result, Model model){
         if (result.hasErrors()) {
             seats.setSeatId(id);
-            return "Seats_Update";
+            return "redirect:/MVC/Seats";
         }
 
         seats.setSeatId(id);
-        seatsService.updateseat(seats, id);
+        seatsService.updateseat(seats);
         return "redirect:/MVC/Seats";
     }
 

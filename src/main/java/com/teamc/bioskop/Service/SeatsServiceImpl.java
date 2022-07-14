@@ -51,7 +51,8 @@ public class SeatsServiceImpl implements SeatsService {
     public Seats getReferenceById (Long id) { return this.seatRepository.getReferenceById(id); }
 
     @Override
-    public Seats updateseat(Seats seat, Long seatId) { return seatRepository.save(seat);
+    public Seats updateseat(Seats seat){
+        return seatRepository.save(seat);
     }
 
 //Delete
@@ -94,6 +95,17 @@ public class SeatsServiceImpl implements SeatsService {
     }
 
     @Override
+    public Page<Seats> Search(String keyword, Integer page) {
+        if (keyword != null) {
+            return seatRepository.Search(keyword, null);
+        }else if (page == null){
+            return seatRepository.findAll(PageRequest.of(0,10, Sort.by("seatId")));
+        } else {
+            return seatRepository.findAll(PageRequest.of(page,10, Sort.by("seatId")));
+        }
+    }
+
+    @Override
     public Integer pageUpdate(String page) {
 
         //container
@@ -118,4 +130,5 @@ public class SeatsServiceImpl implements SeatsService {
 
     return pageNumber;
 }
+
 }

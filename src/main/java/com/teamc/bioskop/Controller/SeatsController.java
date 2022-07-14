@@ -115,9 +115,9 @@ public class SeatsController {
             seat.setSeatNumber(seatsDetails.getSeatNumber());
             seat.setIsAvailable(seatsDetails.getIsAvailable());
             //Optional<Seats> updatedseats = seatsService.updateseat(seat, seatId);
-            Seats updatedseats = seatsService.updateseat(seat, seatId);
+            Seats updatedseats = seatsService.updateseat(seat);
             logger.info(Line + " Logger Start Update " + Line);
-            logger.info(seatsService.updateseat(seat, seatId));
+            logger.info(seatsService.updateseat(seat));
             logger.info(Line +" Logger END Update "+ Line);
             return ResponseHandler.generateResponse("Success Update Seats",HttpStatus.CREATED, updatedseats);
         }catch (Exception e){

@@ -93,7 +93,7 @@ public class FilmsServiceImpl implements FilmsService {
     @Override
     public Page<Films> search(String keyword, Integer page){
         if (keyword != null){
-            return filmsRepository.searchByName(keyword, null);
+            return filmsRepository.Search(keyword, null);
         } else if (page == null){
             return filmsRepository.findAll(PageRequest.of(0, 10,Sort.by("filmId")));
         } else {
