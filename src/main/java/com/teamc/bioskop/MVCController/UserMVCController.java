@@ -31,7 +31,7 @@ public class UserMVCController {
 
     @GetMapping("/MVC/User/Signup")
     public String showUserForm(User user) {
-        return "User_AddNew";
+        return "Add_user";
     }
 
 
