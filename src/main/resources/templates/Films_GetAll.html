@@ -68,8 +68,9 @@
               <i class='bx bx-down-arrow icon' style='color:rgba(0,0,0,0)'></i>
             </i>
             <div class="dropdown-content">
+              <a href="/MVC/Film">Films (Now Airing)</a>
               <a href="/MVC/schedules">Check schedules</a>
-              <a href="/MVC/Seats">Available seats</a>
+              <a href="/MVC/Seats?keyword=true">Available seats</a>
               <a href="/MVC/Reservation/new">Make a reservation</a>
               <a href="/MVC/User/Signup">Registration</a>
             </div>
@@ -136,7 +137,7 @@
           <tr>
             <th scope="col">Film id</th>
             <th scope="col">Film Name</th>
-            <th scope="col">Is Playing</th>
+            <th scope="col">Airing</th>
             <th class="d-print-none" scope="col">Action</th>
           </tr>
         </thead>
@@ -144,7 +145,7 @@
           <tr th:each="Films : ${films}">
             <td th:text="${Films.filmId}"></td>
             <td th:text="${Films.name}"></td>
-            <td th:text="${Films.isPlaying} ? 'Playing' : 'Coming Soon'"></td>
+            <td th:text="${Films.isPlaying} ? 'Airing' : 'Coming Soon'"></td>
             <td>
               <a data-bs-toggle="modal" th:attr="data-bs-target='#modalUpdate'+${Films.filmId}"
                 class="bx bxs-edit icon d-print-none" role="button"></a>
@@ -158,33 +159,33 @@
       </table>
     </div>
 
-    </div>
+    <!-- </div> -->
 
-<!--   =========== PAGINATION ==========-->
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-      <li class="page-item">
+    <!--   =========== PAGINATION ==========-->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
           <a class="page-link" th:href="@{/MVC/Film?page=prev}">Previous</a>
-      </li>
+        </li>
 
-      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=1}">1</a></li>
-      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=2}">2</a></li>
-      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=3}">3</a></li>
-      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=4}">4</a></li>
-      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=5}">5</a></li>
-      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=6}">6</a></li>
-      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=7}">7</a></li>
-      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=8}">8</a></li>
-      <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=9}">9</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=1}">1</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=2}">2</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=3}">3</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=4}">4</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=5}">5</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=6}">6</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=7}">7</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=8}">8</a></li>
+        <li class="page-item"><a class="page-link" th:href="@{/MVC/Film?page=9}">9</a></li>
 
-      <li class="page-item">
+        <li class="page-item">
           <a class="page-link" th:href="@{/MVC/Film?page=next}">Next</a>
-      </li>
-  </ul>
-</nav>
+        </li>
+      </ul>
+    </nav>
 
 
-    <!-- start modal --> 
+    <!-- start modal -->
     <!-- Modal Update-->
     <div class="modal" th:each="Films : ${films}" th:id="'modalUpdate'+${Films.filmId}" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -203,11 +204,15 @@
                   placeholder="name">
                 <span th:if="${#fields.hasErrors('name')}" th:errors="{name}"></span>
               </div>
-              <select class="form-select" th:name="isPlaying" th:value="${Films.isPlaying}" aria-label="Default select example">
+              <div class="mb-3">
+                <label class="form-label">isPlaying</label>
+              <select class="form-select" th:name="isPlaying" th:value="${Films.isPlaying}"
+                aria-label="Default select example">
                 <option selected>Select menu</option>
-                <option value="true">Playing</option>
+                <option value="true">Airing</option>
                 <option value="false">Coming Soon</option>
               </select>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -254,16 +259,19 @@
                 <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="name">
                 <span th:if="${#fields.hasErrors('name')}" th:errors="{name}"></span>
               </div>
-              <select class="form-select" th:name="isPlaying" th:value="${isPlaying}" aria-label="Default select example">
-                <option selected>Select menu</option>
-                <option value="true">Playing</option>
-                <option value="false">Coming Soon</option>
-              </select>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-outline-primary">Add Film</button>
-            </div>
+              <div class="mb-3">
+                <label class="form-label">isPlaying</label>
+                <select class="form-select" th:name="isPlaying" th:value="${isPlaying}"
+                  aria-label="Default select example">
+                  <option selected>Select Choice</option>
+                  <option value="true">Airing</option>
+                  <option value="false">Coming Soon</option>
+                </select>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-outline-primary">Add Film</button>
+              </div>
           </form>
         </div>
       </div>

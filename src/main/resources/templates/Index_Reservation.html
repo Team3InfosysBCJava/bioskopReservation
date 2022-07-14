@@ -76,8 +76,9 @@
               <i class='bx bx-down-arrow icon' style='color:rgba(0,0,0,0)'></i>
             </i>
             <div class="dropdown-content">
+              <a href="/MVC/Film">Films (Now Airing)</a>
               <a href="/MVC/schedules">Check schedules</a>
-              <a href="/MVC/Seats">Available seats</a>
+              <a href="/MVC/Seats?keyword=true">Available seats</a>
               <a href="/MVC/Reservation/new">Make a reservation</a>
               <a href="/MVC/User/Signup">Registration</a>
             </div>
@@ -154,8 +155,7 @@
               <th scope="col">Date Film</th>
               <th scope="col">Start Film</th>
               <th scope="col">End Film</th>
-              <th scope="col">Action</a>
-              </th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -175,10 +175,14 @@
               <td>
                 <a data-bs-toggle="modal" th:attr="data-bs-target='#modalUpdate'+${Reservation.reservationId}"
                   class="d-print-none bx bxs-edit icon" role="button"></a>
-              </td>
+              </td>&nbsp;
               <td>
                 <a data-bs-toggle="modal" th:attr="data-bs-target='#modalDelete'+${Reservation.reservationId}"
                   class="d-print-none bx bxs-trash icon" role="button"></a>
+              </td>
+              <td>
+                <a data-bs-toggle="modal" th:attr="data-bs-target='#modalPrint'+${Reservation.reservationId}"
+                  class="d-print-none bx bxs-archive-out icon" role="button"></a>
               </td>
             </tr>
           </tbody>
@@ -212,6 +216,63 @@
 
 
     <!-- modal start -->
+      <!-- start print -->
+      <div class="modal" th:each="Reservation : ${Reservation_entry}" th:id="'modalPrint'+${Reservation.reservationId}" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <!--=======MODAL HEADER===========-->
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Seat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <table id="PDF-print" class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Email User</th>
+                                    <th scope="col">Film Name</th>
+                                    <th scope="col">Status Show</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Studio</th>
+                                    <th scope="col">Seat Number</th>
+                                    <th scope="col">Status Seat</th>
+                                    <th scope="col">Date Film</th>
+                                    <th scope="col">Start Film</th>
+                                    <th scope="col">End Film</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <td th:text="${Reservation.reservationId}"></td>
+                                  <td th:text="${Reservation.user.username}"></td>
+                                  <td th:text="${Reservation.user.emailId}"></td>
+                                  <td th:text="${Reservation.schedule.films.name}"></td>
+                                  <td th:text="${Reservation.schedule.films.isPlaying}? 'Playing' : 'Coming Soon'"></td>
+                                  <td th:text="${Reservation.schedule.price}"></td>
+                                  <td th:text="${Reservation.schedule.seats.studioName}"></td>
+                                  <td th:text="${Reservation.schedule.seats.seatNumber}"></td>
+                                  <td th:text="${Reservation.schedule.seats.isAvailable}? 'Available' : 'Unavailable'"></td>
+                                  <td th:text="${Reservation.schedule.dateShow}"></td>
+                                  <td th:text="${Reservation.schedule.showStart}"></td>
+                                  <td th:text="${Reservation.schedule.showEnd}"></td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a role="button" onclick="printJS('PDF-print', 'html')">
+                            <i class='bx bxs-file-pdf icon'>Print</i>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- end print -->
     <!--    modal Update start-->
     <div class="modal" th:each="Reservation : ${Reservation_entry}" th:id="'modalUpdate'+${Reservation.reservationId}"
       tabindex="-1">
